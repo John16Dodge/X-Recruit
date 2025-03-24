@@ -6,48 +6,93 @@ import {
   CalendarClock, 
   Building2, 
   Lightbulb, 
-  Users
+  Users,
+  BookMarkedIcon,
+  GitGraphIcon,
+  HandHelping,
+  Edit,
+  BracketsIcon
 } from 'lucide-react';
 import FeatureCard from '../ui/FeatureCard';
+import { title } from 'process';
+import { Description } from '@radix-ui/react-dialog';
+import path from 'path';
 
 const Features = () => {
   const features = [
     {
-      title: "AI-Powered Resume Screening",
-      description: "Intelligent filtering and ranking of candidates based on skills, experience, and job requirements.",
+      title: "Student Dashboard",
+      description: "A personalized dashboard for students to manage their placement activities, track applications, and access career tools.",
       icon: FileSearch,
       delay: 100
     },
     {
-      title: "Automated Job Matching",
-      description: "Smart recommendations that connect candidates with their ideal opportunities.",
+      title: "Internship & Job Listings",
+      description: "A dashboard for colleges to manage placement activities, track student progress, and coordinate with recruiters.",
       icon: Briefcase,
       delay: 200
     },
     {
-      title: "Interview Scheduling System",
+      title: "College Dashboard",
       description: "AI-driven coordination between recruiters and candidates for seamless interview management.",
       icon: CalendarClock,
       delay: 300
     },
     {
-      title: "Startup & Funding Support",
-      description: "Connecting entrepreneurs with investors and mentors to fuel business growth.",
+      title: "To-Do List",
+      description: "CA task management tool for students to organize their placement preparation activities, such as resume updates or interview practice.",
       icon: Building2,
       delay: 400
     },
     {
-      title: "Career Mentorship & Learning",
-      description: "Personalized guidance for career growth and continuous skill development.",
+      title: "Mock Interviews",
+      description: "Simulated interview sessions to help students practice and improve their interview skills with feedback.",
       icon: Lightbulb,
       delay: 500
     },
     {
-      title: "Networking & Events",
-      description: "Dynamic platform for industry collaborations and professional networking opportunities.",
-      icon: Users,
+      title: "Campus Event Calendar",
+      description: "A calendar to track campus placement events, such as job fairs, company visits, and workshops.",
+      icon:  FileSearch,
       delay: 600
+    },
+    {
+      title: "Job Roles and Its Market Analysis",
+      description: "Insights into various job roles, including market demand, salary trends, and required skills.",
+      icon: BookMarkedIcon,
+      delay: 600
+    },
+    {
+      title: "Student Skill Profile Builder",
+      description: "A feature for students to build and showcase their skills, certifications, and projects in a professional profile",
+      icon: GitGraphIcon,
+      delay: 600
+    },
+    {
+      title: "Recruiter Feedback System",
+      description: "A system for recruiters to provide feedback to students on their applications, interviews, or profiles.",
+      icon: HandHelping,
+      delay: 600
+    },
+    {
+      title: "Placement Analytics Dashboard",
+      description: "An analytics tool for colleges and students to track placement statistics, success rates, and trends.",
+      icon: BracketsIcon,
+      delay: 600
+    },
+    {
+      title: "Roadmap Generator",
+      description: "A tool to generate personalized career roadmaps for students, outlining steps to achieve their career goals.",
+      icon: Edit,
+      delay: 600
+    },
+    {
+      title: "Services for Business and Mentorships",
+      description: "Services for businesses to engage with students (e.g., mentorship programs, workshops) and for students to access mentorship opportunities.",
+      icon: Users,
+      delay:600
     }
+
   ];
 
   return (

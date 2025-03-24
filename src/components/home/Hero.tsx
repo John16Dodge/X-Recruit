@@ -16,15 +16,15 @@ const Hero = () => {
           {/* Left Content */}
           <div className="w-full lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0">
             <span className="inline-block px-4 py-2 rounded-full bg-xr-blue/10 text-xr-blue font-medium text-sm mb-6 animate-fade-in">
-              Next-Gen AI Recruitment Platform
+              Guidance?? X-Recruit....!!!
             </span>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight animate-fade-in animate-delay-100">
-              <span className="text-gradient">AI-Powered</span> Hiring & Career Platform
+              <span className="text-gradient">X-Recruit</span> Career Guidance for Placement
             </h1>
             
             <p className="text-lg text-xr-gray mb-8 max-w-xl mx-auto lg:mx-0 animate-fade-in animate-delay-200">
-              Streamlining recruitment processes, enhancing campus placements, and providing career mentorship through advanced AI technology.
+            "X-Recruit: Transforming Campus Placements and Beyond"
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 animate-fade-in animate-delay-300">
@@ -59,7 +59,7 @@ const Hero = () => {
               <div className="bg-xr-blue text-white p-4 flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <BriefcaseBusiness size={20} />
-                  <span className="font-medium">X-Recruit Dashboard</span>
+                  <span className="font-medium">XR Dashboard</span>
                 </div>
                 <div className="flex space-x-2">
                   <div className="w-3 h-3 rounded-full bg-red-400"></div>
@@ -73,18 +73,18 @@ const Hero = () => {
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-xr-gray" size={18} />
                   <input 
                     type="text" 
-                    placeholder="Search for jobs, skills, companies..." 
+                    placeholder="Search for roadmaps, career to pursue etc...." 
                     className="w-full py-3 pl-10 pr-4 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-xr-blue focus:border-transparent"
                   />
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div className="p-4 rounded-lg bg-xr-blue-light/10 border border-xr-blue-light/30">
-                    <div className="text-xr-blue text-2xl font-bold">18</div>
+                    <div className="text-xr-blue text-2xl font-bold">100+</div>
                     <div className="text-xr-gray-dark text-sm">New Job Matches</div>
                   </div>
                   <div className="p-4 rounded-lg bg-xr-purple-light/10 border border-xr-purple-light/30">
-                    <div className="text-xr-purple text-2xl font-bold">5</div>
+                    <div className="text-xr-purple text-2xl font-bold">1000+</div>
                     <div className="text-xr-gray-dark text-sm">Interview Requests</div>
                   </div>
                 </div>
@@ -92,14 +92,24 @@ const Hero = () => {
                 <div className="space-y-4">
                   <div className="p-4 rounded-lg border border-gray-100 hover:border-xr-blue-light/30 transition-colors cursor-pointer">
                     <div className="flex justify-between">
-                      <h3 className="font-medium text-xr-gray-dark">Frontend Developer</h3>
+                      <h3 className="font-medium text-xr-gray-dark">Full Stack Developer</h3>
                       <span className="text-green-500 text-sm">95% Match</span>
                     </div>
-                    <div className="text-xr-gray text-sm mt-1">TechCorp Inc.</div>
+                    <div className="text-xr-gray text-sm mt-1">X-Recruit</div>
                     <div className="flex items-center space-x-2 mt-3">
-                      <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-xs">React</span>
-                      <span className="px-2 py-1 rounded-full bg-purple-100 text-purple-700 text-xs">TypeScript</span>
-                      <span className="px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs">CSS</span>
+                      <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-xs">MERN Stack</span>
+                      <span className="px-2 py-1 rounded-full bg-purple-100 text-purple-700 text-xs">Problem Solving</span>
+                    </div>
+                  </div>
+                  <div className="p-4 rounded-lg border border-gray-100 hover:border-xr-blue-light/30 transition-colors cursor-pointer">
+                    <div className="flex justify-between">
+                      <h3 className="font-medium text-xr-gray-dark">Business Analyst</h3>
+                      <span className="text-green-500 text-sm">93% Match</span>
+                    </div>
+                    <div className="text-xr-gray text-sm mt-1">X-Recruit</div>
+                    <div className="flex items-center space-x-2 mt-3">
+                      <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-xs">SCRUM Master</span>
+                      <span className="px-2 py-1 rounded-full bg-purple-100 text-purple-700 text-xs">Team Collaborator</span>
                     </div>
                   </div>
                   
@@ -108,7 +118,7 @@ const Hero = () => {
                       <h3 className="font-medium text-xr-gray-dark">UX Designer</h3>
                       <span className="text-green-500 text-sm">87% Match</span>
                     </div>
-                    <div className="text-xr-gray text-sm mt-1">DesignHub Ltd.</div>
+                    <div className="text-xr-gray text-sm mt-1">X-Recruit</div>
                     <div className="flex items-center space-x-2 mt-3">
                       <span className="px-2 py-1 rounded-full bg-red-100 text-red-700 text-xs">Figma</span>
                       <span className="px-2 py-1 rounded-full bg-yellow-100 text-yellow-700 text-xs">Prototyping</span>

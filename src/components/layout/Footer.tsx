@@ -23,11 +23,11 @@ const Footer = () => {
             </Link>
             <p className="text-gray-300 mb-6 max-w-md">
               Next-generation AI-driven recruitment platform designed to streamline hiring processes, 
-              enhance campus placements, and provide career mentorship.
+              enhance campus placements, and provide career and Business and Entreprenuership mentorship.
             </p>
             <div className="flex space-x-4">
               <a 
-                href="https://linkedin.com" 
+                href="https://in.linkedin.com/company/xrecruition" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-white transition-colors"
@@ -35,15 +35,7 @@ const Footer = () => {
               >
                 <Linkedin size={20} />
               </a>
-              <a 
-                href="https://twitter.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-300 hover:text-white transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter size={20} />
-              </a>
+          
               <a 
                 href="https://instagram.com" 
                 target="_blank" 
@@ -53,15 +45,7 @@ const Footer = () => {
               >
                 <Instagram size={20} />
               </a>
-              <a 
-                href="https://facebook.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-300 hover:text-white transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook size={20} />
-              </a>
+            
             </div>
           </div>
 
@@ -97,11 +81,6 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Resources</h3>
             <ul className="space-y-3">
               <li>
-                <Link to="/blog" className="text-gray-300 hover:text-white transition-colors">
-                  Blog
-                </Link>
-              </li>
-              <li>
                 <Link to="/help" className="text-gray-300 hover:text-white transition-colors">
                   Help Center
                 </Link>
@@ -111,34 +90,30 @@ const Footer = () => {
                   Events & Webinars
                 </Link>
               </li>
-              <li>
-                <Link to="/careers" className="text-gray-300 hover:text-white transition-colors">
-                  Careers at X-Recruit
-                </Link>
-              </li>
+            
             </ul>
           </div>
 
           {/* Contact */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-            <ul className="space-y-3">
+            <ul className="space-y-5">
               <li className="flex items-start space-x-3">
                 <Mail size={18} className="mt-0.5 text-gray-300" />
-                <a href="mailto:hello@xrecruit.com" className="text-gray-300 hover:text-white transition-colors">
-                  hello@xrecruit.com
+                <a href="mailto:hello@xrecruit.com" className="text-gray-300 hover:text-white transition-colors size-3">
+                  xrecruit.official@gmail.com
                 </a>
               </li>
               <li className="flex items-start space-x-3">
                 <Phone size={18} className="mt-0.5 text-gray-300" />
                 <a href="tel:+1234567890" className="text-gray-300 hover:text-white transition-colors">
-                  +1 (234) 567-890
+                  +91 8148916824 
                 </a>
               </li>
               <li className="flex items-start space-x-3">
-                <MapPin size={18} className="mt-0.5 text-gray-300" />
+                <MapPin size={25} className="mt-0.5 text-gray-300" />
                 <span className="text-gray-300">
-                  123 AI Plaza, Innovation Valley, CA 94103
+                  NO: 437 Devanathaswamy Nagar, VPM
                 </span>
               </li>
             </ul>
