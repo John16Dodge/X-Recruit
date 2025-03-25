@@ -53,6 +53,9 @@ const Navbar = () => {
           <Link to="/recruiters" className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors">
             For Recruiters
           </Link>
+          <Link to="/roadmap-generator" className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors">
+            Roadmap Generator
+          </Link>
           <Link to="/features" className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors">
             Features
           </Link>
@@ -113,6 +116,13 @@ const Navbar = () => {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               For Recruiters
+            </Link>
+            <Link 
+              to="/roadmap-generator" 
+              className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Roadmap Generator
             </Link>
             <Link 
               to="/features" 
