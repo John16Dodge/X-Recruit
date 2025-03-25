@@ -6,7 +6,14 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import { BookOpen, Code, Lightbulb, LineChart, ArrowDown, ArrowUp } from 'lucide-react';
+import { BookOpen, Code, Lightbulb, LineChart, ArrowDown, ArrowUp, Globe, LaptopIcon, Youtube, Database, Server, PencilRuler, BookMarked } from 'lucide-react';
+
+interface Resource {
+  title: string;
+  url: string;
+  type: 'book' | 'video' | 'course' | 'article' | 'tool' | 'community';
+  platform?: string;
+}
 
 interface Roadmap {
   id: number;
@@ -16,7 +23,10 @@ interface Roadmap {
   icon: React.ReactNode;
   difficulty?: 'beginner' | 'intermediate' | 'advanced';
   timeEstimate?: string;
-  resources?: { title: string; url: string; type: 'book' | 'video' | 'course' | 'article' }[];
+  resources?: Resource[];
+  tools?: string[];
+  platforms?: string[];
+  certifications?: string[];
   aiGenerated?: boolean;
 }
 
@@ -29,7 +39,7 @@ const RoadmapGenerator = () => {
   const [isAiThinking, setIsAiThinking] = useState(false);
   const [showDetails, setShowDetails] = useState<number | null>(null);
 
-  // Simplified demo roadmaps database
+  // Expanded demo roadmaps database with tools, platforms, and more learning resources
   const demoRoadmaps: Record<string, Roadmap[]> = {
     frontend: [
       {
@@ -49,16 +59,41 @@ const RoadmapGenerator = () => {
           "Learn build tools and bundlers"
         ],
         resources: [
-          { title: "Complete Web Development Bootcamp", url: "#", type: "course" },
-          { title: "JavaScript: The Good Parts", url: "#", type: "book" },
-          { title: "React Documentation", url: "#", type: "article" }
+          { title: "Complete Web Development Bootcamp", url: "https://www.udemy.com/course/the-complete-web-development-bootcamp/", type: "course", platform: "Udemy" },
+          { title: "JavaScript: The Good Parts", url: "https://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742", type: "book" },
+          { title: "React Documentation", url: "https://reactjs.org/docs/getting-started.html", type: "article" },
+          { title: "Frontend Masters", url: "https://frontendmasters.com/", type: "course", platform: "Frontend Masters" },
+          { title: "CSS-Tricks", url: "https://css-tricks.com/", type: "article", platform: "CSS-Tricks" }
+        ],
+        tools: [
+          "VS Code",
+          "Chrome DevTools",
+          "Git & GitHub",
+          "npm/yarn",
+          "Webpack",
+          "ESLint",
+          "Prettier"
+        ],
+        platforms: [
+          "Udemy",
+          "Frontend Masters",
+          "freeCodeCamp",
+          "Codecademy",
+          "Coursera",
+          "YouTube",
+          "MDN Web Docs"
+        ],
+        certifications: [
+          "Meta Frontend Developer Professional Certificate",
+          "freeCodeCamp Responsive Web Design",
+          "JavaScript Algorithms and Data Structures"
         ]
       },
       {
         id: 2,
         title: "UI/UX Design Track",
         description: "Design-focused path for frontend developers",
-        icon: <Lightbulb className="h-8 w-8 text-purple-500" />,
+        icon: <PencilRuler className="h-8 w-8 text-purple-500" />,
         difficulty: "beginner",
         timeEstimate: "4-6 months",
         steps: [
@@ -71,9 +106,33 @@ const RoadmapGenerator = () => {
           "Portfolio development"
         ],
         resources: [
-          { title: "Don't Make Me Think", url: "#", type: "book" },
-          { title: "Figma Essential Training", url: "#", type: "video" },
-          { title: "Design Systems Handbook", url: "#", type: "article" }
+          { title: "Don't Make Me Think", url: "https://www.amazon.com/Dont-Make-Think-Revisited-Usability/dp/0321965515", type: "book" },
+          { title: "Figma Essential Training", url: "https://www.linkedin.com/learning/figma-essential-training-the-basics", type: "video", platform: "LinkedIn Learning" },
+          { title: "Design Systems Handbook", url: "https://www.designbetter.co/design-systems-handbook", type: "article" },
+          { title: "UI/UX Design Bootcamp", url: "https://www.coursera.org/professional-certificates/google-ux-design", type: "course", platform: "Coursera" }
+        ],
+        tools: [
+          "Figma",
+          "Adobe XD",
+          "Sketch",
+          "InVision",
+          "Principle",
+          "Maze",
+          "Optimal Workshop"
+        ],
+        platforms: [
+          "Coursera",
+          "LinkedIn Learning",
+          "Interaction Design Foundation",
+          "Dribbble",
+          "Behance",
+          "Medium",
+          "UX Collective"
+        ],
+        certifications: [
+          "Google UX Design Professional Certificate",
+          "Interaction Design Foundation Certification",
+          "Nielsen Norman Group UX Certification"
         ]
       }
     ],
@@ -82,7 +141,7 @@ const RoadmapGenerator = () => {
         id: 1,
         title: "Backend Developer Roadmap",
         description: "Path to becoming a proficient backend developer",
-        icon: <Code className="h-8 w-8 text-blue-500" />,
+        icon: <Server className="h-8 w-8 text-blue-500" />,
         difficulty: "intermediate",
         timeEstimate: "6-9 months",
         steps: [
@@ -95,16 +154,40 @@ const RoadmapGenerator = () => {
           "Deployment and DevOps basics"
         ],
         resources: [
-          { title: "Node.js Design Patterns", url: "#", type: "book" },
-          { title: "RESTful API Design", url: "#", type: "course" },
-          { title: "Database Design Fundamentals", url: "#", type: "video" }
+          { title: "Node.js Design Patterns", url: "https://www.amazon.com/Node-js-Design-Patterns-production-grade-applications/dp/1839214112", type: "book" },
+          { title: "RESTful API Design", url: "https://www.udemy.com/course/rest-api/", type: "course", platform: "Udemy" },
+          { title: "Database Design Fundamentals", url: "https://www.youtube.com/playlist?list=PL1LIXLIF50uXWJ9alDSXClzNCMynac38g", type: "video", platform: "YouTube" },
+          { title: "Backend Development - The Complete Guide", url: "https://www.codecademy.com/learn/paths/web-development", type: "course", platform: "Codecademy" }
+        ],
+        tools: [
+          "Docker",
+          "Postman",
+          "Git & GitHub",
+          "Redis",
+          "Node.js/Express",
+          "Django/Flask",
+          "Spring Boot"
+        ],
+        platforms: [
+          "Udemy",
+          "Codecademy",
+          "Pluralsight",
+          "freeCodeCamp",
+          "edX",
+          "YouTube",
+          "GitHub"
+        ],
+        certifications: [
+          "AWS Certified Developer",
+          "Oracle Certified Professional Java Developer",
+          "MongoDB Developer Certification"
         ]
       },
       {
         id: 2,
         title: "Database Specialist Track",
         description: "Focus on data management and database technologies",
-        icon: <BookOpen className="h-8 w-8 text-green-500" />,
+        icon: <Database className="h-8 w-8 text-green-500" />,
         difficulty: "advanced",
         timeEstimate: "4-8 months",
         steps: [
@@ -117,9 +200,33 @@ const RoadmapGenerator = () => {
           "Database security"
         ],
         resources: [
-          { title: "SQL Performance Explained", url: "#", type: "book" },
-          { title: "MongoDB University", url: "#", type: "course" },
-          { title: "Database Internals", url: "#", type: "book" }
+          { title: "SQL Performance Explained", url: "https://www.amazon.com/SQL-Performance-Explained-Understanding-Internals/dp/3950307826", type: "book" },
+          { title: "MongoDB University", url: "https://university.mongodb.com/", type: "course", platform: "MongoDB University" },
+          { title: "Database Internals", url: "https://www.amazon.com/Database-Internals-Deep-Distributed-Systems/dp/1492040347", type: "book" },
+          { title: "Advanced SQL for Data Analysis", url: "https://www.datacamp.com/courses/joining-data-in-postgresql", type: "course", platform: "DataCamp" }
+        ],
+        tools: [
+          "MySQL",
+          "PostgreSQL",
+          "MongoDB",
+          "Redis",
+          "Elasticsearch",
+          "DBeaver",
+          "SQL Server Management Studio"
+        ],
+        platforms: [
+          "DataCamp",
+          "MongoDB University",
+          "Oracle University",
+          "Pluralsight",
+          "edX",
+          "Udemy",
+          "YouTube"
+        ],
+        certifications: [
+          "Oracle Database SQL Certified Associate",
+          "Microsoft Certified: Azure Database Administrator Associate",
+          "MongoDB Certified DBA Associate"
         ]
       }
     ],
@@ -141,9 +248,84 @@ const RoadmapGenerator = () => {
           "Business understanding and communication"
         ],
         resources: [
-          { title: "Python for Data Analysis", url: "#", type: "book" },
-          { title: "Deep Learning Specialization", url: "#", type: "course" },
-          { title: "Feature Engineering for Machine Learning", url: "#", type: "book" }
+          { title: "Python for Data Analysis", url: "https://www.amazon.com/Python-Data-Analysis-Wrangling-IPython/dp/1491957662", type: "book" },
+          { title: "Deep Learning Specialization", url: "https://www.coursera.org/specializations/deep-learning", type: "course", platform: "Coursera" },
+          { title: "Feature Engineering for Machine Learning", url: "https://www.amazon.com/Feature-Engineering-Machine-Learning-Principles/dp/1491953241", type: "book" },
+          { title: "Data Science A-Z", url: "https://www.udemy.com/course/datascience/", type: "course", platform: "Udemy" },
+          { title: "StatQuest with Josh Starmer", url: "https://www.youtube.com/c/joshstarmer", type: "video", platform: "YouTube" }
+        ],
+        tools: [
+          "Python",
+          "R",
+          "Jupyter Notebooks",
+          "Pandas",
+          "NumPy",
+          "Scikit-learn",
+          "TensorFlow/PyTorch",
+          "Tableau/Power BI"
+        ],
+        platforms: [
+          "Coursera",
+          "DataCamp",
+          "Kaggle",
+          "edX",
+          "Fast.ai",
+          "Udacity",
+          "YouTube"
+        ],
+        certifications: [
+          "IBM Data Science Professional Certificate",
+          "Microsoft Certified: Azure Data Scientist Associate",
+          "Google Data Analytics Professional Certificate"
+        ]
+      }
+    ],
+    cloud: [
+      {
+        id: 1,
+        title: "Cloud Computing Roadmap",
+        description: "Path to becoming a cloud computing expert",
+        icon: <Globe className="h-8 w-8 text-blue-500" />,
+        difficulty: "intermediate",
+        timeEstimate: "6-9 months",
+        steps: [
+          "Understand cloud computing fundamentals",
+          "Learn a major cloud platform (AWS, Azure, GCP)",
+          "Master networking concepts",
+          "Study cloud storage solutions",
+          "Learn infrastructure as code",
+          "Understand containerization",
+          "Study cloud security best practices"
+        ],
+        resources: [
+          { title: "AWS Certified Solutions Architect Study Guide", url: "https://www.amazon.com/Certified-Solutions-Architect-Study-Guide/dp/1119713080", type: "book" },
+          { title: "Azure Fundamentals", url: "https://learn.microsoft.com/en-us/training/paths/az-900-describe-cloud-concepts/", type: "course", platform: "Microsoft Learn" },
+          { title: "Google Cloud Platform Fundamentals", url: "https://www.coursera.org/learn/gcp-fundamentals", type: "course", platform: "Coursera" },
+          { title: "A Cloud Guru", url: "https://acloudguru.com/", type: "course", platform: "A Cloud Guru" }
+        ],
+        tools: [
+          "Terraform",
+          "AWS CLI",
+          "Azure CLI",
+          "Google Cloud SDK",
+          "Docker",
+          "Kubernetes",
+          "CloudFormation"
+        ],
+        platforms: [
+          "A Cloud Guru",
+          "Coursera",
+          "Pluralsight",
+          "AWS Training",
+          "Microsoft Learn",
+          "Google Cloud Training",
+          "edX"
+        ],
+        certifications: [
+          "AWS Certified Solutions Architect",
+          "Microsoft Azure Administrator",
+          "Google Cloud Professional Cloud Architect",
+          "Certified Kubernetes Administrator"
         ]
       }
     ]
@@ -227,6 +409,8 @@ const RoadmapGenerator = () => {
         generatedRoadmaps = demoRoadmaps.datascience;
       } else if (categoryMatch === 'design') {
         generatedRoadmaps = [demoRoadmaps.frontend.find(r => r.title.includes('UI/UX'))!];
+      } else if (categoryMatch === 'devops' || categoryMatch === 'cloud') {
+        generatedRoadmaps = demoRoadmaps.cloud;
       } else {
         // If no specific match, provide a mixed recommendation
         generatedRoadmaps = [demoRoadmaps.frontend[0], demoRoadmaps.backend[0]];
@@ -250,9 +434,31 @@ const RoadmapGenerator = () => {
           `Continue learning and stay updated with ${prompt} trends`
         ],
         resources: [
-          { title: "Recommended Online Course", url: "#", type: "course" },
+          { title: "Recommended Online Course", url: "#", type: "course", platform: "Udemy" },
           { title: "Essential Reading", url: "#", type: "book" },
-          { title: "Community Forum", url: "#", type: "article" }
+          { title: "Community Forum", url: "#", type: "community", platform: "Reddit" },
+          { title: "Video Tutorial Series", url: "#", type: "video", platform: "YouTube" }
+        ],
+        tools: [
+          "VS Code or suitable IDE",
+          "Git & GitHub",
+          "Industry-standard frameworks",
+          "Testing tools",
+          "Documentation tools"
+        ],
+        platforms: [
+          "Udemy",
+          "Coursera",
+          "edX",
+          "Pluralsight",
+          "YouTube",
+          "Medium",
+          "GitHub"
+        ],
+        certifications: [
+          "Industry-recognized certifications",
+          "Specialized platform certifications",
+          "Skill-specific badges"
         ],
         aiGenerated: true
       };
@@ -367,11 +573,52 @@ const RoadmapGenerator = () => {
                       )}
                     </CardHeader>
                     <CardContent>
-                      <ol className="space-y-2 list-decimal list-inside">
+                      <h4 className="font-medium text-gray-800 mb-2">Learning Path:</h4>
+                      <ol className="space-y-2 list-decimal list-inside mb-4">
                         {roadmap.steps.map((step, index) => (
                           <li key={index} className="text-gray-700">{step}</li>
                         ))}
                       </ol>
+                      
+                      {/* Tools Section */}
+                      {roadmap.tools && roadmap.tools.length > 0 && (
+                        <div className="mb-4">
+                          <h4 className="font-medium text-gray-800 mb-2">Recommended Tools:</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {roadmap.tools.map((tool, idx) => (
+                              <span key={idx} className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded-full">
+                                {tool}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* Platforms Section */}
+                      {roadmap.platforms && roadmap.platforms.length > 0 && (
+                        <div className="mb-4">
+                          <h4 className="font-medium text-gray-800 mb-2">Learning Platforms:</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {roadmap.platforms.map((platform, idx) => (
+                              <span key={idx} className="text-xs bg-purple-50 text-purple-700 px-2 py-1 rounded-full">
+                                {platform}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* Certifications Section */}
+                      {roadmap.certifications && roadmap.certifications.length > 0 && (
+                        <div className="mb-4">
+                          <h4 className="font-medium text-gray-800 mb-2">Relevant Certifications:</h4>
+                          <ul className="space-y-1 list-disc list-inside">
+                            {roadmap.certifications.map((cert, idx) => (
+                              <li key={idx} className="text-sm text-gray-700">{cert}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                       
                       {roadmap.resources && (
                         <div className="mt-4">
@@ -381,11 +628,11 @@ const RoadmapGenerator = () => {
                           >
                             {showDetails === roadmap.id ? (
                               <>
-                                <ArrowUp className="h-4 w-4 mr-1" /> Hide resources
+                                <ArrowUp className="h-4 w-4 mr-1" /> Hide detailed resources
                               </>
                             ) : (
                               <>
-                                <ArrowDown className="h-4 w-4 mr-1" /> Show resources
+                                <ArrowDown className="h-4 w-4 mr-1" /> Show detailed resources
                               </>
                             )}
                           </button>
@@ -393,13 +640,25 @@ const RoadmapGenerator = () => {
                           {showDetails === roadmap.id && (
                             <div className="mt-3 space-y-2 pl-2 border-l-2 border-blue-100">
                               <h4 className="font-medium text-gray-700">Recommended Resources:</h4>
-                              <ul className="space-y-1">
+                              <ul className="space-y-2">
                                 {roadmap.resources.map((resource, idx) => (
                                   <li key={idx} className="text-sm">
-                                    <span className="inline-block w-16 text-xs bg-gray-100 rounded px-1 mr-2">
-                                      {resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}
-                                    </span>
-                                    {resource.title}
+                                    <div className="flex items-start">
+                                      {resource.type === 'book' && <BookMarked className="h-4 w-4 mr-2 text-blue-500" />}
+                                      {resource.type === 'video' && <Youtube className="h-4 w-4 mr-2 text-red-500" />}
+                                      {resource.type === 'course' && <BookOpen className="h-4 w-4 mr-2 text-green-500" />}
+                                      {resource.type === 'article' && <FileText className="h-4 w-4 mr-2 text-yellow-500" />}
+                                      {resource.type === 'tool' && <LaptopIcon className="h-4 w-4 mr-2 text-purple-500" />}
+                                      {resource.type === 'community' && <Users className="h-4 w-4 mr-2 text-indigo-500" />}
+                                      <div>
+                                        <span className="font-medium">{resource.title}</span>
+                                        {resource.platform && (
+                                          <span className="text-xs text-gray-500 ml-2">
+                                            on {resource.platform}
+                                          </span>
+                                        )}
+                                      </div>
+                                    </div>
                                   </li>
                                 ))}
                               </ul>
