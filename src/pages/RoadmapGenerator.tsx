@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -39,50 +38,27 @@ const RoadmapGenerator = () => {
   const [isAiThinking, setIsAiThinking] = useState(false);
   const [showDetails, setShowDetails] = useState<number | null>(null);
 
-  // Define sample difficulty level colors with updated color palette
-  const difficultyColors = {
-    beginner: {
-      bg: 'bg-emerald-100 dark:bg-emerald-900/30',
-      text: 'text-emerald-700 dark:text-emerald-300',
-      border: 'border-emerald-200 dark:border-emerald-800'
-    },
-    intermediate: {
-      bg: 'bg-amber-100 dark:bg-amber-900/30',
-      text: 'text-amber-700 dark:text-amber-300',
-      border: 'border-amber-200 dark:border-amber-800'
-    },
-    advanced: {
-      bg: 'bg-rose-100 dark:bg-rose-900/30',
-      text: 'text-rose-700 dark:text-rose-300',
-      border: 'border-rose-200 dark:border-rose-800'
-    }
+  // Get tag class based on difficulty level
+  const getDifficultyTagClass = (difficulty: 'beginner' | 'intermediate' | 'advanced') => {
+    return `tag-${difficulty}`;
   };
 
-  // Resource type colors with updated color palette
-  const resourceTypeColors = {
-    book: {
-      bg: 'bg-indigo-100 dark:bg-indigo-900/30',
-      text: 'text-indigo-700 dark:text-indigo-300'
-    },
-    video: {
-      bg: 'bg-red-100 dark:bg-red-900/30',
-      text: 'text-red-700 dark:text-red-300'
-    },
-    course: {
-      bg: 'bg-blue-100 dark:bg-blue-900/30',
-      text: 'text-blue-700 dark:text-blue-300'
-    },
-    article: {
-      bg: 'bg-teal-100 dark:bg-teal-900/30',
-      text: 'text-teal-700 dark:text-teal-300'
-    },
-    tool: {
-      bg: 'bg-purple-100 dark:bg-purple-900/30',
-      text: 'text-purple-700 dark:text-purple-300'
-    },
-    community: {
-      bg: 'bg-green-100 dark:bg-green-900/30',
-      text: 'text-green-700 dark:text-green-300'
+  // Get resource type tag class
+  const getResourceTagClass = (type: 'book' | 'video' | 'course' | 'article' | 'tool' | 'community') => {
+    return `tag-resource-${type}`;
+  };
+
+  // Get card gradient class based on difficulty
+  const getCardGradientClass = (difficulty?: 'beginner' | 'intermediate' | 'advanced') => {
+    switch (difficulty) {
+      case 'beginner':
+        return 'card-gradient-green';
+      case 'intermediate':
+        return 'card-gradient-amber';
+      case 'advanced':
+        return 'card-gradient-rose';
+      default:
+        return 'card-gradient-blue';
     }
   };
 
@@ -653,7 +629,10 @@ const RoadmapGenerator = () => {
               <h2 className="text-2xl font-semibold">Your Roadmaps</h2>
               
               {roadmaps.map((roadmap) => (
-                <Card key={roadmap.id} className={`overflow-hidden ${roadmap.aiGenerated ? 'border-accent' : ''}`}>
+                <Card 
+                  key={roadmap.id} 
+                  className={`overflow-hidden border-t-4 ${roadmap.aiGenerated ? 'border-t-accent' : 'border-t-primary'} ${getCardGradientClass(roadmap.difficulty)}`}
+                >
                   <CardHeader className="pb-4">
                     <div className="flex justify-between items-start">
                       <div className="flex items-center gap-3">
@@ -667,7 +646,7 @@ const RoadmapGenerator = () => {
                       </div>
                       
                       {roadmap.difficulty && (
-                        <div className={`px-3 py-1 rounded-full text-xs font-medium ${difficultyColors[roadmap.difficulty].bg} ${difficultyColors[roadmap.difficulty].text} ${difficultyColors[roadmap.difficulty].border}`}>
+                        <div className={getDifficultyTagClass(roadmap.difficulty)}>
                           {roadmap.difficulty.charAt(0).toUpperCase() + roadmap.difficulty.slice(1)}
                         </div>
                       )}
@@ -699,7 +678,7 @@ const RoadmapGenerator = () => {
                             <div className="grid gap-2">
                               {roadmap.resources.map((resource, index) => (
                                 <div key={index} className="flex items-start gap-2">
-                                  <div className={`px-2 py-1 rounded text-xs ${resourceTypeColors[resource.type].bg} ${resourceTypeColors[resource.type].text}`}>
+                                  <div className={getResourceTagClass(resource.type)}>
                                     {resource.type}
                                   </div>
                                   <div className="text-sm flex-grow">
@@ -721,7 +700,7 @@ const RoadmapGenerator = () => {
                             <div className="text-sm font-medium mb-1">Tools & Technologies:</div>
                             <div className="flex flex-wrap gap-2">
                               {roadmap.tools.map((tool, index) => (
-                                <div key={index} className="px-2 py-1 bg-muted rounded-md text-xs">
+                                <div key={index} className="skill-tag">
                                   {tool}
                                 </div>
                               ))}
@@ -734,7 +713,7 @@ const RoadmapGenerator = () => {
                             <div className="text-sm font-medium mb-1">Learning Platforms:</div>
                             <div className="flex flex-wrap gap-2">
                               {roadmap.platforms.map((platform, index) => (
-                                <div key={index} className="px-2 py-1 bg-muted rounded-md text-xs">
+                                <div key={index} className="skill-tag">
                                   {platform}
                                 </div>
                               ))}
