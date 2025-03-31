@@ -1,12 +1,23 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [studentDropdownOpen, setStudentDropdownOpen] = useState(false);
+  const [collegeDropdownOpen, setCollegeDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +36,16 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const toggleStudentDropdown = () => {
+    setStudentDropdownOpen(!studentDropdownOpen);
+    if (!studentDropdownOpen) setCollegeDropdownOpen(false);
+  };
+
+  const toggleCollegeDropdown = () => {
+    setCollegeDropdownOpen(!collegeDropdownOpen);
+    if (!collegeDropdownOpen) setStudentDropdownOpen(false);
+  };
+
   return (
     <header 
       className={`fixed w-full z-50 transition-all duration-300 ${
@@ -40,25 +61,110 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          <Link to="/" className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors">
-            Home
-          </Link>
-          <Link to="/students" className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors">
-            For Students
-          </Link>
-          <Link to="/colleges" className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors">
-            For Colleges
-          </Link>
-          <Link to="/recruiters" className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors">
-            For Recruiters
-          </Link>
-          <Link to="/roadmap-generator" className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors">
-            Roadmap Generator
-          </Link>
-          <Link to="/features" className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors">
-            Features
-          </Link>
+        <nav className="hidden md:block">
+          <NavigationMenu>
+            <NavigationMenuList className="flex items-center space-x-6">
+              <NavigationMenuItem>
+                <Link to="/" className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors">
+                  Home
+                </Link>
+              </NavigationMenuItem>
+              
+              {/* Students Dropdown */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-xr-gray-dark hover:text-xr-blue font-medium">
+                  For Students
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="w-[220px]">
+                  <ul className="grid w-full gap-1 p-2">
+                    <li className="row-span-1">
+                      <NavigationMenuLink asChild>
+                        <Link 
+                          to="/students"
+                          className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">Overview</div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                    <li className="row-span-1">
+                      <NavigationMenuLink asChild>
+                        <Link 
+                          to="/roadmap-generator"
+                          className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">Roadmap Generator</div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                    <li className="row-span-1">
+                      <NavigationMenuLink asChild>
+                        <Link 
+                          to="/students/resources"
+                          className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">Learning Resources</div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              
+              {/* Colleges Dropdown */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-xr-gray-dark hover:text-xr-blue font-medium">
+                  For Colleges
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="w-[220px]">
+                  <ul className="grid w-full gap-1 p-2">
+                    <li className="row-span-1">
+                      <NavigationMenuLink asChild>
+                        <Link 
+                          to="/colleges"
+                          className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">Overview</div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                    <li className="row-span-1">
+                      <NavigationMenuLink asChild>
+                        <Link 
+                          to="/colleges/partnerships"
+                          className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">Partnerships</div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                    <li className="row-span-1">
+                      <NavigationMenuLink asChild>
+                        <Link 
+                          to="/colleges/campus-programs"
+                          className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">Campus Programs</div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              
+              <NavigationMenuItem>
+                <Link to="/recruiters" className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors">
+                  For Recruiters
+                </Link>
+              </NavigationMenuItem>
+              
+              <NavigationMenuItem>
+                <Link to="/features" className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors">
+                  Features
+                </Link>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
         </nav>
 
         {/* CTA Buttons */}
@@ -96,33 +202,85 @@ const Navbar = () => {
             >
               Home
             </Link>
-            <Link 
-              to="/students" 
-              className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              For Students
-            </Link>
-            <Link 
-              to="/colleges" 
-              className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              For Colleges
-            </Link>
+            
+            {/* Mobile Students Dropdown */}
+            <div className="relative">
+              <button 
+                onClick={toggleStudentDropdown}
+                className="w-full flex items-center justify-between text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+              >
+                <span>For Students</span>
+                <ChevronDown size={16} className={`transition-transform ${studentDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {studentDropdownOpen && (
+                <div className="pl-4 mt-2 space-y-2 border-l-2 border-gray-100">
+                  <Link 
+                    to="/students" 
+                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Overview
+                  </Link>
+                  <Link 
+                    to="/roadmap-generator" 
+                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Roadmap Generator
+                  </Link>
+                  <Link 
+                    to="/students/resources" 
+                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Learning Resources
+                  </Link>
+                </div>
+              )}
+            </div>
+            
+            {/* Mobile Colleges Dropdown */}
+            <div className="relative">
+              <button 
+                onClick={toggleCollegeDropdown}
+                className="w-full flex items-center justify-between text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+              >
+                <span>For Colleges</span>
+                <ChevronDown size={16} className={`transition-transform ${collegeDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {collegeDropdownOpen && (
+                <div className="pl-4 mt-2 space-y-2 border-l-2 border-gray-100">
+                  <Link 
+                    to="/colleges" 
+                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Overview
+                  </Link>
+                  <Link 
+                    to="/colleges/partnerships" 
+                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Partnerships
+                  </Link>
+                  <Link 
+                    to="/colleges/campus-programs" 
+                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Campus Programs
+                  </Link>
+                </div>
+              )}
+            </div>
+            
             <Link 
               to="/recruiters" 
               className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               For Recruiters
-            </Link>
-            <Link 
-              to="/roadmap-generator" 
-              className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Roadmap Generator
             </Link>
             <Link 
               to="/features" 
