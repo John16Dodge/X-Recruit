@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import { BookOpen, Code, Lightbulb, LineChart, ArrowDown, ArrowUp, Globe, LaptopIcon, Youtube, Database, Server, PencilRuler, BookMarked } from 'lucide-react';
+import { BookOpen, Code, Lightbulb, LineChart, ArrowDown, ArrowUp, Globe, LaptopIcon, Youtube, Database, Server, PencilRuler, BookMarked, FileText as FileTextIcon, Users as UsersIcon, Terminal, ShieldCheck, Smartphone, Gamepad, Brush, Cog, Brain, Aperture, Headphones, CloudSun, LineChart as Analytics, Network, GitBranch } from 'lucide-react';
 
 interface Resource {
   title: string;
@@ -138,7 +138,7 @@ const RoadmapGenerator = () => {
     ],
     backend: [
       {
-        id: 1,
+        id: 3,
         title: "Backend Developer Roadmap",
         description: "Path to becoming a proficient backend developer",
         icon: <Server className="h-8 w-8 text-blue-500" />,
@@ -184,7 +184,7 @@ const RoadmapGenerator = () => {
         ]
       },
       {
-        id: 2,
+        id: 4,
         title: "Database Specialist Track",
         description: "Focus on data management and database technologies",
         icon: <Database className="h-8 w-8 text-green-500" />,
@@ -232,7 +232,7 @@ const RoadmapGenerator = () => {
     ],
     datascience: [
       {
-        id: 1,
+        id: 5,
         title: "Data Science Roadmap",
         description: "Path to becoming a proficient data scientist",
         icon: <LineChart className="h-8 w-8 text-blue-500" />,
@@ -278,11 +278,59 @@ const RoadmapGenerator = () => {
           "Microsoft Certified: Azure Data Scientist Associate",
           "Google Data Analytics Professional Certificate"
         ]
+      },
+      {
+        id: 6,
+        title: "Machine Learning Engineer",
+        description: "Specialized path for building AI systems and models",
+        icon: <Brain className="h-8 w-8 text-pink-500" />,
+        difficulty: "advanced",
+        timeEstimate: "8-12 months",
+        steps: [
+          "Advanced Python programming",
+          "Deep learning frameworks mastery",
+          "MLOps and model deployment",
+          "Feature engineering techniques",
+          "Model optimization and tuning",
+          "Large-scale ML systems",
+          "Real-time inference systems"
+        ],
+        resources: [
+          { title: "Hands-On Machine Learning", url: "https://www.amazon.com/Hands-Machine-Learning-Scikit-Learn-TensorFlow/dp/1492032646", type: "book" },
+          { title: "MLOps: Machine Learning Operations", url: "https://www.coursera.org/specializations/mlops-machine-learning-duke", type: "course", platform: "Coursera" },
+          { title: "Deep Learning for Coders", url: "https://course.fast.ai/", type: "course", platform: "Fast.ai" },
+          { title: "ML System Design", url: "https://www.educative.io/courses/grokking-the-machine-learning-interview", type: "course", platform: "Educative" }
+        ],
+        tools: [
+          "PyTorch",
+          "TensorFlow",
+          "Kubernetes",
+          "Docker",
+          "MLflow",
+          "Kubeflow",
+          "Ray",
+          "DVC (Data Version Control)"
+        ],
+        platforms: [
+          "Coursera",
+          "Fast.ai",
+          "Kaggle",
+          "Hugging Face",
+          "Weights & Biases",
+          "Paper with Code",
+          "Towards Data Science"
+        ],
+        certifications: [
+          "AWS Certified Machine Learning Specialty",
+          "Google Professional Machine Learning Engineer",
+          "Microsoft Certified: Azure AI Engineer Associate",
+          "TensorFlow Developer Certificate"
+        ]
       }
     ],
     cloud: [
       {
-        id: 1,
+        id: 7,
         title: "Cloud Computing Roadmap",
         description: "Path to becoming a cloud computing expert",
         icon: <Globe className="h-8 w-8 text-blue-500" />,
@@ -327,19 +375,517 @@ const RoadmapGenerator = () => {
           "Google Cloud Professional Cloud Architect",
           "Certified Kubernetes Administrator"
         ]
+      },
+      {
+        id: 8,
+        title: "DevOps Engineer",
+        description: "Path to mastering the DevOps methodology and tools",
+        icon: <GitBranch className="h-8 w-8 text-green-500" />,
+        difficulty: "intermediate",
+        timeEstimate: "8-12 months",
+        steps: [
+          "Learn Linux administration",
+          "Master Git and version control systems",
+          "Understanding CI/CD pipelines",
+          "Container orchestration with Kubernetes",
+          "Infrastructure as Code (Terraform, Ansible)",
+          "Monitoring and observability",
+          "Site Reliability Engineering principles"
+        ],
+        resources: [
+          { title: "The DevOps Handbook", url: "https://www.amazon.com/DevOps-Handbook-World-Class-Reliability-Organizations/dp/1942788002", type: "book" },
+          { title: "Kubernetes: Up and Running", url: "https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure/dp/1492046531", type: "book" },
+          { title: "DevOps Engineer Learning Path", url: "https://www.linkedin.com/learning/paths/become-a-devops-engineer", type: "course", platform: "LinkedIn Learning" },
+          { title: "Terraform in Action", url: "https://www.manning.com/books/terraform-in-action", type: "book" }
+        ],
+        tools: [
+          "Git",
+          "Jenkins/GitHub Actions/GitLab CI",
+          "Docker",
+          "Kubernetes",
+          "Terraform",
+          "Ansible",
+          "Prometheus/Grafana",
+          "ELK Stack"
+        ],
+        platforms: [
+          "Linux Academy",
+          "A Cloud Guru",
+          "KodeKloud",
+          "Pluralsight",
+          "Udemy",
+          "GitHub Labs",
+          "Katacoda"
+        ],
+        certifications: [
+          "Certified Kubernetes Administrator (CKA)",
+          "AWS Certified DevOps Engineer Professional",
+          "Terraform Associate",
+          "Docker Certified Associate",
+          "Azure DevOps Engineer Expert"
+        ]
+      }
+    ],
+    security: [
+      {
+        id: 9,
+        title: "Cybersecurity Specialist",
+        description: "Path to becoming a cybersecurity professional",
+        icon: <ShieldCheck className="h-8 w-8 text-red-500" />,
+        difficulty: "intermediate",
+        timeEstimate: "8-12 months",
+        steps: [
+          "Understand security fundamentals",
+          "Learn network security principles",
+          "Study cryptography basics",
+          "Practice security assessment techniques",
+          "Cloud security configurations",
+          "Security operations and incident response",
+          "Web application security testing"
+        ],
+        resources: [
+          { title: "CompTIA Security+ Study Guide", url: "https://www.amazon.com/CompTIA-Security-Study-Guide-SY0-601/dp/1119736250", type: "book" },
+          { title: "Penetration Testing: A Hands-On Introduction", url: "https://www.amazon.com/Penetration-Testing-Hands-Introduction-Hacking/dp/1593275641", type: "book" },
+          { title: "Cybersecurity Career Path", url: "https://www.coursera.org/professional-certificates/google-cybersecurity", type: "course", platform: "Coursera" },
+          { title: "Web Security Academy", url: "https://portswigger.net/web-security", type: "course", platform: "PortSwigger" }
+        ],
+        tools: [
+          "Kali Linux",
+          "Wireshark",
+          "Nmap",
+          "Metasploit",
+          "Burp Suite",
+          "OWASP ZAP",
+          "Nessus",
+          "Splunk"
+        ],
+        platforms: [
+          "TryHackMe",
+          "HackTheBox",
+          "Coursera",
+          "Cybrary",
+          "edX",
+          "SANS Online",
+          "INE Security"
+        ],
+        certifications: [
+          "CompTIA Security+",
+          "Certified Ethical Hacker (CEH)",
+          "CISSP",
+          "OSCP",
+          "AWS Certified Security - Specialty",
+          "Certified Cloud Security Professional (CCSP)"
+        ]
+      }
+    ],
+    mobile: [
+      {
+        id: 10,
+        title: "Mobile App Developer",
+        description: "Path to becoming a skilled mobile application developer",
+        icon: <Smartphone className="h-8 w-8 text-blue-500" />,
+        difficulty: "intermediate",
+        timeEstimate: "6-9 months",
+        steps: [
+          "Learn mobile development fundamentals",
+          "Choose a platform (iOS or Android)",
+          "Master a language (Swift/Obj-C or Kotlin/Java)",
+          "Study UI/UX design principles for mobile",
+          "Understand app architecture patterns",
+          "Learn data persistence and networking",
+          "App store deployment and optimization"
+        ],
+        resources: [
+          { title: "iOS Programming: The Big Nerd Ranch Guide", url: "https://www.amazon.com/iOS-Programming-Ranch-Guide-Guides/dp/0135264022", type: "book" },
+          { title: "Android Programming: The Big Nerd Ranch Guide", url: "https://www.amazon.com/Android-Programming-Ranch-Guide-Guides/dp/0135245125", type: "book" },
+          { title: "Flutter & Dart - The Complete Guide", url: "https://www.udemy.com/course/flutter-bootcamp-with-dart/", type: "course", platform: "Udemy" },
+          { title: "React Native in Action", url: "https://www.manning.com/books/react-native-in-action", type: "book" }
+        ],
+        tools: [
+          "Xcode/Android Studio",
+          "Figma/Sketch",
+          "React Native/Flutter",
+          "Firebase",
+          "GitHub",
+          "Postman",
+          "TestFlight/Google Play Console"
+        ],
+        platforms: [
+          "Udemy",
+          "Pluralsight",
+          "Codecademy",
+          "Raywenderlich",
+          "Udacity",
+          "LinkedIn Learning",
+          "edX"
+        ],
+        certifications: [
+          "Apple Certified iOS Developer",
+          "Associate Android Developer",
+          "React Native Developer Certification",
+          "Flutter Certified Application Developer",
+          "AWS Mobile Developer - Associate"
+        ]
+      },
+      {
+        id: 11,
+        title: "Cross-Platform App Developer",
+        description: "Path to building applications that work across multiple platforms",
+        icon: <Smartphone className="h-8 w-8 text-purple-500" />,
+        difficulty: "intermediate",
+        timeEstimate: "6-9 months",
+        steps: [
+          "Learn JavaScript/TypeScript fundamentals",
+          "Master React or other UI frameworks",
+          "Study React Native or Flutter",
+          "Understand cross-platform limitations",
+          "Native module integration",
+          "Performance optimization techniques",
+          "Cross-platform testing strategies"
+        ],
+        resources: [
+          { title: "React Native - The Practical Guide", url: "https://www.udemy.com/course/react-native-the-practical-guide/", type: "course", platform: "Udemy" },
+          { title: "Flutter in Action", url: "https://www.amazon.com/Flutter-Action-Eric-Windmill/dp/1617296147", type: "book" },
+          { title: "Ionic Framework Masterclass", url: "https://www.udemy.com/course/ionic-4-apps-for-ios-android-pwa/", type: "course", platform: "Udemy" },
+          { title: "Expo Documentation", url: "https://docs.expo.dev/", type: "article" }
+        ],
+        tools: [
+          "React Native",
+          "Flutter",
+          "Expo",
+          "Ionic",
+          "VS Code",
+          "Firebase",
+          "App Center",
+          "Fastlane"
+        ],
+        platforms: [
+          "Udemy",
+          "React Native Community",
+          "Flutter Dev",
+          "Expo Community",
+          "YouTube",
+          "Medium",
+          "GitHub"
+        ],
+        certifications: [
+          "React Native Developer Certification",
+          "Flutter Certified Application Developer",
+          "Cordova/PhoneGap Developer Certificate"
+        ]
+      }
+    ],
+    game: [
+      {
+        id: 12,
+        title: "Game Developer",
+        description: "Path to becoming a professional game developer",
+        icon: <Gamepad className="h-8 w-8 text-teal-500" />,
+        difficulty: "intermediate",
+        timeEstimate: "9-12 months",
+        steps: [
+          "Learn a programming language (C#, C++)",
+          "Master a game engine (Unity, Unreal)",
+          "Study game design principles",
+          "Learn 2D/3D graphics fundamentals",
+          "Understand game physics",
+          "Audio integration for games",
+          "Game optimization techniques"
+        ],
+        resources: [
+          { title: "Game Programming Patterns", url: "https://gameprogrammingpatterns.com/", type: "book" },
+          { title: "Unity Game Development Bootcamp", url: "https://www.udemy.com/course/unitycourse2/", type: "course", platform: "Udemy" },
+          { title: "Unreal Engine C++ Developer", url: "https://www.udemy.com/course/unrealcourse/", type: "course", platform: "Udemy" },
+          { title: "The Art of Game Design", url: "https://www.amazon.com/Art-Game-Design-Book-Lenses/dp/0123694965", type: "book" }
+        ],
+        tools: [
+          "Unity",
+          "Unreal Engine",
+          "Godot",
+          "Blender",
+          "Visual Studio",
+          "GitHub",
+          "FMOD/Wwise",
+          "Photoshop/GIMP"
+        ],
+        platforms: [
+          "Unity Learn",
+          "Unreal Engine Learning Portal",
+          "Udemy",
+          "Coursera",
+          "YouTube",
+          "GitHub",
+          "GameDev.net"
+        ],
+        certifications: [
+          "Unity Certified Programmer",
+          "Unity Certified Artist",
+          "Unreal Engine Certification",
+          "Certified Godot Developer"
+        ]
+      }
+    ],
+    design: [
+      {
+        id: 13,
+        title: "Graphic Designer",
+        description: "Path to becoming a professional graphic designer",
+        icon: <Brush className="h-8 w-8 text-pink-500" />,
+        difficulty: "beginner",
+        timeEstimate: "6-9 months",
+        steps: [
+          "Learn design fundamentals and principles",
+          "Master color theory and typography",
+          "Study composition and layout",
+          "Learn Adobe Creative Suite",
+          "Develop brand identity skills",
+          "Create a professional portfolio",
+          "Understand print and digital design differences"
+        ],
+        resources: [
+          { title: "Thinking with Type", url: "https://www.amazon.com/Thinking-Type-2nd-revised-expanded/dp/1568989695", type: "book" },
+          { title: "Graphic Design Bootcamp", url: "https://www.udemy.com/course/graphic-design-masterclass/", type: "course", platform: "Udemy" },
+          { title: "Adobe Illustrator CC - Advanced Training", url: "https://www.skillshare.com/classes/Adobe-Illustrator-CC-Advanced-Training/1248257613", type: "course", platform: "Skillshare" },
+          { title: "Logo Design Fundamentals", url: "https://www.domestika.org/en/courses/3060-logo-design-from-concept-to-presentation", type: "course", platform: "Domestika" }
+        ],
+        tools: [
+          "Adobe Photoshop",
+          "Adobe Illustrator",
+          "Adobe InDesign",
+          "Figma",
+          "Procreate",
+          "Canva",
+          "Affinity Designer"
+        ],
+        platforms: [
+          "Skillshare",
+          "Domestika",
+          "Udemy",
+          "LinkedIn Learning",
+          "Behance",
+          "Dribbble",
+          "YouTube"
+        ],
+        certifications: [
+          "Adobe Certified Professional",
+          "Graphic Design Certificate Program",
+          "Certified Digital Designer",
+          "Certification in Visual Communication"
+        ]
+      }
+    ],
+    sysadmin: [
+      {
+        id: 14,
+        title: "System Administrator",
+        description: "Path to becoming a systems administrator",
+        icon: <Cog className="h-8 w-8 text-gray-500" />,
+        difficulty: "intermediate",
+        timeEstimate: "6-9 months",
+        steps: [
+          "Learn Linux/Windows server administration",
+          "Understand networking fundamentals",
+          "Master virtualization technologies",
+          "Learn about storage systems",
+          "Backup and disaster recovery",
+          "System monitoring and maintenance",
+          "Security best practices"
+        ],
+        resources: [
+          { title: "UNIX and Linux System Administration Handbook", url: "https://www.amazon.com/UNIX-Linux-System-Administration-Handbook/dp/0134277554", type: "book" },
+          { title: "Windows Server Administration Fundamentals", url: "https://learn.microsoft.com/en-us/training/paths/windows-server-fundamentals/", type: "course", platform: "Microsoft Learn" },
+          { title: "CompTIA Server+ Certification Guide", url: "https://www.amazon.com/CompTIA-Server-Certification-Guide-SK0-005/dp/1801078351", type: "book" },
+          { title: "Virtualization Essentials", url: "https://www.pluralsight.com/courses/virtualization-essentials", type: "course", platform: "Pluralsight" }
+        ],
+        tools: [
+          "Linux/Windows Server",
+          "PowerShell/Bash",
+          "VMware/Hyper-V",
+          "Active Directory",
+          "Ansible/Puppet",
+          "Nagios/Zabbix",
+          "Veeam Backup"
+        ],
+        platforms: [
+          "Pluralsight",
+          "Linux Academy",
+          "Microsoft Learn",
+          "CBT Nuggets",
+          "ITProTV",
+          "Udemy",
+          "edX"
+        ],
+        certifications: [
+          "CompTIA Server+",
+          "RHCSA (Red Hat Certified System Administrator)",
+          "Microsoft Certified: Windows Server",
+          "VMware Certified Professional",
+          "Linux Professional Institute Certification"
+        ]
+      }
+    ],
+    qa: [
+      {
+        id: 15,
+        title: "QA Engineer",
+        description: "Path to becoming a quality assurance engineer",
+        icon: <Terminal className="h-8 w-8 text-indigo-500" />,
+        difficulty: "beginner",
+        timeEstimate: "5-7 months",
+        steps: [
+          "Understand software testing fundamentals",
+          "Learn manual testing techniques",
+          "Master test case design",
+          "Study automation testing basics",
+          "Learn a test automation tool (Selenium, Cypress)",
+          "Understand CI/CD for testing",
+          "API testing methods"
+        ],
+        resources: [
+          { title: "Foundations of Software Testing ISTQB Certification", url: "https://www.amazon.com/Foundations-Software-Testing-ISTQB-Certification/dp/1473764793", type: "book" },
+          { title: "Selenium WebDriver with Java", url: "https://www.udemy.com/course/selenium-real-time-examplesinterview-questions/", type: "course", platform: "Udemy" },
+          { title: "API Testing with Postman", url: "https://www.pluralsight.com/courses/postman-fundamentals", type: "course", platform: "Pluralsight" },
+          { title: "Modern Test Automation with Cypress", url: "https://testautomationu.applitools.com/cypress-tutorial/", type: "course", platform: "Test Automation University" }
+        ],
+        tools: [
+          "Selenium",
+          "Cypress",
+          "Postman",
+          "JMeter",
+          "Jenkins",
+          "JIRA",
+          "TestRail",
+          "Cucumber"
+        ],
+        platforms: [
+          "Udemy",
+          "Pluralsight",
+          "Test Automation University",
+          "Ministry of Testing",
+          "LinkedIn Learning",
+          "edX",
+          "YouTube"
+        ],
+        certifications: [
+          "ISTQB Foundation Level",
+          "ISTQB Agile Tester",
+          "Certified Test Engineer",
+          "Selenium Certification",
+          "API Testing Certification"
+        ]
+      },
+      {
+        id: 16,
+        title: "Test Automation Engineer",
+        description: "Specialized path for automation testing experts",
+        icon: <Terminal className="h-8 w-8 text-blue-500" />,
+        difficulty: "intermediate",
+        timeEstimate: "7-10 months",
+        steps: [
+          "Master a programming language (Java, Python, JavaScript)",
+          "Learn advanced test automation frameworks",
+          "Study design patterns for test automation",
+          "Performance testing techniques",
+          "Mobile automation testing",
+          "API and microservices testing",
+          "Test infrastructure as code"
+        ],
+        resources: [
+          { title: "Practical Test Automation", url: "https://testautomationu.applitools.com/learningpaths.html", type: "course", platform: "Test Automation University" },
+          { title: "Selenium Design Patterns", url: "https://www.amazon.com/Mastering-Selenium-WebDriver-strategies-automation/dp/1784394351", type: "book" },
+          { title: "Advanced Appium", url: "https://www.udemy.com/course/appium-selenium-for-mobile-automation-testing/", type: "course", platform: "Udemy" },
+          { title: "Performance Testing with JMeter", url: "https://www.blazemeter.com/university/jmeter-training", type: "course", platform: "BlazeMeter University" }
+        ],
+        tools: [
+          "Selenium WebDriver",
+          "Appium",
+          "Playwright",
+          "Cucumber/SpecFlow",
+          "JMeter/Gatling",
+          "Docker/Kubernetes",
+          "TestNG/JUnit/Mocha"
+        ],
+        platforms: [
+          "Test Automation University",
+          "Udemy",
+          "Pluralsight",
+          "LambdaTest Academy",
+          "BrowserStack University",
+          "LinkedIn Learning",
+          "GitHub"
+        ],
+        certifications: [
+          "ISTQB Test Automation Engineer",
+          "Selenium WebDriver with Java Certification",
+          "Appium Mobile Testing Certification",
+          "Performance Testing Certification"
+        ]
+      }
+    ],
+    product: [
+      {
+        id: 17,
+        title: "Product Manager",
+        description: "Path to becoming a technical product manager",
+        icon: <Aperture className="h-8 w-8 text-blue-500" />,
+        difficulty: "intermediate",
+        timeEstimate: "8-12 months",
+        steps: [
+          "Learn product management fundamentals",
+          "Understand software development lifecycle",
+          "Study user research and UX design basics",
+          "Learn agile methodologies",
+          "Develop data analysis skills",
+          "Master product roadmapping",
+          "Practice stakeholder management"
+        ],
+        resources: [
+          { title: "Inspired: How to Create Tech Products Customers Love", url: "https://www.amazon.com/INSPIRED-Create-Tech-Products-Customers/dp/1119387507", type: "book" },
+          { title: "Product Management Certification", url: "https://www.productschool.com/product-management-certification/", type: "course", platform: "Product School" },
+          { title: "Agile Product Owner Role", url: "https://www.scrum.org/professional-scrum-product-owner-certification", type: "course", platform: "Scrum.org" },
+          { title: "Designing User Experiences", url: "https://www.interaction-design.org/courses/user-research-methods-and-best-practices", type: "course", platform: "Interaction Design Foundation" }
+        ],
+        tools: [
+          "JIRA/Asana",
+          "Figma/Sketch",
+          "Amplitude/Mixpanel",
+          "Miro/Mural",
+          "ProductPlan",
+          "Google Analytics",
+          "Notion/Confluence"
+        ],
+        platforms: [
+          "Product School",
+          "Mind the Product",
+          "Reforge",
+          "Udemy",
+          "Product Management Festival",
+          "ProductCon",
+          "The Product Experience"
+        ],
+        certifications: [
+          "Certified Scrum Product Owner (CSPO)",
+          "Professional Scrum Product Owner (PSPO)",
+          "Product Management Certificate",
+          "Product Analytics Certification",
+          "Agile Certified Product Manager"
+        ]
       }
     ]
   };
 
   // AI-based roadmap categories for more intelligent matching
   const aiCategories = {
-    webdev: ["website", "web", "html", "css", "javascript", "react", "frontend", "back-end", "fullstack"],
-    mobile: ["mobile", "app", "android", "ios", "flutter", "react native", "swift"],
-    data: ["data", "analytics", "science", "machine learning", "ai", "statistics", "visualization", "python", "analysis"],
-    design: ["design", "ui", "ux", "user experience", "figma", "adobe", "graphic", "visual"],
-    devops: ["devops", "cloud", "aws", "azure", "docker", "kubernetes", "ci/cd", "pipeline"],
-    security: ["security", "cyber", "hacking", "penetration", "encryption", "protection", "firewall", "vulnerability"],
-    game: ["game", "unity", "unreal", "2d", "3d", "gaming", "development"]
+    webdev: ["website", "web", "html", "css", "javascript", "react", "frontend", "front-end", "back-end", "backend", "fullstack"],
+    mobile: ["mobile", "app", "android", "ios", "flutter", "react native", "swift", "kotlin"],
+    data: ["data", "analytics", "science", "machine learning", "ai", "artificial intelligence", "statistics", "visualization", "python", "analysis", "big data"],
+    design: ["design", "ui", "ux", "user experience", "figma", "adobe", "graphic", "visual", "animation"],
+    devops: ["devops", "cloud", "aws", "azure", "docker", "kubernetes", "ci/cd", "pipeline", "deployment"],
+    security: ["security", "cyber", "hacking", "penetration", "encryption", "protection", "firewall", "vulnerability", "ethical"],
+    game: ["game", "unity", "unreal", "2d", "3d", "gaming", "development"],
+    system: ["system", "admin", "administrator", "linux", "windows", "server", "network"],
+    qa: ["qa", "quality", "test", "testing", "automation", "selenium", "cypress"],
+    product: ["product", "manager", "management", "agile", "scrum", "roadmap"]
   };
 
   // Generate AI suggestion based on the prompt
@@ -385,35 +931,62 @@ const RoadmapGenerator = () => {
       let generatedRoadmaps: Roadmap[] = [];
       const promptLower = prompt.toLowerCase();
       
-      // More sophisticated keyword matching with AI categories
-      let categoryMatch = '';
-      let highestMatchScore = 0;
-      
-      // Analyze prompt against AI categories
-      Object.entries(aiCategories).forEach(([category, keywords]) => {
-        const matchCount = keywords.filter(keyword => promptLower.includes(keyword)).length;
-        if (matchCount > highestMatchScore) {
-          highestMatchScore = matchCount;
-          categoryMatch = category;
-        }
-      });
-      
-      // Map AI category to roadmap category
-      if (categoryMatch === 'webdev') {
-        if (promptLower.includes('back') || promptLower.includes('server') || promptLower.includes('api')) {
-          generatedRoadmaps = demoRoadmaps.backend;
-        } else {
-          generatedRoadmaps = demoRoadmaps.frontend;
-        }
-      } else if (categoryMatch === 'data' || categoryMatch === 'ai') {
-        generatedRoadmaps = demoRoadmaps.datascience;
-      } else if (categoryMatch === 'design') {
-        generatedRoadmaps = [demoRoadmaps.frontend.find(r => r.title.includes('UI/UX'))!];
-      } else if (categoryMatch === 'devops' || categoryMatch === 'cloud') {
-        generatedRoadmaps = demoRoadmaps.cloud;
+      // Check if user wants all technical job roadmaps
+      if (promptLower.includes('all') && (promptLower.includes('technical') || promptLower.includes('tech') || promptLower.includes('jobs'))) {
+        // Add one roadmap from each category
+        Object.keys(demoRoadmaps).forEach(category => {
+          if (demoRoadmaps[category] && demoRoadmaps[category].length > 0) {
+            generatedRoadmaps.push(demoRoadmaps[category][0]);
+          }
+        });
       } else {
-        // If no specific match, provide a mixed recommendation
-        generatedRoadmaps = [demoRoadmaps.frontend[0], demoRoadmaps.backend[0]];
+        // More sophisticated keyword matching with AI categories
+        let categoryMatch = '';
+        let highestMatchScore = 0;
+        
+        // Analyze prompt against AI categories
+        Object.entries(aiCategories).forEach(([category, keywords]) => {
+          const matchCount = keywords.filter(keyword => promptLower.includes(keyword)).length;
+          if (matchCount > highestMatchScore) {
+            highestMatchScore = matchCount;
+            categoryMatch = category;
+          }
+        });
+        
+        // Map AI category to roadmap category
+        if (categoryMatch === 'webdev') {
+          if (promptLower.includes('back') || promptLower.includes('server') || promptLower.includes('api')) {
+            generatedRoadmaps = demoRoadmaps.backend;
+          } else {
+            generatedRoadmaps = demoRoadmaps.frontend;
+          }
+        } else if (categoryMatch === 'data') {
+          generatedRoadmaps = demoRoadmaps.datascience;
+        } else if (categoryMatch === 'design') {
+          generatedRoadmaps = demoRoadmaps.design;
+        } else if (categoryMatch === 'devops' || categoryMatch === 'cloud') {
+          generatedRoadmaps = demoRoadmaps.cloud;
+        } else if (categoryMatch === 'security') {
+          generatedRoadmaps = demoRoadmaps.security;
+        } else if (categoryMatch === 'mobile') {
+          generatedRoadmaps = demoRoadmaps.mobile;
+        } else if (categoryMatch === 'game') {
+          generatedRoadmaps = demoRoadmaps.game;
+        } else if (categoryMatch === 'system') {
+          generatedRoadmaps = demoRoadmaps.sysadmin;
+        } else if (categoryMatch === 'qa') {
+          generatedRoadmaps = demoRoadmaps.qa;
+        } else if (categoryMatch === 'product') {
+          generatedRoadmaps = demoRoadmaps.product;
+        } else {
+          // If no specific match, provide a mixed recommendation
+          generatedRoadmaps = [
+            demoRoadmaps.frontend[0],
+            demoRoadmaps.backend[0],
+            demoRoadmaps.datascience[0],
+            demoRoadmaps.cloud[0]
+          ];
+        }
       }
       
       // Generate a custom AI roadmap based on the prompt
@@ -463,7 +1036,11 @@ const RoadmapGenerator = () => {
         aiGenerated: true
       };
       
-      generatedRoadmaps.push(customRoadmap);
+      // Only add the custom roadmap if not showing all technical jobs
+      if (!promptLower.includes('all') || !promptLower.includes('technical')) {
+        generatedRoadmaps.push(customRoadmap);
+      }
+      
       setRoadmaps(generatedRoadmaps);
       setIsGenerating(false);
       
@@ -647,9 +1224,9 @@ const RoadmapGenerator = () => {
                                       {resource.type === 'book' && <BookMarked className="h-4 w-4 mr-2 text-blue-500" />}
                                       {resource.type === 'video' && <Youtube className="h-4 w-4 mr-2 text-red-500" />}
                                       {resource.type === 'course' && <BookOpen className="h-4 w-4 mr-2 text-green-500" />}
-                                      {resource.type === 'article' && <FileText className="h-4 w-4 mr-2 text-yellow-500" />}
+                                      {resource.type === 'article' && <FileTextIcon className="h-4 w-4 mr-2 text-yellow-500" />}
                                       {resource.type === 'tool' && <LaptopIcon className="h-4 w-4 mr-2 text-purple-500" />}
-                                      {resource.type === 'community' && <Users className="h-4 w-4 mr-2 text-indigo-500" />}
+                                      {resource.type === 'community' && <UsersIcon className="h-4 w-4 mr-2 text-indigo-500" />}
                                       <div>
                                         <span className="font-medium">{resource.title}</span>
                                         {resource.platform && (
