@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -203,7 +202,7 @@ const Navbar = () => {
                 onClick={toggleStudentDropdown}
                 className={`w-full flex items-center justify-between font-medium transition-colors rounded-md px-3 py-2 ${
                   studentDropdownOpen 
-                    ? 'bg-xr-blue text-white' 
+                    ? 'bg-blue-50 text-xr-blue' 
                     : 'text-xr-gray-dark hover:text-xr-blue'
                 }`}
               >
@@ -243,7 +242,7 @@ const Navbar = () => {
                 onClick={toggleCollegeDropdown}
                 className={`w-full flex items-center justify-between font-medium transition-colors rounded-md px-3 py-2 ${
                   collegeDropdownOpen 
-                    ? 'bg-xr-blue text-white' 
+                    ? 'bg-blue-50 text-xr-blue' 
                     : 'text-xr-gray-dark hover:text-xr-blue'
                 }`}
               >
