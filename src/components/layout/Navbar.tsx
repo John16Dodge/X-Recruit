@@ -72,7 +72,7 @@ const Navbar = () => {
               
               {/* Students Dropdown */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-xr-gray-dark hover:text-xr-blue font-medium">
+                <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent text-xr-gray-dark hover:text-xr-blue font-medium">
                   For Students
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="w-[220px]">
@@ -113,7 +113,7 @@ const Navbar = () => {
               
               {/* Colleges Dropdown */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-xr-gray-dark hover:text-xr-blue font-medium">
+                <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent text-xr-gray-dark hover:text-xr-blue font-medium">
                   For Colleges
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="w-[220px]">
@@ -207,13 +207,17 @@ const Navbar = () => {
             <div className="relative">
               <button 
                 onClick={toggleStudentDropdown}
-                className="w-full flex items-center justify-between text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+                className={`w-full flex items-center justify-between font-medium transition-colors rounded-md px-3 py-2 ${
+                  studentDropdownOpen 
+                    ? 'bg-emerald-500 text-white' 
+                    : 'text-xr-gray-dark hover:text-xr-blue'
+                }`}
               >
                 <span>For Students</span>
                 <ChevronDown size={16} className={`transition-transform ${studentDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
               {studentDropdownOpen && (
-                <div className="pl-4 mt-2 space-y-2 border-l-2 border-gray-100">
+                <div className="pl-4 mt-2 space-y-2 border-l-2 border-emerald-200">
                   <Link 
                     to="/students" 
                     className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
@@ -243,13 +247,17 @@ const Navbar = () => {
             <div className="relative">
               <button 
                 onClick={toggleCollegeDropdown}
-                className="w-full flex items-center justify-between text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+                className={`w-full flex items-center justify-between font-medium transition-colors rounded-md px-3 py-2 ${
+                  collegeDropdownOpen 
+                    ? 'bg-emerald-500 text-white' 
+                    : 'text-xr-gray-dark hover:text-xr-blue'
+                }`}
               >
                 <span>For Colleges</span>
                 <ChevronDown size={16} className={`transition-transform ${collegeDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
               {collegeDropdownOpen && (
-                <div className="pl-4 mt-2 space-y-2 border-l-2 border-gray-100">
+                <div className="pl-4 mt-2 space-y-2 border-l-2 border-emerald-200">
                   <Link 
                     to="/colleges" 
                     className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
