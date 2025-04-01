@@ -153,12 +153,6 @@ const Navbar = () => {
               </NavigationMenuItem>
               
               <NavigationMenuItem>
-                <Link to="/recruiters" className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors">
-                  For Recruiters
-                </Link>
-              </NavigationMenuItem>
-              
-              <NavigationMenuItem>
                 <Link to="/features" className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors">
                   Features
                 </Link>
@@ -209,7 +203,7 @@ const Navbar = () => {
                 onClick={toggleStudentDropdown}
                 className={`w-full flex items-center justify-between font-medium transition-colors rounded-md px-3 py-2 ${
                   studentDropdownOpen 
-                    ? 'bg-emerald-500 text-white' 
+                    ? 'bg-xr-blue text-white' 
                     : 'text-xr-gray-dark hover:text-xr-blue'
                 }`}
               >
@@ -217,7 +211,7 @@ const Navbar = () => {
                 <ChevronDown size={16} className={`transition-transform ${studentDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
               {studentDropdownOpen && (
-                <div className="pl-4 mt-2 space-y-2 border-l-2 border-emerald-200">
+                <div className="pl-4 mt-2 space-y-2 border-l-2 border-xr-blue-light">
                   <Link 
                     to="/students" 
                     className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
@@ -249,7 +243,7 @@ const Navbar = () => {
                 onClick={toggleCollegeDropdown}
                 className={`w-full flex items-center justify-between font-medium transition-colors rounded-md px-3 py-2 ${
                   collegeDropdownOpen 
-                    ? 'bg-emerald-500 text-white' 
+                    ? 'bg-xr-blue text-white' 
                     : 'text-xr-gray-dark hover:text-xr-blue'
                 }`}
               >
@@ -257,7 +251,7 @@ const Navbar = () => {
                 <ChevronDown size={16} className={`transition-transform ${collegeDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
               {collegeDropdownOpen && (
-                <div className="pl-4 mt-2 space-y-2 border-l-2 border-emerald-200">
+                <div className="pl-4 mt-2 space-y-2 border-l-2 border-xr-blue-light">
                   <Link 
                     to="/colleges" 
                     className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
@@ -283,13 +277,6 @@ const Navbar = () => {
               )}
             </div>
             
-            <Link 
-              to="/recruiters" 
-              className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              For Recruiters
-            </Link>
             <Link 
               to="/features" 
               className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
