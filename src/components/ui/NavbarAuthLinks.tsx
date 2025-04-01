@@ -24,11 +24,11 @@ const NavbarAuthLinks = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <Link to="/auth/student-login">
-        <Button variant="outline" size="sm">Student Login</Button>
+      <Link to="/login">
+        <Button variant="outline" size="sm">Login</Button>
       </Link>
-      <Link to="/auth/college-login">
-        <Button variant="outline" size="sm">College Login</Button>
+      <Link to="/register">
+        <Button variant="outline" size="sm">Register</Button>
       </Link>
     </div>
   );
