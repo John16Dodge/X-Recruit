@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { useAuth } from '@/contexts/AuthContext';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -27,6 +28,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -38,8 +40,11 @@ const Login = () => {
   });
 
   const onSubmit = (values: FormValues) => {
-    // In a real app, you would validate credentials here
+    // Simulate login (in a real app, you would validate credentials here)
     console.log('Login attempt:', values);
+    
+    // Simulate successful login
+    login({ name: values.name, email: values.email }, 'fake-token-123');
     
     // Show success message
     toast.success('Login successful!');
