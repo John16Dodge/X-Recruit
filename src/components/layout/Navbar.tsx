@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import NavbarAuthLinks from '@/components/ui/NavbarAuthLinks';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -106,6 +107,16 @@ const Navbar = () => {
                         </Link>
                       </NavigationMenuLink>
                     </li>
+                    <li className="row-span-1">
+                      <NavigationMenuLink asChild>
+                        <Link 
+                          to="/students/todo-list"
+                          className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">Todo List</div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
@@ -162,12 +173,7 @@ const Navbar = () => {
 
         {/* CTA Buttons */}
         <div className="hidden md:flex items-center space-x-4">
-          <Button variant="outline" className="border-xr-blue text-xr-blue hover:bg-xr-blue/5">
-            Log in
-          </Button>
-          <Button className="bg-xr-blue hover:bg-xr-blue-dark">
-            Get Started
-          </Button>
+          <NavbarAuthLinks />
         </div>
 
         {/* Mobile Menu Button */}
@@ -232,6 +238,13 @@ const Navbar = () => {
                   >
                     Learning Resources
                   </Link>
+                  <Link 
+                    to="/students/todo-list" 
+                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Todo List
+                  </Link>
                 </div>
               )}
             </div>
@@ -285,12 +298,7 @@ const Navbar = () => {
             </Link>
           </nav>
           <div className="flex flex-col space-y-3">
-            <Button variant="outline" className="w-full border-xr-blue text-xr-blue hover:bg-xr-blue/5">
-              Log in
-            </Button>
-            <Button className="w-full bg-xr-blue hover:bg-xr-blue-dark">
-              Get Started
-            </Button>
+            <NavbarAuthLinks />
           </div>
         </div>
       </div>

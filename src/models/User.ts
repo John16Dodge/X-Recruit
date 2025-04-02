@@ -1,10 +1,11 @@
-
 import mongoose, { Document, Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 export enum UserRole {
   STUDENT = 'student',
   COLLEGE = 'college',
+  TEACHER = 'teacher',
+  RECRUITER = 'recruiter',
 }
 
 export interface IUser extends Document {

@@ -14,6 +14,7 @@ import CollegeLogin from "./pages/Auth/CollegeLogin";
 import CollegeRegister from "./pages/Auth/CollegeRegister";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
+import TodoListPage from "./pages/students/TodoListPage";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/auth/college-register" element={<CollegeRegister />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/students/todo-list" element={<TodoListPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
