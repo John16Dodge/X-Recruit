@@ -12,7 +12,7 @@ const NavbarAuthLinks = () => {
     return (
       <div className="flex items-center gap-4">
         <div className="text-sm font-medium">
-          Welcome, {user.name}
+          Welcome, {user.name || user.email}
         </div>
         <Button variant="outline" size="sm" onClick={logout} className="flex items-center gap-2">
           <LogOut className="h-4 w-4" />
