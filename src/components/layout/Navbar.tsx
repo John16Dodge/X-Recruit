@@ -106,16 +106,6 @@ const Navbar = () => {
                     <li className="row-span-1">
                       <NavigationMenuLink asChild>
                         <Link 
-                          to="/roadmap-generator"
-                          className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                        >
-                          <div className="text-sm font-medium leading-none">Roadmap Generator</div>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                    <li className="row-span-1">
-                      <NavigationMenuLink asChild>
-                        <Link 
                           to="/students/resources"
                           className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
@@ -280,13 +270,6 @@ const Navbar = () => {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Overview
-                  </Link>
-                  <Link 
-                    to="/roadmap-generator" 
-                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Roadmap Generator
                   </Link>
                   <Link 
                     to="/students/resources" 
