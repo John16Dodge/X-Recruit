@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -18,6 +19,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [studentDropdownOpen, setStudentDropdownOpen] = useState(false);
   const [collegeDropdownOpen, setCollegeDropdownOpen] = useState(false);
+  const [teacherDropdownOpen, setTeacherDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,12 +40,26 @@ const Navbar = () => {
 
   const toggleStudentDropdown = () => {
     setStudentDropdownOpen(!studentDropdownOpen);
-    if (!studentDropdownOpen) setCollegeDropdownOpen(false);
+    if (!studentDropdownOpen) {
+      setCollegeDropdownOpen(false);
+      setTeacherDropdownOpen(false);
+    }
   };
 
   const toggleCollegeDropdown = () => {
     setCollegeDropdownOpen(!collegeDropdownOpen);
-    if (!collegeDropdownOpen) setStudentDropdownOpen(false);
+    if (!collegeDropdownOpen) {
+      setStudentDropdownOpen(false);
+      setTeacherDropdownOpen(false);
+    }
+  };
+
+  const toggleTeacherDropdown = () => {
+    setTeacherDropdownOpen(!teacherDropdownOpen);
+    if (!teacherDropdownOpen) {
+      setStudentDropdownOpen(false);
+      setCollegeDropdownOpen(false);
+    }
   };
 
   return (
@@ -155,6 +171,47 @@ const Navbar = () => {
                           className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
                           <div className="text-sm font-medium leading-none">Campus Programs</div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              
+              {/* Teachers Dropdown */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent text-xr-gray-dark hover:text-xr-blue font-medium">
+                  For Teachers
+                </NavigationMenuTrigger>
+                <NavigationMenuContent className="w-[220px]">
+                  <ul className="grid w-full gap-1 p-2">
+                    <li className="row-span-1">
+                      <NavigationMenuLink asChild>
+                        <Link 
+                          to="/teachers"
+                          className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">Overview</div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                    <li className="row-span-1">
+                      <NavigationMenuLink asChild>
+                        <Link 
+                          to="/teachers/todo-list"
+                          className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">Todo List</div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                    <li className="row-span-1">
+                      <NavigationMenuLink asChild>
+                        <Link 
+                          to="/teachers/resources"
+                          className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">Teaching Resources</div>
                         </Link>
                       </NavigationMenuLink>
                     </li>
@@ -284,6 +341,46 @@ const Navbar = () => {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Campus Programs
+                  </Link>
+                </div>
+              )}
+            </div>
+            
+            {/* Mobile Teachers Dropdown */}
+            <div className="relative">
+              <button 
+                onClick={toggleTeacherDropdown}
+                className={`w-full flex items-center justify-between font-medium transition-colors rounded-md px-3 py-2 ${
+                  teacherDropdownOpen 
+                    ? 'bg-blue-50 text-xr-blue' 
+                    : 'text-xr-gray-dark hover:text-xr-blue'
+                }`}
+              >
+                <span>For Teachers</span>
+                <ChevronDown size={16} className={`transition-transform ${teacherDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {teacherDropdownOpen && (
+                <div className="pl-4 mt-2 space-y-2 border-l-2 border-xr-blue-light">
+                  <Link 
+                    to="/teachers" 
+                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Overview
+                  </Link>
+                  <Link 
+                    to="/teachers/todo-list" 
+                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Todo List
+                  </Link>
+                  <Link 
+                    to="/teachers/resources" 
+                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Teaching Resources
                   </Link>
                 </div>
               )}

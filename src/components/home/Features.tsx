@@ -11,7 +11,8 @@ import {
   GitGraphIcon,
   HandHelping,
   Edit,
-  BracketsIcon
+  BracketsIcon,
+  ClipboardList
 } from 'lucide-react';
 import FeatureCard from '../ui/FeatureCard';
 import { title } from 'process';
@@ -40,8 +41,8 @@ const Features = () => {
     },
     {
       title: "To-Do List",
-      description: "CA task management tool for students to organize their placement preparation activities, such as resume updates or interview practice.",
-      icon: Building2,
+      description: "A comprehensive task management tool for students and teachers to organize academic activities, track assignments, and manage deadlines.",
+      icon: ClipboardList,
       delay: 400
     },
     {
@@ -92,7 +93,6 @@ const Features = () => {
       icon: Users,
       delay:600
     }
-
   ];
 
   return (
