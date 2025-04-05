@@ -24,12 +24,13 @@ import {
 } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/contexts/AuthContext';
+import { UserRole } from '@/models/User';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
   username: z.string().min(3, 'Username must be at least 3 characters'),
-  userType: z.enum(['student', 'teacher', 'recruiter'], {
+  userType: z.enum([UserRole.STUDENT, UserRole.TEACHER, UserRole.RECRUITER], {
     required_error: 'Please select a user type',
   }),
   password: z.string().min(6, 'Password must be at least 6 characters'),
@@ -139,9 +140,9 @@ const Register = () => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="student">Student</SelectItem>
-                        <SelectItem value="teacher">Teacher</SelectItem>
-                        <SelectItem value="recruiter">Recruiter</SelectItem>
+                        <SelectItem value={UserRole.STUDENT}>Student</SelectItem>
+                        <SelectItem value={UserRole.TEACHER}>Teacher</SelectItem>
+                        <SelectItem value={UserRole.RECRUITER}>Recruiter</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
