@@ -6,6 +6,7 @@ import Hero from '../components/home/Hero';
 import Features from '../components/home/Features';
 import Dashboard from '../components/home/Dashboard';
 import CallToAction from '../components/home/CallToAction';
+import TeamMembers from '../components/home/TeamMembers';
 
 const Index = () => {
   useEffect(() => {
@@ -20,6 +21,7 @@ const Index = () => {
         <Hero />
         <Features />
         <Dashboard />
+        <TeamMembers />
         <CallToAction />
       </main>
       <Footer />
