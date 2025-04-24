@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Users } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import {
   Carousel,
   CarouselContent,
@@ -16,33 +16,39 @@ interface TeamMember {
   role: string;
   image?: string;
   initials: string;
+  portfolioLink?: string;
 }
 
 const teamMembers: TeamMember[] = [
   {
     name: "Dr. Sarah Johnson",
     role: "AI Research Lead",
-    initials: "SJ"
+    initials: "SJ",
+    portfolioLink: "https://www.linkedin.com/in/sarah-johnson"
   },
   {
     name: "Michael Chen",
     role: "Technical Director",
-    initials: "MC"
+    initials: "MC",
+    portfolioLink: "https://www.linkedin.com/in/michael-chen"
   },
   {
     name: "Dr. Emily Rodriguez",
     role: "Career Development Specialist",
-    initials: "ER"
+    initials: "ER",
+    portfolioLink: "https://www.linkedin.com/in/emily-rodriguez"
   },
   {
     name: "James Wilson",
     role: "Industry Relations Manager",
-    initials: "JW"
+    initials: "JW",
+    portfolioLink: "https://www.linkedin.com/in/james-wilson"
   },
   {
     name: "Priya Patel",
     role: "Student Success Coordinator",
-    initials: "PP"
+    initials: "PP",
+    portfolioLink: "https://www.linkedin.com/in/priya-patel"
   }
 ];
 
@@ -80,7 +86,18 @@ const TeamMembers = () => {
                         </AvatarFallback>
                       </Avatar>
                       <h3 className="text-lg font-semibold mb-1">{member.name}</h3>
-                      <p className="text-xr-gray text-sm">{member.role}</p>
+                      <p className="text-xr-gray text-sm mb-2">{member.role}</p>
+                      {member.portfolioLink && (
+                        <a 
+                          href={member.portfolioLink} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-xr-purple hover:text-xr-purple/80 transition-colors flex items-center gap-1"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          Portfolio
+                        </a>
+                      )}
                     </CardContent>
                   </Card>
                 </div>
