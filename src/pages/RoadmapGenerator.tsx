@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -27,7 +26,6 @@ interface Roadmap {
   tools?: string[];
   platforms?: string[];
   certifications?: string[];
-  jobRoles?: string[]; // New field for job roles
   aiGenerated?: boolean;
 }
 
@@ -102,8 +100,7 @@ const RoadmapGenerator = () => {
       ],
       tools: ["VS Code", "Chrome DevTools", "GitHub", "CodePen"],
       platforms: ["freeCodeCamp", "Codecademy", "Frontend Mentor"],
-      certifications: ["Microsoft Certified: Web Developer"],
-      jobRoles: ["Junior Front-End Developer", "Web Developer", "HTML/CSS Developer", "JavaScript Developer", "UI Developer"]
+      certifications: ["Microsoft Certified: Web Developer"]
     },
     {
       id: 2,
@@ -136,8 +133,7 @@ const RoadmapGenerator = () => {
       ],
       tools: ["Python", "R", "Jupyter Notebook", "Pandas", "scikit-learn"],
       platforms: ["Kaggle", "DataCamp", "Coursera"],
-      certifications: ["AWS Certified Data Analytics - Specialty", "Microsoft Certified: Data Scientist Associate"],
-      jobRoles: ["Data Analyst", "Junior Data Scientist", "Data Engineer", "Business Intelligence Analyst", "Research Analyst"]
+      certifications: ["AWS Certified Data Analytics - Specialty", "Microsoft Certified: Data Scientist Associate"]
     },
     {
       id: 3,
@@ -172,8 +168,7 @@ const RoadmapGenerator = () => {
       ],
       tools: ["VS Code", "Git", "Docker", "Postman", "MongoDB Compass"],
       platforms: ["GitHub", "StackOverflow", "FreeCodeCamp"],
-      certifications: ["AWS Certified Developer", "MongoDB Certified Developer"],
-      jobRoles: ["Full Stack Developer", "MERN Stack Developer", "Web Application Developer", "Software Engineer", "Backend Developer", "Frontend Developer"]
+      certifications: ["AWS Certified Developer", "MongoDB Certified Developer"]
     },
     {
       id: 4,
@@ -208,8 +203,7 @@ const RoadmapGenerator = () => {
       ],
       tools: ["Figma", "Adobe XD", "Sketch", "InVision", "Maze"],
       platforms: ["Dribbble", "Behance", "UX Collective"],
-      certifications: ["Nielsen Norman Group UX Certification", "Google UX Design Certificate"],
-      jobRoles: ["UI Designer", "UX Designer", "Product Designer", "Interaction Designer", "Visual Designer", "UX Researcher", "Information Architect"]
+      certifications: ["Nielsen Norman Group UX Certification", "Google UX Design Certificate"]
     },
     {
       id: 5,
@@ -244,8 +238,7 @@ const RoadmapGenerator = () => {
       ],
       tools: ["Jira", "Selenium", "Postman", "JMeter", "TestRail"],
       platforms: ["Ministry of Testing", "uTest", "Test Automation University"],
-      certifications: ["ISTQB Foundation Level", "Certified Test Engineer"],
-      jobRoles: ["QA Tester", "Software Test Engineer", "Manual Tester", "Automation Test Engineer", "QA Analyst", "Test Lead"]
+      certifications: ["ISTQB Foundation Level", "Certified Test Engineer"]
     },
     {
       id: 6,
@@ -280,8 +273,7 @@ const RoadmapGenerator = () => {
       ],
       tools: ["Terraform", "AWS CloudFormation", "Docker", "Kubernetes", "Prometheus"],
       platforms: ["AWS", "Azure", "Google Cloud"],
-      certifications: ["AWS Certified Solutions Architect Professional", "Google Professional Cloud Architect"],
-      jobRoles: ["Cloud Architect", "Cloud Engineer", "DevOps Engineer", "Site Reliability Engineer", "Infrastructure Architect", "Cloud Solutions Architect"]
+      certifications: ["AWS Certified Solutions Architect Professional", "Google Professional Cloud Architect"]
     },
     {
       id: 7,
@@ -316,8 +308,7 @@ const RoadmapGenerator = () => {
       ],
       tools: ["Python", "Jupyter", "TensorFlow", "PyTorch", "Pandas"],
       platforms: ["Kaggle", "DataCamp", "HackerRank"],
-      certifications: ["TensorFlow Developer Certificate", "IBM Data Science Professional Certificate"],
-      jobRoles: ["Data Scientist", "Machine Learning Engineer", "AI Researcher", "Applied Scientist", "Research Scientist", "Quantitative Analyst"]
+      certifications: ["TensorFlow Developer Certificate", "IBM Data Science Professional Certificate"]
     },
     {
       id: 8,
@@ -352,8 +343,7 @@ const RoadmapGenerator = () => {
       ],
       tools: ["Jenkins", "Docker", "Kubernetes", "Ansible", "Terraform"],
       platforms: ["GitHub", "GitLab", "AWS"],
-      certifications: ["AWS Certified DevOps Engineer", "Kubernetes Certified Administrator"],
-      jobRoles: ["DevOps Engineer", "Site Reliability Engineer", "Platform Engineer", "Infrastructure Engineer", "Release Engineer", "Automation Engineer"]
+      certifications: ["AWS Certified DevOps Engineer", "Kubernetes Certified Administrator"]
     },
     {
       id: 9,
@@ -388,8 +378,7 @@ const RoadmapGenerator = () => {
       ],
       tools: ["Python", "TensorFlow", "PyTorch", "scikit-learn", "MLflow"],
       platforms: ["Kaggle", "GitHub", "HuggingFace"],
-      certifications: ["Google Professional Machine Learning Engineer", "AWS Machine Learning Specialty"],
-      jobRoles: ["Machine Learning Engineer", "AI Developer", "NLP Engineer", "Computer Vision Engineer", "Deep Learning Specialist", "MLOps Engineer"]
+      certifications: ["Google Professional Machine Learning Engineer", "AWS Machine Learning Specialty"]
     },
     {
       id: 10,
@@ -424,8 +413,7 @@ const RoadmapGenerator = () => {
       ],
       tools: ["Wireshark", "Metasploit", "Nmap", "Burp Suite", "Kali Linux"],
       platforms: ["TryHackMe", "HackTheBox", "SANS"],
-      certifications: ["CompTIA Security+", "Certified Ethical Hacker (CEH)"],
-      jobRoles: ["Security Analyst", "Security Engineer", "Penetration Tester", "Vulnerability Analyst", "Security Consultant", "SOC Analyst", "Ethical Hacker"]
+      certifications: ["CompTIA Security+", "Certified Ethical Hacker (CEH)"]
     },
     {
       id: 11,
@@ -460,8 +448,7 @@ const RoadmapGenerator = () => {
       ],
       tools: ["Remix", "Hardhat", "Truffle", "MetaMask", "Ganache"],
       platforms: ["Ethereum", "Solana", "Polkadot"],
-      certifications: ["Certified Blockchain Developer", "ConsenSys Developer Certification"],
-      jobRoles: ["Blockchain Developer", "Smart Contract Developer", "Solidity Developer", "Web3 Developer", "DeFi Engineer", "Crypto Researcher"]
+      certifications: ["Certified Blockchain Developer", "ConsenSys Developer Certification"]
     },
     {
       id: 12,
@@ -495,8 +482,7 @@ const RoadmapGenerator = () => {
       ],
       tools: ["Git", "VS Code", "IntelliJ IDEA", "GitHub", "Jenkins"],
       platforms: ["LeetCode", "HackerRank", "GitHub"],
-      certifications: ["Oracle Certified Professional, Java SE", "Microsoft Certified: Azure Developer Associate"],
-      jobRoles: ["Software Engineer", "Software Developer", "Application Developer", "Backend Engineer", "Systems Developer", "Java/Python/.NET Developer"]
+      certifications: ["Oracle Certified Professional, Java SE", "Microsoft Certified: Azure Developer Associate"]
     }
   ];
 
@@ -686,19 +672,6 @@ const RoadmapGenerator = () => {
                           </div>
                         )}
                         
-                        {roadmap.jobRoles && roadmap.jobRoles.length > 0 && (
-                          <div>
-                            <div className="text-sm font-medium mb-1">Potential Job Roles:</div>
-                            <div className="flex flex-wrap gap-2">
-                              {roadmap.jobRoles.map((role, index) => (
-                                <div key={index} className="job-role-tag">
-                                  {role}
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                        
                         {roadmap.resources && roadmap.resources.length > 0 && (
                           <div>
                             <div className="text-sm font-medium mb-2">Recommended Resources:</div>
@@ -785,146 +758,6 @@ const RoadmapGenerator = () => {
       </main>
       
       <Footer />
-
-      <style jsx global>{`
-        .job-role-tag {
-          display: inline-flex;
-          padding: 0.25rem 0.5rem;
-          font-size: 0.75rem;
-          font-weight: 500;
-          border-radius: 0.375rem;
-          background-color: #f0f9ff;
-          color: #0369a1;
-          border: 1px solid #bae6fd;
-        }
-        
-        /* Keep existing CSS styles */
-        .tag-beginner {
-          display: inline-flex;
-          padding: 0.25rem 0.5rem;
-          font-size: 0.75rem;
-          font-weight: 500;
-          border-radius: 0.375rem;
-          background-color: #dcfce7;
-          color: #166534;
-          border: 1px solid #86efac;
-        }
-        
-        .tag-intermediate {
-          display: inline-flex;
-          padding: 0.25rem 0.5rem;
-          font-size: 0.75rem;
-          font-weight: 500;
-          border-radius: 0.375rem;
-          background-color: #fef9c3;
-          color: #854d0e;
-          border: 1px solid #fde047;
-        }
-        
-        .tag-advanced {
-          display: inline-flex;
-          padding: 0.25rem 0.5rem;
-          font-size: 0.75rem;
-          font-weight: 500;
-          border-radius: 0.375rem;
-          background-color: #fee2e2;
-          color: #b91c1c;
-          border: 1px solid #fca5a5;
-        }
-        
-        .tag-resource-book {
-          display: inline-flex;
-          padding: 0.25rem 0.5rem;
-          font-size: 0.65rem;
-          font-weight: 500;
-          border-radius: 0.375rem;
-          background-color: #f3e8ff;
-          color: #7e22ce;
-          white-space: nowrap;
-        }
-        
-        .tag-resource-video {
-          display: inline-flex;
-          padding: 0.25rem 0.5rem;
-          font-size: 0.65rem;
-          font-weight: 500;
-          border-radius: 0.375rem;
-          background-color: #ffedd5;
-          color: #c2410c;
-          white-space: nowrap;
-        }
-        
-        .tag-resource-course {
-          display: inline-flex;
-          padding: 0.25rem 0.5rem;
-          font-size: 0.65rem;
-          font-weight: 500;
-          border-radius: 0.375rem;
-          background-color: #dbeafe;
-          color: #1d4ed8;
-          white-space: nowrap;
-        }
-        
-        .tag-resource-article {
-          display: inline-flex;
-          padding: 0.25rem 0.5rem;
-          font-size: 0.65rem;
-          font-weight: 500;
-          border-radius: 0.375rem;
-          background-color: #e0f2fe;
-          color: #0369a1;
-          white-space: nowrap;
-        }
-        
-        .tag-resource-tool {
-          display: inline-flex;
-          padding: 0.25rem 0.5rem;
-          font-size: 0.65rem;
-          font-weight: 500;
-          border-radius: 0.375rem;
-          background-color: #f3f4f6;
-          color: #4b5563;
-          white-space: nowrap;
-        }
-        
-        .tag-resource-community {
-          display: inline-flex;
-          padding: 0.25rem 0.5rem;
-          font-size: 0.65rem;
-          font-weight: 500;
-          border-radius: 0.375rem;
-          background-color: #d1fae5;
-          color: #065f46;
-          white-space: nowrap;
-        }
-        
-        .skill-tag {
-          display: inline-flex;
-          padding: 0.25rem 0.5rem;
-          font-size: 0.75rem;
-          font-weight: 500;
-          border-radius: 0.375rem;
-          background-color: #f3f4f6;
-          color: #4b5563;
-          border: 1px solid #e5e7eb;
-        }
-        
-        .card-gradient-green {
-          background: linear-gradient(to bottom right, rgba(220, 252, 231, 0.5), rgba(255, 255, 255, 1) 40%);
-        }
-        
-        .card-gradient-amber {
-          background: linear-gradient(to bottom right, rgba(254, 249, 195, 0.5), rgba(255, 255, 255, 1) 40%);
-        }
-        
-        .card-gradient-rose {
-          background: linear-gradient(to bottom right, rgba(254, 226, 226, 0.5), rgba(255, 255, 255, 1) 40%);
-        }
-        
-        .card-gradient-blue {
-          background: linear-gradient(to bottom right, rgba(219, 234, 254, 0.5), rgba(255, 255, 255, 1) 40%);
-        }
-      `}</style>
     </div>
   );
 };

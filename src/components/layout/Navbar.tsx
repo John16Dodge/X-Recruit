@@ -1,9 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import NavbarAuthLinks from '@/components/ui/NavbarAuthLinks';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -19,7 +17,6 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [studentDropdownOpen, setStudentDropdownOpen] = useState(false);
   const [collegeDropdownOpen, setCollegeDropdownOpen] = useState(false);
-  const [teacherDropdownOpen, setTeacherDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,26 +37,12 @@ const Navbar = () => {
 
   const toggleStudentDropdown = () => {
     setStudentDropdownOpen(!studentDropdownOpen);
-    if (!studentDropdownOpen) {
-      setCollegeDropdownOpen(false);
-      setTeacherDropdownOpen(false);
-    }
+    if (!studentDropdownOpen) setCollegeDropdownOpen(false);
   };
 
   const toggleCollegeDropdown = () => {
     setCollegeDropdownOpen(!collegeDropdownOpen);
-    if (!collegeDropdownOpen) {
-      setStudentDropdownOpen(false);
-      setTeacherDropdownOpen(false);
-    }
-  };
-
-  const toggleTeacherDropdown = () => {
-    setTeacherDropdownOpen(!teacherDropdownOpen);
-    if (!teacherDropdownOpen) {
-      setStudentDropdownOpen(false);
-      setCollegeDropdownOpen(false);
-    }
+    if (!collegeDropdownOpen) setStudentDropdownOpen(false);
   };
 
   return (
@@ -106,20 +89,20 @@ const Navbar = () => {
                     <li className="row-span-1">
                       <NavigationMenuLink asChild>
                         <Link 
-                          to="/students/resources"
+                          to="/roadmap-generator"
                           className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          <div className="text-sm font-medium leading-none">Learning Resources</div>
+                          <div className="text-sm font-medium leading-none">Roadmap Generator</div>
                         </Link>
                       </NavigationMenuLink>
                     </li>
                     <li className="row-span-1">
                       <NavigationMenuLink asChild>
                         <Link 
-                          to="/students/todo-list"
+                          to="/students/resources"
                           className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          <div className="text-sm font-medium leading-none">Todo List</div>
+                          <div className="text-sm font-medium leading-none">Learning Resources</div>
                         </Link>
                       </NavigationMenuLink>
                     </li>
@@ -168,47 +151,6 @@ const Navbar = () => {
                 </NavigationMenuContent>
               </NavigationMenuItem>
               
-              {/* Teachers Dropdown */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent text-xr-gray-dark hover:text-xr-blue font-medium">
-                  For Teachers
-                </NavigationMenuTrigger>
-                <NavigationMenuContent className="w-[220px]">
-                  <ul className="grid w-full gap-1 p-2">
-                    <li className="row-span-1">
-                      <NavigationMenuLink asChild>
-                        <Link 
-                          to="/teachers"
-                          className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                        >
-                          <div className="text-sm font-medium leading-none">Overview</div>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                    <li className="row-span-1">
-                      <NavigationMenuLink asChild>
-                        <Link 
-                          to="/teachers/todo-list"
-                          className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                        >
-                          <div className="text-sm font-medium leading-none">Todo List</div>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                    <li className="row-span-1">
-                      <NavigationMenuLink asChild>
-                        <Link 
-                          to="/teachers/resources"
-                          className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                        >
-                          <div className="text-sm font-medium leading-none">Teaching Resources</div>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-              
               <NavigationMenuItem>
                 <Link to="/features" className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors">
                   Features
@@ -220,7 +162,12 @@ const Navbar = () => {
 
         {/* CTA Buttons */}
         <div className="hidden md:flex items-center space-x-4">
-          <NavbarAuthLinks />
+          <Button variant="outline" className="border-xr-blue text-xr-blue hover:bg-xr-blue/5">
+            Log in
+          </Button>
+          <Button className="bg-xr-blue hover:bg-xr-blue-dark">
+            Get Started
+          </Button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -272,18 +219,18 @@ const Navbar = () => {
                     Overview
                   </Link>
                   <Link 
+                    to="/roadmap-generator" 
+                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Roadmap Generator
+                  </Link>
+                  <Link 
                     to="/students/resources" 
                     className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Learning Resources
-                  </Link>
-                  <Link 
-                    to="/students/todo-list" 
-                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Todo List
                   </Link>
                 </div>
               )}
@@ -329,46 +276,6 @@ const Navbar = () => {
               )}
             </div>
             
-            {/* Mobile Teachers Dropdown */}
-            <div className="relative">
-              <button 
-                onClick={toggleTeacherDropdown}
-                className={`w-full flex items-center justify-between font-medium transition-colors rounded-md px-3 py-2 ${
-                  teacherDropdownOpen 
-                    ? 'bg-blue-50 text-xr-blue' 
-                    : 'text-xr-gray-dark hover:text-xr-blue'
-                }`}
-              >
-                <span>For Teachers</span>
-                <ChevronDown size={16} className={`transition-transform ${teacherDropdownOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {teacherDropdownOpen && (
-                <div className="pl-4 mt-2 space-y-2 border-l-2 border-xr-blue-light">
-                  <Link 
-                    to="/teachers" 
-                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Overview
-                  </Link>
-                  <Link 
-                    to="/teachers/todo-list" 
-                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Todo List
-                  </Link>
-                  <Link 
-                    to="/teachers/resources" 
-                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Teaching Resources
-                  </Link>
-                </div>
-              )}
-            </div>
-            
             <Link 
               to="/features" 
               className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
@@ -378,7 +285,12 @@ const Navbar = () => {
             </Link>
           </nav>
           <div className="flex flex-col space-y-3">
-            <NavbarAuthLinks />
+            <Button variant="outline" className="w-full border-xr-blue text-xr-blue hover:bg-xr-blue/5">
+              Log in
+            </Button>
+            <Button className="w-full bg-xr-blue hover:bg-xr-blue-dark">
+              Get Started
+            </Button>
           </div>
         </div>
       </div>
