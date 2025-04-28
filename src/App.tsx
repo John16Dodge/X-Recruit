@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import RoadmapGenerator from "./pages/RoadmapGenerator";
+import MentorRequest from "./pages/MentorRequest";
 
 const queryClient = new QueryClient();
 
