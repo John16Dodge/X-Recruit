@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -123,7 +122,15 @@ export default {
                 'slide-in-bottom': {
                     '0%': { transform: 'translateY(100%)' },
                     '100%': { transform: 'translateY(0)' }
-                }
+                },
+				gradient: {
+					'0%, 100%': { backgroundPosition: '0% 50%' },
+					'50%': { backgroundPosition: '100% 50%' },
+				},
+				fadeIn: {
+					from: { opacity: '0', transform: 'translateY(-10px)' },
+					to: { opacity: '1', transform: 'translateY(0)' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -136,7 +143,9 @@ export default {
                 'glow': 'glow 2s ease-in-out infinite',
                 'slide-in-right': 'slide-in-right 0.5s ease-out',
                 'slide-in-left': 'slide-in-left 0.5s ease-out',
-                'slide-in-bottom': 'slide-in-bottom 0.5s ease-out'
+                'slide-in-bottom': 'slide-in-bottom 0.5s ease-out',
+				gradient: 'gradient 15s ease infinite',
+				fadeIn: 'fadeIn 0.5s ease-out forwards',
 			},
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
