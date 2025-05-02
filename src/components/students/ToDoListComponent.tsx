@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef, KeyboardEvent, ChangeEvent, FormEvent } from 'react';
+import { Button } from '@/components/ui/button';
 
 // Task and Subtask type definitions
 interface Subtask {
@@ -16,6 +17,7 @@ interface Task {
   subtasks: Subtask[];
   assignedTo: string;
   completed: boolean;
+  showSubtasks?: boolean; // Add this optional property
 }
 
 export const ToDoListComponent = () => {
@@ -395,19 +397,18 @@ export const ToDoListComponent = () => {
                     <div 
                       className="subtasks-btn px-2 py-1 rounded-md text-xs bg-gray-200 inline-block cursor-pointer"
                       onClick={() => {
-                        // For simplicity, we're toggling visibility via React state in a real implementation
                         const updatedTasks = [...tasks];
                         updatedTasks[actualIndex] = {
                           ...updatedTasks[actualIndex],
                           showSubtasks: !updatedTasks[actualIndex].showSubtasks
-                        } as Task & { showSubtasks?: boolean };
+                        };
                         setTasks(updatedTasks);
                       }}
                     >
                       Subtasks ({task.subtasks.length})
                     </div>
                     
-                    {(task as Task & { showSubtasks?: boolean }).showSubtasks && (
+                    {task.showSubtasks && (
                       <div className="subtasks-section mt-2 p-3 bg-gray-100 rounded-md">
                         <ul className="subtask-list space-y-2">
                           {task.subtasks.map((subtask, subtaskIndex) => (
@@ -428,7 +429,7 @@ export const ToDoListComponent = () => {
                             type="text"
                             placeholder="Add new subtask"
                             className="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-xr-blue"
-                            onKeyPress={(e) => {
+                            onKeyPress={(e: KeyboardEvent<HTMLInputElement>) => {
                               if (e.key === 'Enter') {
                                 addSubtask(actualIndex, (e.target as HTMLInputElement).value);
                                 (e.target as HTMLInputElement).value = '';
@@ -454,7 +455,8 @@ export const ToDoListComponent = () => {
         </Button>
       </div>
 
-      <style jsx>{`
+      <style>
+        {`
         .background {
           position: absolute;
           top: 0;
@@ -496,7 +498,8 @@ export const ToDoListComponent = () => {
             animation: none;
           }
         }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };
