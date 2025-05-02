@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import RoadmapGenerator from "./pages/RoadmapGenerator";
 import MentorRequest from "./pages/MentorRequest";
+import TodoList from "./pages/TodoList";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/roadmap-generator" element={<RoadmapGenerator />} />
           <Route path="/request-mentor" element={<MentorRequest />} />
+          <Route path="/todo-list" element={<TodoList />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
