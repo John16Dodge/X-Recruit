@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef, KeyboardEvent, ChangeEvent, FormEvent } from 'react';
 import { Button } from '@/components/ui/button';
 
@@ -17,7 +16,7 @@ interface Task {
   subtasks: Subtask[];
   assignedTo: string;
   completed: boolean;
-  showSubtasks?: boolean; // Add this optional property
+  showSubtasks?: boolean; // Optional property to control subtask visibility
 }
 
 export const ToDoListComponent = () => {
@@ -477,8 +476,8 @@ export const ToDoListComponent = () => {
           width: 100%;
           height: 100%;
           z-index: -1;
-          opacity: 0.6;
-          background: linear-gradient(135deg, #1e3a8a, #2f855a, #374151, #1e3a8a);
+          opacity: 0.8;
+          background: linear-gradient(135deg, #1a365d, #2d3748, #1e293b, #0f172a);
           background-size: 400% 400%;
           animation: gradientWave 15s ease infinite;
         }
@@ -492,8 +491,8 @@ export const ToDoListComponent = () => {
         }
 
         .light-mode .background {
-          background: linear-gradient(135deg, #60a5fa, #34d399, #818cf8, #60a5fa);
-          opacity: 0.3;
+          background: linear-gradient(135deg, #e0f2fe, #bfdbfe, #dbeafe, #eff6ff);
+          opacity: 0.7;
         }
 
         @keyframes gradientWave {
