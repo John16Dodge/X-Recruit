@@ -45,16 +45,51 @@ const ContactForm = () => {
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     
-    // Simulate API call with timeout
-    setTimeout(() => {
-      console.log('Form submitted:', data);
+    try {
+      // Format WhatsApp message
+      const whatsappMessage = encodeURIComponent(
+        `*New Contact Form Message*\n\n` +
+        `*Name:* ${data.name}\n` +
+        `*Email:* ${data.email}\n` +
+        `*Phone:* ${data.phone || 'Not provided'}\n\n` +
+        `*Message:*\n${data.message}`
+      );
+      
+      // WhatsApp API URL
+      const whatsappUrl = `https://wa.me/918148916824?text=${whatsappMessage}`;
+      
+      // Open WhatsApp in new tab
+      window.open(whatsappUrl, '_blank');
+      
+      // Simulate email notification (in a real app, this would be a backend API call)
+      console.log('Email notification would be sent to: xrecruitofficial@gmail.com');
+      console.log('Email content:', {
+        to: 'xrecruitofficial@gmail.com',
+        subject: `Contact Form: Message from ${data.name}`,
+        body: `
+          Name: ${data.name}
+          Email: ${data.email}
+          Phone: ${data.phone || 'Not provided'}
+          Message: ${data.message}
+        `
+      });
+      
       toast({
         title: "Message Sent",
-        description: "Thank you! We'll get back to you soon.",
+        description: "Thank you! Your message has been forwarded to our team.",
       });
+      
       form.reset();
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Error",
+        description: "There was a problem sending your message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (

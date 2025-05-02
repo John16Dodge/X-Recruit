@@ -53,8 +53,8 @@ const Index = () => {
                       </div>
                       <div>
                         <h4 className="text-sm font-medium text-xr-gray-dark">Email</h4>
-                        <a href="mailto:xrecruit.official@gmail.com" className="text-xr-blue hover:text-xr-blue-dark transition-colors">
-                          xrecruit.official@gmail.com
+                        <a href="mailto:xrecruitofficial@gmail.com" className="text-xr-blue hover:text-xr-blue-dark transition-colors">
+                          xrecruitofficial@gmail.com
                         </a>
                       </div>
                     </div>
