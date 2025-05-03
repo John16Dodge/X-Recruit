@@ -22,13 +22,13 @@ interface TeamMember {
 const teamMembers: TeamMember[] = [
   {
     name: "Magesh Kumar Jayavel",
-    role: "Technical Director",
-    initials: "MK",
+    role: "Co-Founder",
+    initials: "MKJ",
     portfolioLink: "https://john16dodge.github.io/MK-Portfolio/"
   },
   {
     name: "Jayaprakash. S",
-    role: "AI Research Lead",
+    role: "Cyber Security Expert, Co-Founder",
     initials: "JP"
   }
 ];
