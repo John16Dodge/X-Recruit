@@ -3,7 +3,8 @@ import { useToast } from '@/components/ui/use-toast';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Layout } from '@/components/layout/Layout';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 import { BookOpen, Code, Lightbulb, LineChart, ArrowDown, ArrowUp, Globe, LaptopIcon, Youtube, Database, Server, PencilRuler, BookMarked, FileText as FileTextIcon, Users as UsersIcon, Terminal, ShieldCheck, Smartphone, Gamepad, Brush, Cog, Brain, Aperture, Headphones, CloudSun, LineChart as Analytics, Network, GitBranch, Blocks } from 'lucide-react';
 
 interface Resource {
@@ -578,12 +579,14 @@ const RoadmapGenerator = () => {
   };
 
   return (
-    <Layout>
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           <div className="mb-12 text-center">
             <h1 className="text-4xl font-bold tracking-tight mb-4">Tech Career Roadmap Generator</h1>
-            <p className="text-lg text-muted-foreground dark:text-gray-300">
+            <p className="text-lg text-muted-foreground">
               Enter a tech career path you're interested in, and our AI will generate a personalized learning roadmap.
             </p>
           </div>
@@ -614,7 +617,7 @@ const RoadmapGenerator = () => {
             </div>
             
             {aiSuggestion && (
-              <div className="mt-4 p-4 bg-muted rounded-md text-sm dark:text-gray-200">
+              <div className="mt-4 p-4 bg-muted rounded-md text-sm">
                 <p className="font-medium mb-1">AI Suggestion:</p>
                 <p>{aiSuggestion}</p>
               </div>
@@ -638,7 +641,7 @@ const RoadmapGenerator = () => {
                         </div>
                         <div>
                           <CardTitle>{roadmap.title}</CardTitle>
-                          <CardDescription className="mt-1 dark:text-gray-300">{roadmap.description}</CardDescription>
+                          <CardDescription className="mt-1">{roadmap.description}</CardDescription>
                         </div>
                       </div>
                       
@@ -652,8 +655,8 @@ const RoadmapGenerator = () => {
                   
                   <CardContent className="pb-4">
                     <div className="mb-4">
-                      <div className="text-sm font-medium mb-2 dark:text-gray-200">Roadmap Steps:</div>
-                      <ol className="space-y-2 list-decimal pl-5 text-sm dark:text-gray-300">
+                      <div className="text-sm font-medium mb-2">Roadmap Steps:</div>
+                      <ol className="space-y-2 list-decimal pl-5 text-sm">
                         {roadmap.steps.map((step, index) => (
                           <li key={index}>{step}</li>
                         ))}
@@ -661,29 +664,29 @@ const RoadmapGenerator = () => {
                     </div>
                     
                     {showDetails === roadmap.id && (
-                      <div className="space-y-4 mt-6 pt-4 border-t dark:border-gray-700">
+                      <div className="space-y-4 mt-6 pt-4 border-t">
                         {roadmap.timeEstimate && (
                           <div>
-                            <div className="text-sm font-medium mb-1 dark:text-gray-200">Estimated Time:</div>
-                            <div className="text-sm dark:text-gray-300">{roadmap.timeEstimate}</div>
+                            <div className="text-sm font-medium mb-1">Estimated Time:</div>
+                            <div className="text-sm">{roadmap.timeEstimate}</div>
                           </div>
                         )}
                         
                         {roadmap.resources && roadmap.resources.length > 0 && (
                           <div>
-                            <div className="text-sm font-medium mb-2 dark:text-gray-200">Recommended Resources:</div>
+                            <div className="text-sm font-medium mb-2">Recommended Resources:</div>
                             <div className="grid gap-2">
                               {roadmap.resources.map((resource, index) => (
                                 <div key={index} className="flex items-start gap-2">
                                   <div className={getResourceTagClass(resource.type)}>
                                     {resource.type}
                                   </div>
-                                  <div className="text-sm flex-grow dark:text-gray-300">
+                                  <div className="text-sm flex-grow">
                                     <a href={resource.url} target="_blank" rel="noopener noreferrer" className="hover:underline font-medium">
                                       {resource.title}
                                     </a>
                                     {resource.platform && (
-                                      <span className="text-muted-foreground dark:text-gray-400"> • {resource.platform}</span>
+                                      <span className="text-muted-foreground"> • {resource.platform}</span>
                                     )}
                                   </div>
                                 </div>
@@ -694,10 +697,10 @@ const RoadmapGenerator = () => {
                         
                         {roadmap.tools && roadmap.tools.length > 0 && (
                           <div>
-                            <div className="text-sm font-medium mb-1 dark:text-gray-200">Tools & Technologies:</div>
+                            <div className="text-sm font-medium mb-1">Tools & Technologies:</div>
                             <div className="flex flex-wrap gap-2">
                               {roadmap.tools.map((tool, index) => (
-                                <div key={index} className="skill-tag dark:bg-blue-900/50 dark:text-blue-200">
+                                <div key={index} className="skill-tag">
                                   {tool}
                                 </div>
                               ))}
@@ -707,10 +710,10 @@ const RoadmapGenerator = () => {
                         
                         {roadmap.platforms && roadmap.platforms.length > 0 && (
                           <div>
-                            <div className="text-sm font-medium mb-1 dark:text-gray-200">Learning Platforms:</div>
+                            <div className="text-sm font-medium mb-1">Learning Platforms:</div>
                             <div className="flex flex-wrap gap-2">
                               {roadmap.platforms.map((platform, index) => (
-                                <div key={index} className="skill-tag dark:bg-blue-900/50 dark:text-blue-200">
+                                <div key={index} className="skill-tag">
                                   {platform}
                                 </div>
                               ))}
@@ -720,8 +723,8 @@ const RoadmapGenerator = () => {
                         
                         {roadmap.certifications && roadmap.certifications.length > 0 && (
                           <div>
-                            <div className="text-sm font-medium mb-1 dark:text-gray-200">Recommended Certifications:</div>
-                            <div className="space-y-1 dark:text-gray-300">
+                            <div className="text-sm font-medium mb-1">Recommended Certifications:</div>
+                            <div className="space-y-1">
                               {roadmap.certifications.map((certification, index) => (
                                 <div key={index} className="text-sm">
                                   • {certification}
@@ -753,7 +756,9 @@ const RoadmapGenerator = () => {
           )}
         </div>
       </main>
-    </Layout>
+      
+      <Footer />
+    </div>
   );
 };
 
