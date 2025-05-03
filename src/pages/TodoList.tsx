@@ -16,7 +16,7 @@ const TodoList = () => {
     <Layout>
       <div className="container-custom py-24 max-w-5xl">
         <div className="mb-8">
-          <Link to="/" className="inline-flex items-center gap-2 text-xr-blue hover:text-xr-blue-dark transition-colors">
+          <Link to="/" className="inline-flex items-center gap-2 text-xr-blue hover:text-xr-blue-dark transition-colors dark:text-blue-400 dark:hover:text-blue-300">
             <ArrowLeft size={20} />
             <span>Back to Home</span>
           </Link>
@@ -26,7 +26,7 @@ const TodoList = () => {
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="text-gradient">Student Task Organizer</span>
           </h1>
-          <p className="text-xr-gray max-w-2xl mx-auto">
+          <p className="text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
             Plan your study sessions, track assignments, and manage your academic goals with our comprehensive task organizer designed specifically for students.
           </p>
         </div>

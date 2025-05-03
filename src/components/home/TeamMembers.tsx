@@ -1,13 +1,6 @@
 
 import React from 'react';
 import { ExternalLink } from 'lucide-react';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -35,20 +28,20 @@ const teamMembers: TeamMember[] = [
 
 const TeamMembers = () => {
   return (
-    <section className="section-padding bg-gray-50 relative overflow-hidden" id="team">
+    <section className="section-padding bg-gradient-to-br from-gray-50 to-blue-50/50 dark:from-gray-900 dark:to-gray-800 relative overflow-hidden" id="team">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-xr-purple/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-xr-blue/5 rounded-full blur-3xl"></div>
       
       <div className="container-custom">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-block px-4 py-2 rounded-full bg-xr-purple/10 text-xr-purple font-medium text-sm mb-4 animate-fade-in">
+          <span className="inline-block px-4 py-2 rounded-full bg-xr-purple/10 text-xr-purple font-medium text-sm mb-4 animate-fade-in dark:bg-xr-purple/20 dark:text-purple-300">
             Our Team
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-6 animate-fade-in animate-delay-100">
             Meet Our <span className="text-gradient">Expert Team</span>
           </h2>
-          <p className="text-xr-gray text-lg animate-fade-in animate-delay-200">
+          <p className="text-gray-700 dark:text-gray-300 text-lg animate-fade-in animate-delay-200">
             Our dedicated team of professionals is committed to bridging the gap between education and industry.
           </p>
         </div>
@@ -56,22 +49,22 @@ const TeamMembers = () => {
         <div className="max-w-3xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {teamMembers.map((member, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
+              <Card key={index} className="hover:shadow-lg transition-shadow duration-300 dark:bg-gray-800 dark:border-gray-700">
                 <CardContent className="flex flex-col items-center p-6">
                   <Avatar className="w-24 h-24 mb-4">
                     {member.image && <AvatarImage src={member.image} alt={member.name} />}
-                    <AvatarFallback className="bg-xr-purple/10 text-xr-purple text-xl">
+                    <AvatarFallback className="bg-xr-purple/10 text-xr-purple text-xl dark:bg-purple-900/30 dark:text-purple-300">
                       {member.initials}
                     </AvatarFallback>
                   </Avatar>
-                  <h3 className="text-lg font-semibold mb-1">{member.name}</h3>
-                  <p className="text-xr-gray text-sm mb-2">{member.role}</p>
+                  <h3 className="text-lg font-semibold mb-1 text-gray-900 dark:text-gray-100">{member.name}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">{member.role}</p>
                   {member.portfolioLink && (
                     <a 
                       href={member.portfolioLink} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-xr-purple hover:text-xr-purple/80 transition-colors flex items-center gap-1"
+                      className="text-xr-purple hover:text-xr-purple/80 transition-colors flex items-center gap-1 dark:text-purple-400 dark:hover:text-purple-300"
                     >
                       <ExternalLink className="w-4 h-4" />
                       Portfolio
