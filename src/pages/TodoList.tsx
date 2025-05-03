@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef, KeyboardEvent, ChangeEvent } from 'react';
+import React, { useEffect } from 'react';
 import { Layout } from '@/components/layout/Layout';
 import { ToDoListComponent } from '@/components/students/ToDoListComponent';
 import { Button } from '@/components/ui/button';
@@ -22,7 +22,7 @@ const TodoList = () => {
           </Link>
         </div>
 
-        <div className="mb-8 text-center">
+        <div className="mb-12 text-center">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="text-gradient">Student Task Organizer</span>
           </h1>
