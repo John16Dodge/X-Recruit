@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -702,7 +703,7 @@ const RoadmapGenerator = () => {
                                         {resource.title}
                                       </a>
                                       {resource.platform && (
-                                        <span className="text-gray-500 text-sm block mt-1"> Platform: {resource.platform}</span>
+                                        <span className="text-gray-500 text-sm block mt-1">Platform: {resource.platform}</span>
                                       )}
                                     </div>
                                   </div>
@@ -815,4 +816,11 @@ const RoadmapGenerator = () => {
           @apply bg-gradient-to-br from-white to-rose-50;
         }
         .card-gradient-blue {
-          @apply bg-gradient-to-br from-white
+          @apply bg-gradient-to-br from-white to-blue-50;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default RoadmapGenerator;
