@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import RoadmapGenerator from "./pages/RoadmapGenerator";
 import MentorRequest from "./pages/MentorRequest";
 import TodoList from "./pages/TodoList";
+import BlobCursor from "./components/animations/BlobCursor";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <BlobCursor />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/roadmap-generator" element={<RoadmapGenerator />} />
