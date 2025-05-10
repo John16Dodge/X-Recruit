@@ -9,6 +9,7 @@ import Dashboard from '../components/home/Dashboard';
 import CallToAction from '../components/home/CallToAction';
 import TeamMembers from '../components/home/TeamMembers';
 import ContactForm from '../components/home/ContactForm';
+import Particles from '../components/animations/Particles';
 
 const Index = () => {
   useEffect(() => {
@@ -17,9 +18,23 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col relative overflow-hidden">
+      {/* Background particles animation */}
+      <div className="absolute inset-0 z-0">
+        <Particles
+          particleColors={['#4C9AFF', '#0052CC', '#998DD9', '#6554C0']}
+          particleCount={120}
+          particleSpread={15}
+          speed={0.05}
+          particleBaseSize={80}
+          moveParticlesOnHover={true}
+          alphaParticles={true}
+          disableRotation={false}
+        />
+      </div>
+      
       <Navbar />
-      <main className="flex-grow">
+      <main className="flex-grow relative z-10">
         <Hero />
         <Features />
         <Dashboard />
