@@ -15,18 +15,10 @@ const Index = () => {
   useEffect(() => {
     // Scroll to top on component mount
     window.scrollTo(0, 0);
-    
-    // Set dark mode class
-    document.documentElement.classList.add('dark');
-    
-    return () => {
-      // Cleanup when component unmounts
-      document.documentElement.classList.remove('dark');
-    };
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden bg-gray-900 text-white">
+    <div className="min-h-screen flex flex-col relative overflow-hidden">
       {/* Background particles animation */}
       <div className="absolute inset-0 z-0">
         <Particles
@@ -49,7 +41,7 @@ const Index = () => {
         <TeamMembers />
         
         {/* Contact Form Section */}
-        <section id="contact" className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 relative overflow-hidden">
+        <section id="contact" className="py-20 bg-gradient-to-b from-white to-blue-50 relative overflow-hidden">
           {/* Animated background shapes */}
           <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#0052CC_1px,transparent_1px)] [background-size:20px_20px] animate-pulse"></div>
           
@@ -58,7 +50,7 @@ const Index = () => {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 <span className="text-gradient">Contact Us</span>
               </h2>
-              <p className="text-gray-300 max-w-xl mx-auto">
+              <p className="text-xr-gray max-w-xl mx-auto">
                 Have questions about X-Recruit? We're here to help you navigate your career journey.
               </p>
             </div>
@@ -66,8 +58,8 @@ const Index = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               {/* Contact Information */}
               <div className="space-y-8">
-                <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 shadow-card border border-gray-700/20 hover:shadow-card-hover transition-all duration-300 animate-fade-in">
-                  <h3 className="text-xl font-semibold mb-4 text-gray-100">Contact Information</h3>
+                <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-card border border-white/20 hover:shadow-card-hover transition-all duration-300 animate-fade-in">
+                  <h3 className="text-xl font-semibold mb-4 text-xr-gray-dark">Contact Information</h3>
                   
                   <div className="space-y-4">
                     <div className="flex items-start">
@@ -75,8 +67,8 @@ const Index = () => {
                         <Mail className="h-5 w-5" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-medium text-gray-200">Email</h4>
-                        <a href="mailto:xrecruitofficial@gmail.com" className="text-xr-blue hover:text-xr-blue-light transition-colors">
+                        <h4 className="text-sm font-medium text-xr-gray-dark">Email</h4>
+                        <a href="mailto:xrecruitofficial@gmail.com" className="text-xr-blue hover:text-xr-blue-dark transition-colors">
                           xrecruitofficial@gmail.com
                         </a>
                       </div>
@@ -87,8 +79,8 @@ const Index = () => {
                         <Phone className="h-5 w-5" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-medium text-gray-200">Phone</h4>
-                        <a href="tel:+918148916824" className="text-xr-blue hover:text-xr-blue-light transition-colors">
+                        <h4 className="text-sm font-medium text-xr-gray-dark">Phone</h4>
+                        <a href="tel:+918148916824" className="text-xr-blue hover:text-xr-blue-dark transition-colors">
                           +91 8148916824
                         </a>
                       </div>
@@ -96,20 +88,20 @@ const Index = () => {
                   </div>
                 </div>
                 
-                <div className="bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 shadow-card border border-gray-700/20 hover:shadow-card-hover transition-all duration-300 animate-fade-in animate-delay-100">
-                  <h3 className="text-xl font-semibold mb-4 text-gray-100">Working Hours</h3>
+                <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-card border border-white/20 hover:shadow-card-hover transition-all duration-300 animate-fade-in animate-delay-100">
+                  <h3 className="text-xl font-semibold mb-4 text-xr-gray-dark">Working Hours</h3>
                   <ul className="space-y-2">
                     <li className="flex justify-between">
-                      <span className="text-gray-400">Weekdays</span>
-                      <span className="font-medium text-gray-200">9:00 AM - 6:00 PM</span>
+                      <span className="text-xr-gray">Weekdays</span>
+                      <span className="font-medium text-xr-gray-dark">9:00 AM - 6:00 PM</span>
                     </li>
                     <li className="flex justify-between">
-                      <span className="text-gray-400">Saturday</span>
-                      <span className="font-medium text-gray-200">9:00 AM - 3:00 PM</span>
+                      <span className="text-xr-gray">Saturday</span>
+                      <span className="font-medium text-xr-gray-dark">9:00 AM - 3:00 PM</span>
                     </li>
                     <li className="flex justify-between">
-                      <span className="text-gray-400">Sunday</span>
-                      <span className="font-medium text-gray-200">Closed</span>
+                      <span className="text-xr-gray">Sunday</span>
+                      <span className="font-medium text-xr-gray-dark">Closed</span>
                     </li>
                   </ul>
                 </div>

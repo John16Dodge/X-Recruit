@@ -305,20 +305,3 @@
 html {
   scroll-behavior: smooth;
 }
-
-/* Dark mode specific styles */
-.dark .glass-card {
-  @apply bg-gray-800/80 backdrop-blur-lg border border-gray-700/20;
-}
-
-.dark .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400;
-}
-
-.dark .feature-card {
-  @apply bg-gray-800/80 border border-gray-700/20;
-}
-
-.dark .feature-icon {
-  @apply bg-blue-900/30 text-blue-400;
-}
