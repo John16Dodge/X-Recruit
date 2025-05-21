@@ -1,10 +1,11 @@
 
 import React, { useState } from 'react';
-import { useSpring, animated } from 'react-spring';
-import { Link } from 'react-router-dom';
+import { useSpring, animated, config } from 'react-spring';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { Key } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -20,6 +21,8 @@ const formSchema = z.object({
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   // React Spring animations
   const fadeIn = useSpring({
@@ -45,6 +48,19 @@ const Login = () => {
     config: { tension: 200, friction: 20 }
   });
 
+  // Button click animation
+  const [buttonProps, buttonApi] = useSpring(() => ({
+    scale: 1,
+    config: config.wobbly,
+  }));
+
+  // Success animation
+  const successAnimation = useSpring({
+    opacity: isSubmitted ? 1 : 0,
+    transform: isSubmitted ? 'scale(1)' : 'scale(0.5)',
+    config: config.gentle
+  });
+
   // Form setup
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -57,14 +73,28 @@ const Login = () => {
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
     
+    // Button animation on click
+    buttonApi.start({
+      from: { scale: 0.95 },
+      to: { scale: 1 },
+    });
+    
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
+      setIsSubmitted(true);
+      
       toast({
-        title: "Login attempt",
-        description: "This is a demo login. Backend authentication is not configured yet.",
+        title: "Login successful!",
+        description: "Welcome back to X-Recruit.",
       });
+      
       console.log("Login submitted:", values);
+      
+      // Redirect after successful animation display
+      setTimeout(() => {
+        navigate('/');
+      }, 1000);
     }, 1500);
   };
 
@@ -124,13 +154,31 @@ const Login = () => {
                     </FormItem>
                   )}
                 />
-                <Button 
-                  type="submit" 
-                  className="w-full shine-effect" 
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Signing in..." : "Sign In"}
-                </Button>
+                <animated.div style={buttonProps}>
+                  <Button 
+                    type="submit" 
+                    className="w-full shine-effect" 
+                    disabled={isLoading}
+                    onClick={() => {
+                      buttonApi.start({
+                        from: { scale: 0.95 },
+                        to: { scale: 1 },
+                      });
+                    }}
+                  >
+                    {isLoading ? (
+                      <div className="flex items-center gap-2">
+                        <span className="h-4 w-4 rounded-full border-2 border-t-transparent border-white animate-spin"></span>
+                        Signing in...
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <Key className="h-4 w-4" />
+                        Sign In
+                      </div>
+                    )}
+                  </Button>
+                </animated.div>
               </form>
             </Form>
           </CardContent>
@@ -149,6 +197,22 @@ const Login = () => {
           </CardFooter>
         </Card>
       </animated.div>
+      
+      {/* Success animation overlay */}
+      {isSubmitted && (
+        <animated.div 
+          style={successAnimation}
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+        >
+          <div className="bg-white p-8 rounded-lg text-center">
+            <div className="w-16 h-16 bg-green-500 rounded-full mx-auto flex items-center justify-center text-white text-2xl mb-4">
+              ✓
+            </div>
+            <h2 className="text-2xl font-bold mb-2">Login Successful!</h2>
+            <p>Redirecting to dashboard...</p>
+          </div>
+        </animated.div>
+      )}
     </div>
   );
 };
