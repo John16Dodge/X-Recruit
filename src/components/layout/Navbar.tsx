@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import {
   NavigationMenu,
@@ -10,6 +11,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { useSpring, animated, config } from 'react-spring';
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
@@ -17,6 +19,18 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [studentDropdownOpen, setStudentDropdownOpen] = useState(false);
   const [collegeDropdownOpen, setCollegeDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+
+  // Button animation
+  const [loginButtonProps, loginButtonApi] = useSpring(() => ({
+    scale: 1,
+    config: config.wobbly,
+  }));
+
+  const [getStartedButtonProps, getStartedButtonApi] = useSpring(() => ({
+    scale: 1,
+    config: config.wobbly,
+  }));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,6 +57,30 @@ const Navbar = () => {
   const toggleCollegeDropdown = () => {
     setCollegeDropdownOpen(!collegeDropdownOpen);
     if (!collegeDropdownOpen) setStudentDropdownOpen(false);
+  };
+
+  const handleLoginClick = () => {
+    // Animate button
+    loginButtonApi.start({
+      from: { scale: 0.9 },
+      to: { scale: 1 },
+    });
+    
+    // Navigate to login page
+    navigate('/login');
+    
+    // Close mobile menu if open
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
+  };
+
+  const handleGetStartedClick = () => {
+    // Animate button
+    getStartedButtonApi.start({
+      from: { scale: 0.9 },
+      to: { scale: 1 },
+    });
   };
 
   return (
@@ -172,12 +210,24 @@ const Navbar = () => {
 
         {/* CTA Buttons */}
         <div className="hidden md:flex items-center space-x-4">
-          <Button variant="outline" className="border-xr-blue text-xr-blue hover:bg-xr-blue/5">
-            Log in
-          </Button>
-          <Button className="bg-xr-blue hover:bg-xr-blue-dark">
-            Get Started
-          </Button>
+          <animated.div style={loginButtonProps}>
+            <Button 
+              variant="outline" 
+              className="border-xr-blue text-xr-blue hover:bg-xr-blue/5 shine-effect"
+              onClick={handleLoginClick}
+            >
+              Log in
+            </Button>
+          </animated.div>
+          
+          <animated.div style={getStartedButtonProps}>
+            <Button 
+              className="bg-xr-blue hover:bg-xr-blue-dark shine-effect"
+              onClick={handleGetStartedClick}
+            >
+              Get Started
+            </Button>
+          </animated.div>
         </div>
 
         {/* Mobile Menu Button */}
@@ -302,10 +352,17 @@ const Navbar = () => {
             </Link>
           </nav>
           <div className="flex flex-col space-y-3">
-            <Button variant="outline" className="w-full border-xr-blue text-xr-blue hover:bg-xr-blue/5">
+            <Button 
+              variant="outline" 
+              className="w-full border-xr-blue text-xr-blue hover:bg-xr-blue/5"
+              onClick={handleLoginClick}
+            >
               Log in
             </Button>
-            <Button className="w-full bg-xr-blue hover:bg-xr-blue-dark">
+            <Button 
+              className="w-full bg-xr-blue hover:bg-xr-blue-dark"
+              onClick={handleGetStartedClick}
+            >
               Get Started
             </Button>
           </div>
