@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -80,6 +79,16 @@ const Navbar = () => {
                     <li className="row-span-1">
                       <NavigationMenuLink asChild>
                         <Link 
+                          to="/students"
+                          className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          <div className="text-sm font-medium leading-none">Overview</div>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+                    <li className="row-span-1">
+                      <NavigationMenuLink asChild>
+                        <Link 
                           to="/roadmap-generator"
                           className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
@@ -90,20 +99,10 @@ const Navbar = () => {
                     <li className="row-span-1">
                       <NavigationMenuLink asChild>
                         <Link 
-                          to="/request-mentor"
+                          to="/students/resources"
                           className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          <div className="text-sm font-medium leading-none">Request a Mentor</div>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                    <li className="row-span-1">
-                      <NavigationMenuLink asChild>
-                        <Link 
-                          to="/todo-list"
-                          className="flex items-center h-full w-full select-none space-y-1 rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                        >
-                          <div className="text-sm font-medium leading-none">Task Organizer</div>
+                          <div className="text-sm font-medium leading-none">Learning Resources</div>
                         </Link>
                       </NavigationMenuLink>
                     </li>
@@ -213,6 +212,13 @@ const Navbar = () => {
               {studentDropdownOpen && (
                 <div className="pl-4 mt-2 space-y-2 border-l-2 border-xr-blue-light">
                   <Link 
+                    to="/students" 
+                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Overview
+                  </Link>
+                  <Link 
                     to="/roadmap-generator" 
                     className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
@@ -220,18 +226,11 @@ const Navbar = () => {
                     Roadmap Generator
                   </Link>
                   <Link 
-                    to="/request-mentor" 
+                    to="/students/resources" 
                     className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Request a Mentor
-                  </Link>
-                  <Link 
-                    to="/todo-list" 
-                    className="block text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Task Organizer
+                    Learning Resources
                   </Link>
                 </div>
               )}
