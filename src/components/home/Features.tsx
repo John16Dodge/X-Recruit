@@ -4,7 +4,6 @@ import {
   FileSearch, 
   Briefcase, 
   CalendarClock, 
-  Building2, 
   Lightbulb, 
   Users,
   BookMarkedIcon,
@@ -14,9 +13,6 @@ import {
   BracketsIcon
 } from 'lucide-react';
 import FeatureCard from '../ui/FeatureCard';
-import { title } from 'process';
-import { Description } from '@radix-ui/react-dialog';
-import path from 'path';
 
 const Features = () => {
   const features = [
@@ -39,22 +35,16 @@ const Features = () => {
       delay: 300
     },
     {
-      title: "To-Do List",
-      description: "CA task management tool for students to organize their placement preparation activities, such as resume updates or interview practice.",
-      icon: Building2,
-      delay: 400
-    },
-    {
       title: "Mock Interviews",
       description: "Simulated interview sessions to help students practice and improve their interview skills with feedback.",
       icon: Lightbulb,
-      delay: 500
+      delay: 400
     },
     {
       title: "Campus Event Calendar",
       description: "A calendar to track campus placement events, such as job fairs, company visits, and workshops.",
       icon:  FileSearch,
-      delay: 600
+      delay: 500
     },
     {
       title: "Job Roles and Its Market Analysis",
