@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -192,6 +193,47 @@
     animation: gradient 15s ease infinite;
   }
 
+  /* New contact form animations */
+  .input-animated {
+    @apply transition-all duration-300;
+  }
+  
+  .input-animated:focus {
+    @apply transform scale-105 border-xr-blue shadow-md;
+  }
+  
+  .contact-icon {
+    @apply transition-all duration-300;
+  }
+  
+  .contact-icon:hover {
+    @apply transform rotate-12 scale-110;
+  }
+  
+  .form-button-pulse {
+    @apply relative overflow-hidden;
+  }
+  
+  .form-button-pulse::after {
+    content: '';
+    @apply absolute inset-0 bg-white/30 opacity-0;
+  }
+  
+  .form-button-pulse:hover::after {
+    animation: pulse 1.5s ease-in-out;
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 0.5;
+      transform: scale(0);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(2);
+    }
+  }
+
   @keyframes gradient {
     0% {
       background-position: 0% 50%;
@@ -202,6 +244,37 @@
     100% {
       background-position: 0% 50%;
     }
+  }
+  
+  /* Shine effect */
+  .shine-effect {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .shine-effect::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    opacity: 0;
+    transform: rotate(30deg);
+    background: rgba(255, 255, 255, 0.13);
+    background: linear-gradient(
+      to right, 
+      rgba(255, 255, 255, 0.13) 0%,
+      rgba(255, 255, 255, 0.13) 77%,
+      rgba(255, 255, 255, 0.5) 92%,
+      rgba(255, 255, 255, 0.0) 100%
+    );
+  }
+  
+  .shine-effect:hover::after {
+    opacity: 1;
+    left: 130%;
+    transition: all 0.7s ease-in-out;
   }
 }
 
