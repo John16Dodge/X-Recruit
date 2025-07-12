@@ -17,13 +17,15 @@ const Navbar = () => {
     { title: 'Overview', href: '/students' },
     { title: 'Roadmap Generator', href: '/roadmap-generator' },
     { title: 'Request a Mentor', href: '/request-mentor' },
+    { title: 'Aptitude and Soft skill training', href: '/aptitude-training' },
     { title: 'Learning Resources', href: '/students/resources' }
   ];
 
   const collegeItems = [
     { title: 'Overview', href: '/colleges' },
     { title: 'Partnerships', href: '/colleges/partnerships' },
-    { title: 'Campus Programs', href: '/colleges/campus-programs' }
+    { title: 'Campus Programs', href: '/colleges/campus-programs' },
+    { title: 'Aptitude and Soft skill training', href: '/colleges/aptitude-training' }
   ];
 
   useEffect(() => {

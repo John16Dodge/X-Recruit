@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import RoadmapGenerator from "./pages/RoadmapGenerator";
 import MentorRequest from "./pages/MentorRequest";
+import AptitudeTraining from "./pages/AptitudeTraining";
 import Login from "./pages/Login";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/roadmap-generator" element={<RoadmapGenerator />} />
           <Route path="/request-mentor" element={<MentorRequest />} />
+          <Route path="/aptitude-training" element={<AptitudeTraining />} />
+          <Route path="/colleges/aptitude-training" element={<AptitudeTraining />} />
           <Route path="/login" element={<Login />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
