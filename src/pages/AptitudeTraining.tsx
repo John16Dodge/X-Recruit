@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import AptitudeForm from '@/components/aptitude/AptitudeForm';
+import CollegeAptitudeForm from '@/components/aptitude/CollegeAptitudeForm';
 import useTheme from '@/hooks/useTheme';
 import { Sun, Moon } from 'lucide-react';
 import Navbar from '@/components/layout/Navbar';
@@ -8,6 +10,10 @@ import Footer from '@/components/layout/Footer';
 const AptitudeTraining = () => {
   const { theme, toggleTheme } = useTheme();
   const [showSuccess, setShowSuccess] = useState(false);
+  const location = useLocation();
+  
+  // Check if this is for colleges based on the route
+  const isForColleges = location.pathname.includes('/colleges/');
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -20,9 +26,9 @@ const AptitudeTraining = () => {
           <div className={`absolute inset-0 backdrop-blur-[2px] transition-opacity duration-500 ${theme === 'dark' ? 'bg-black/20' : 'bg-white/10'}`} />
         </div>
         
-        <div className="w-[90%] max-w-[600px] my-12 p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-lg relative z-10 transition-all duration-300 animate-fadeIn hover:shadow-xl">
+        <div className="w-[90%] max-w-[700px] my-12 p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-lg relative z-10 transition-all duration-300 animate-fadeIn hover:shadow-xl">
           <h1 className="text-3xl mb-6 font-bold text-center flex items-center justify-center gap-3 text-xr-blue">
-            Aptitude & Soft Skills Training
+            {isForColleges ? 'College Training Program' : 'Aptitude & Soft Skills Training'}
             <button
               onClick={toggleTheme}
               className="text-2xl transition-transform duration-300 hover:rotate-12"
@@ -34,10 +40,14 @@ const AptitudeTraining = () => {
 
           {showSuccess ? (
             <div className="text-center p-4 bg-green-500 dark:bg-green-600 text-white rounded-lg animate-fadeIn">
-              Thank You! Your training request has been sent via WhatsApp.
+              Thank You! Your {isForColleges ? 'college training' : 'training'} request has been sent via WhatsApp.
             </div>
           ) : (
-            <AptitudeForm onSuccess={() => setShowSuccess(true)} />
+            isForColleges ? (
+              <CollegeAptitudeForm onSuccess={() => setShowSuccess(true)} />
+            ) : (
+              <AptitudeForm onSuccess={() => setShowSuccess(true)} />
+            )
           )}
         </div>
       </div>
