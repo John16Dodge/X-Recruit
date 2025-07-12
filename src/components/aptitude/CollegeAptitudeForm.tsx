@@ -154,7 +154,7 @@ const CollegeAptitudeForm = ({ onSuccess }: CollegeAptitudeFormProps) => {
 
           <select
             {...register('collegeType')}
-            className={`w-full p-3 text-base border-2 rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 transition-all duration-300 hover:-translate-y-0.5 focus:border-blue-500 dark:focus:border-blue-400 mt-3 ${errors.collegeType ? 'border-red-500' : 'border-gray-200'}`}
+            className={`w-full p-4 text-base border-2 rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 transition-all duration-300 hover:-translate-y-0.5 focus:border-blue-500 dark:focus:border-blue-400 mt-3 min-h-[50px] ${errors.collegeType ? 'border-red-500' : 'border-gray-200'}`}
           >
             <option value="">Select College Type</option>
             {collegeTypes.map(type => (
@@ -235,7 +235,7 @@ const CollegeAptitudeForm = ({ onSuccess }: CollegeAptitudeFormProps) => {
 
           <select
             {...register('batchYear')}
-            className={`w-full p-3 text-base border-2 rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 transition-all duration-300 hover:-translate-y-0.5 focus:border-blue-500 dark:focus:border-blue-400 mt-3 ${errors.batchYear ? 'border-red-500' : 'border-gray-200'}`}
+            className={`w-full p-4 text-base border-2 rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 transition-all duration-300 hover:-translate-y-0.5 focus:border-blue-500 dark:focus:border-blue-400 mt-3 min-h-[50px] ${errors.batchYear ? 'border-red-500' : 'border-gray-200'}`}
           >
             <option value="">Select Batch Year</option>
             {batchYears.map(year => (
@@ -246,7 +246,7 @@ const CollegeAptitudeForm = ({ onSuccess }: CollegeAptitudeFormProps) => {
 
           <select
             {...register('trainingType')}
-            className={`w-full p-3 text-base border-2 rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 transition-all duration-300 hover:-translate-y-0.5 focus:border-blue-500 dark:focus:border-blue-400 mt-3 ${errors.trainingType ? 'border-red-500' : 'border-gray-200'}`}
+            className={`w-full p-4 text-base border-2 rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 transition-all duration-300 hover:-translate-y-0.5 focus:border-blue-500 dark:focus:border-blue-400 mt-3 min-h-[50px] ${errors.trainingType ? 'border-red-500' : 'border-gray-200'}`}
           >
             <option value="">Select Training Type</option>
             {trainingTypes.map(type => (
@@ -257,7 +257,7 @@ const CollegeAptitudeForm = ({ onSuccess }: CollegeAptitudeFormProps) => {
 
           <select
             {...register('trainingDuration')}
-            className={`w-full p-3 text-base border-2 rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 transition-all duration-300 hover:-translate-y-0.5 focus:border-blue-500 dark:focus:border-blue-400 mt-3 ${errors.trainingDuration ? 'border-red-500' : 'border-gray-200'}`}
+            className={`w-full p-4 text-base border-2 rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 transition-all duration-300 hover:-translate-y-0.5 focus:border-blue-500 dark:focus:border-blue-400 mt-3 min-h-[50px] ${errors.trainingDuration ? 'border-red-500' : 'border-gray-200'}`}
           >
             <option value="">Select Training Duration</option>
             {trainingDurations.map(duration => (
@@ -268,7 +268,7 @@ const CollegeAptitudeForm = ({ onSuccess }: CollegeAptitudeFormProps) => {
 
           <select
             {...register('preferredSchedule')}
-            className={`w-full p-3 text-base border-2 rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 transition-all duration-300 hover:-translate-y-0.5 focus:border-blue-500 dark:focus:border-blue-400 mt-3 ${errors.preferredSchedule ? 'border-red-500' : 'border-gray-200'}`}
+            className={`w-full p-4 text-base border-2 rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 transition-all duration-300 hover:-translate-y-0.5 focus:border-blue-500 dark:focus:border-blue-400 mt-3 min-h-[50px] ${errors.preferredSchedule ? 'border-red-500' : 'border-gray-200'}`}
           >
             <option value="">Select Preferred Schedule</option>
             {scheduleOptions.map(option => (
