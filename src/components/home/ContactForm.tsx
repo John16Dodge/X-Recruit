@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Send, Mail, User, Phone, MessageCircle } from 'lucide-react';
+import { Send, Mail, User, Phone, MessageCircle, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -49,8 +49,8 @@ const ContactForm = () => {
     setTimeout(() => {
       console.log('Form submitted:', data);
       toast({
-        title: "Message Sent",
-        description: "Thank you! We'll get back to you soon.",
+        title: "Message Sent Successfully! ✨",
+        description: "Thank you for reaching out! We'll get back to you within 24 hours.",
       });
       form.reset();
       setIsSubmitting(false);
@@ -58,37 +58,45 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-white/80 to-blue-50/80 backdrop-blur-sm rounded-2xl p-8 shadow-glass border border-white/20 hover:shadow-card-hover transition-all duration-500 overflow-hidden relative">
-      {/* Animated decoration circles */}
-      <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-blue-100/30 animate-float opacity-70"></div>
-      <div className="absolute -bottom-16 -left-16 w-32 h-32 rounded-full bg-xr-purple-light/30 animate-float opacity-60" style={{ animationDelay: '1.5s' }}></div>
+    <div className="bg-white/95 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/50 hover:shadow-3xl transition-all duration-500 overflow-hidden relative">
+      {/* Enhanced animated decoration circles */}
+      <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-gradient-to-br from-blue-200/40 to-purple-200/40 animate-float opacity-60"></div>
+      <div className="absolute -bottom-20 -left-20 w-40 h-40 rounded-full bg-gradient-to-br from-purple-200/40 to-pink-200/40 animate-float opacity-50" style={{ animationDelay: '1.5s' }}></div>
       
       <div className="relative z-10">
-        <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gradient animate-fade-in">Get in Touch</h2>
-        <p className="text-xr-gray mb-6 animate-fade-in animate-delay-100">
-          Have a question? Reach out to us and we'll be happy to help.
-        </p>
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 border border-blue-200/50 mb-4">
+            <Sparkles className="w-4 h-4 text-purple-600 mr-2" />
+            <span className="text-sm font-medium text-gray-700">Let's Connect</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gradient bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Get in Touch
+          </h2>
+          <p className="text-gray-600 text-lg">
+            Ready to transform your career journey? Send us a message!
+          </p>
+        </div>
         
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5 animate-fade-in animate-delay-200">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <FormField
                 control={form.control}
                 name="name"
                 render={({ field }) => (
-                  <FormItem className="space-y-2 animate-fade-in animate-delay-100">
-                    <FormLabel className="text-xr-gray-dark flex items-center">
-                      <User className="mr-1.5 h-4 w-4 text-xr-blue" />
-                      <span>Name</span>
+                  <FormItem className="space-y-3">
+                    <FormLabel className="text-gray-800 font-semibold flex items-center text-sm">
+                      <User className="mr-2 h-4 w-4 text-blue-600" />
+                      <span>Full Name</span>
                     </FormLabel>
                     <FormControl>
                       <Input 
-                        placeholder="Your name" 
-                        className="focus:border-xr-blue transition-all duration-300 hover:border-xr-blue-light" 
+                        placeholder="Enter your full name" 
+                        className="h-12 border-2 border-gray-200 focus:border-blue-500 rounded-xl transition-all duration-300 hover:border-blue-300 bg-white/50" 
                         {...field} 
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-red-500" />
                   </FormItem>
                 )}
               />
@@ -96,19 +104,19 @@ const ContactForm = () => {
                 control={form.control}
                 name="email"
                 render={({ field }) => (
-                  <FormItem className="space-y-2 animate-fade-in animate-delay-200">
-                    <FormLabel className="text-xr-gray-dark flex items-center">
-                      <Mail className="mr-1.5 h-4 w-4 text-xr-blue" />
-                      <span>Email</span>
+                  <FormItem className="space-y-3">
+                    <FormLabel className="text-gray-800 font-semibold flex items-center text-sm">
+                      <Mail className="mr-2 h-4 w-4 text-blue-600" />
+                      <span>Email Address</span>
                     </FormLabel>
                     <FormControl>
                       <Input 
-                        placeholder="Your email address" 
-                        className="focus:border-xr-blue transition-all duration-300 hover:border-xr-blue-light" 
+                        placeholder="Enter your email address" 
+                        className="h-12 border-2 border-gray-200 focus:border-blue-500 rounded-xl transition-all duration-300 hover:border-blue-300 bg-white/50" 
                         {...field} 
                       />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-red-500" />
                   </FormItem>
                 )}
               />
@@ -118,19 +126,19 @@ const ContactForm = () => {
               control={form.control}
               name="phone"
               render={({ field }) => (
-                <FormItem className="space-y-2 animate-fade-in animate-delay-300">
-                  <FormLabel className="text-xr-gray-dark flex items-center">
-                    <Phone className="mr-1.5 h-4 w-4 text-xr-blue" />
-                    <span>Phone (Optional)</span>
+                <FormItem className="space-y-3">
+                  <FormLabel className="text-gray-800 font-semibold flex items-center text-sm">
+                    <Phone className="mr-2 h-4 w-4 text-blue-600" />
+                    <span>Phone Number (Optional)</span>
                   </FormLabel>
                   <FormControl>
                     <Input 
-                      placeholder="Your phone number" 
-                      className="focus:border-xr-blue transition-all duration-300 hover:border-xr-blue-light" 
+                      placeholder="Enter your phone number" 
+                      className="h-12 border-2 border-gray-200 focus:border-blue-500 rounded-xl transition-all duration-300 hover:border-blue-300 bg-white/50" 
                       {...field} 
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
@@ -139,33 +147,42 @@ const ContactForm = () => {
               control={form.control}
               name="message"
               render={({ field }) => (
-                <FormItem className="space-y-2 animate-fade-in animate-delay-400">
-                  <FormLabel className="text-xr-gray-dark flex items-center">
-                    <MessageCircle className="mr-1.5 h-4 w-4 text-xr-blue" />
-                    <span>Message</span>
+                <FormItem className="space-y-3">
+                  <FormLabel className="text-gray-800 font-semibold flex items-center text-sm">
+                    <MessageCircle className="mr-2 h-4 w-4 text-blue-600" />
+                    <span>Your Message</span>
                   </FormLabel>
                   <FormControl>
                     <Textarea 
-                      placeholder="Your message here..." 
-                      className="resize-none min-h-[120px] focus:border-xr-blue transition-all duration-300 hover:border-xr-blue-light" 
+                      placeholder="Tell us about your requirements, questions, or how we can help you..." 
+                      className="resize-none min-h-[140px] border-2 border-gray-200 focus:border-blue-500 rounded-xl transition-all duration-300 hover:border-blue-300 bg-white/50" 
                       {...field} 
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
             
             <Button 
               type="submit" 
-              className="w-full bg-xr-blue hover:bg-xr-blue-dark transition-all duration-300 group animate-fade-in animate-delay-500 relative overflow-hidden"
+              className="w-full h-14 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold text-lg rounded-xl transition-all duration-300 group relative overflow-hidden shadow-xl hover:shadow-2xl"
               disabled={isSubmitting}
             >
               <span className="relative z-10 flex items-center justify-center">
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-                <Send size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                {isSubmitting ? (
+                  <>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                    Sending Message...
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <Send size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
               </span>
-              <span className="absolute inset-0 bg-gradient-to-r from-xr-blue to-xr-purple opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Button>
           </form>
         </Form>
