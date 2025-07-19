@@ -19,6 +19,15 @@ const Hero = () => {
               Guidance?? X-Recruit....!!!
             </span>
             
+            {/* Logo */}
+            <div className="flex justify-center lg:justify-start mb-6 animate-fade-in animate-delay-50">
+              <img 
+                src="/lovable-uploads/26807aa8-d05e-46aa-8679-30c0c2a7c5d5.png" 
+                alt="X-Recruit Logo" 
+                className="h-20 w-auto"
+              />
+            </div>
+            
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight animate-fade-in animate-delay-100">
               <span className="text-gradient">X-Recruit</span> Career Guidance for Placement
             </h1>
