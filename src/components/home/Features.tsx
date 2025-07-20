@@ -1,13 +1,11 @@
 
 import React from 'react';
 import { 
-  FileSearch, 
   Briefcase, 
   CalendarClock, 
   Lightbulb, 
   Users,
   BookMarkedIcon,
-  GitGraphIcon,
   HandHelping,
   Edit,
   BracketsIcon
@@ -17,46 +15,34 @@ import FeatureCard from '../ui/FeatureCard';
 const Features = () => {
   const features = [
     {
-      title: "Student Dashboard",
-      description: "A personalized dashboard for students to manage their placement activities, track applications, and access career tools.",
-      icon: FileSearch,
-      delay: 100
-    },
-    {
       title: "Internship & Job Listings",
       description: "A dashboard for colleges to manage placement activities, track student progress, and coordinate with recruiters.",
       icon: Briefcase,
-      delay: 200
+      delay: 100
     },
     {
       title: "College Dashboard",
       description: "AI-driven coordination between recruiters and candidates for seamless interview management.",
       icon: CalendarClock,
-      delay: 300
+      delay: 200
     },
     {
       title: "Mock Interviews",
       description: "Simulated interview sessions to help students practice and improve their interview skills with feedback.",
       icon: Lightbulb,
-      delay: 400
+      delay: 300
     },
     {
       title: "Campus Event Calendar",
       description: "A calendar to track campus placement events, such as job fairs, company visits, and workshops.",
-      icon:  FileSearch,
-      delay: 500
+      icon: BookMarkedIcon,
+      delay: 400
     },
     {
       title: "Job Roles and Its Market Analysis",
       description: "Insights into various job roles, including market demand, salary trends, and required skills.",
       icon: BookMarkedIcon,
-      delay: 600
-    },
-    {
-      title: "Student Skill Profile Builder",
-      description: "A feature for students to build and showcase their skills, certifications, and projects in a professional profile",
-      icon: GitGraphIcon,
-      delay: 600
+      delay: 500
     },
     {
       title: "Recruiter Feedback System",
@@ -68,21 +54,20 @@ const Features = () => {
       title: "Placement Analytics Dashboard",
       description: "An analytics tool for colleges and students to track placement statistics, success rates, and trends.",
       icon: BracketsIcon,
-      delay: 600
+      delay: 700
     },
     {
       title: "Roadmap Generator",
       description: "A tool to generate personalized career roadmaps for students, outlining steps to achieve their career goals.",
       icon: Edit,
-      delay: 600
+      delay: 800
     },
     {
       title: "Services for Business and Mentorships",
       description: "Services for businesses to engage with students (e.g., mentorship programs, workshops) and for students to access mentorship opportunities.",
       icon: Users,
-      delay:600
+      delay: 900
     }
-
   ];
 
   return (

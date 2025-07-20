@@ -25,7 +25,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({ title, items, onItemClick }
       <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent text-xr-gray-dark hover:text-xr-blue font-medium">
         {title}
       </NavigationMenuTrigger>
-      <NavigationMenuContent className="w-[500px]">
+      <NavigationMenuContent className="w-full">
         <ul className="grid w-full gap-1 p-2">
           {items.map((item) => (
             <li key={item.href} className="row-span-1">
