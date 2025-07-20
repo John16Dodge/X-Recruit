@@ -47,7 +47,7 @@ const Index = () => {
                   <img 
                     src="/lovable-uploads/26807aa8-d05e-46aa-8679-30c0c2a7c5d5.png" 
                     alt="X-Recruit Logo" 
-                    className="h-24 w-auto drop-shadow-2xl"
+                    className="h-40 w-auto drop-shadow-2xl"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-xl -z-10"></div>
                 </div>
