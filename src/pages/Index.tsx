@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { Mail, Phone, ArrowRight, CheckCircle, Star, Users, Building, Briefcase, Sparkles, Zap, Target } from 'lucide-react';
 import Navbar from '../components/layout/Navbar';
@@ -33,14 +32,6 @@ const Index = () => {
           
           <div className="container-custom relative z-10">
             <div className="text-center max-w-5xl mx-auto">
-              {/* Premium Badge */}
-              <div className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-blue-600/10 to-purple-600/10 border border-blue-200/50 backdrop-blur-sm mb-8 animate-fade-in">
-                <Sparkles className="w-5 h-5 text-yellow-500 mr-2" />
-                <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  Transform Your Career Journey
-                </span>
-              </div>
-              
               {/* Logo Integration */}
               <div className="flex justify-center mb-8 animate-fade-in animate-delay-100">
                 <div className="relative">
