@@ -8,6 +8,7 @@ import { BookOpen, Code, Lightbulb, LineChart, ArrowDown, ArrowUp, Globe, Laptop
 import ApiKeyManager from '@/components/roadmap/ApiKeyManager';
 import RoadmapForm from '@/components/roadmap/RoadmapForm';
 import { AIService } from '@/services/AIService';
+import RoadmapExamples from '@/components/roadmap/RoadmapExamples';
 
 interface Resource {
   title: string;
@@ -159,6 +160,12 @@ const RoadmapGenerator = () => {
           {hasApiKey && (
             <div className="mb-12">
               <RoadmapForm onSubmit={generateAIRoadmap} isGenerating={isGenerating} />
+            </div>
+          )}
+
+          {!hasApiKey && (
+            <div className="mb-12">
+              <RoadmapExamples />
             </div>
           )}
           
