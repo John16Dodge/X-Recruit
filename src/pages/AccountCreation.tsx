@@ -5,11 +5,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Key, UserPlus } from 'lucide-react';
+import { UserPlus, Eye, EyeOff } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { toast } from '@/hooks/use-toast';
@@ -19,12 +18,19 @@ import Logo from '@/components/layout/navbar/Logo';
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
   password: z.string().min(8, { message: "Password must be at least 8 characters" }),
-  rememberMe: z.boolean().default(false),
+  confirmPassword: z.string().min(8, { message: "Please confirm your password" }),
+  firstName: z.string().min(2, { message: "First name must be at least 2 characters" }),
+  lastName: z.string().min(2, { message: "Last name must be at least 2 characters" }),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
 });
 
-const Login = () => {
+const AccountCreation = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
 
   // React Spring animations
@@ -70,7 +76,9 @@ const Login = () => {
     defaultValues: {
       email: "",
       password: "",
-      rememberMe: false,
+      confirmPassword: "",
+      firstName: "",
+      lastName: "",
     },
   });
 
@@ -89,15 +97,15 @@ const Login = () => {
       setIsSubmitted(true);
       
       toast({
-        title: "Login successful!",
-        description: "Welcome back to X-Recruit.",
+        title: "Account created successfully!",
+        description: "Welcome to X-Recruit. You can now sign in with your credentials.",
       });
       
-      console.log("Login submitted:", values);
+      console.log("Account creation submitted:", values);
       
       // Redirect after successful animation display
       setTimeout(() => {
-        navigate('/');
+        navigate('/login');
       }, 1000);
     }, 1500);
   };
@@ -113,18 +121,54 @@ const Login = () => {
         <div className="flex justify-center mb-4">
           <Logo />
         </div>
-        <p className="text-xr-gray mt-2">Sign in to access your account</p>
+        <p className="text-xr-gray mt-2">Create your X-Recruit account</p>
       </animated.div>
       
       <animated.div style={formAnimation} className="w-full max-w-md">
         <Card className="border-none shadow-card">
           <CardHeader>
-            <CardTitle className="text-2xl text-center">Welcome Back</CardTitle>
-            <CardDescription className="text-center">Enter your credentials to continue</CardDescription>
+            <CardTitle className="text-2xl text-center">Create Account</CardTitle>
+            <CardDescription className="text-center">Enter your information to get started</CardDescription>
           </CardHeader>
           <CardContent>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="firstName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>First Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="John"
+                            className="input-animated"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="lastName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Last Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Doe"
+                            className="input-animated"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
                 <FormField
                   control={form.control}
                   name="email"
@@ -150,12 +194,21 @@ const Login = () => {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input
-                          type="password"
-                          placeholder="••••••••"
-                          className="input-animated"
-                          {...field}
-                        />
+                        <div className="relative">
+                          <Input
+                            type={showPassword ? "text" : "password"}
+                            placeholder="••••••••"
+                            className="input-animated pr-10"
+                            {...field}
+                          />
+                          <button
+                            type="button"
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                            onClick={() => setShowPassword(!showPassword)}
+                          >
+                            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                          </button>
+                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -163,20 +216,28 @@ const Login = () => {
                 />
                 <FormField
                   control={form.control}
-                  name="rememberMe"
+                  name="confirmPassword"
                   render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                    <FormItem>
+                      <FormLabel>Confirm Password</FormLabel>
                       <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
+                        <div className="relative">
+                          <Input
+                            type={showConfirmPassword ? "text" : "password"}
+                            placeholder="••••••••"
+                            className="input-animated pr-10"
+                            {...field}
+                          />
+                          <button
+                            type="button"
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                          >
+                            {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                          </button>
+                        </div>
                       </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel className="text-sm font-normal">
-                          Remember me
-                        </FormLabel>
-                      </div>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -195,12 +256,12 @@ const Login = () => {
                     {isLoading ? (
                       <div className="flex items-center gap-2">
                         <span className="h-4 w-4 rounded-full border-2 border-t-transparent border-white animate-spin"></span>
-                        Signing in...
+                        Creating Account...
                       </div>
                     ) : (
                       <div className="flex items-center gap-2">
-                        <Key className="h-4 w-4" />
-                        Login
+                        <UserPlus className="h-4 w-4" />
+                        Create Account
                       </div>
                     )}
                   </Button>
@@ -208,24 +269,11 @@ const Login = () => {
               </form>
             </Form>
           </CardContent>
-          <CardFooter className="flex flex-col space-y-3">
+          <CardFooter className="flex flex-col space-y-2">
             <animated.div style={slideUp} className="text-sm text-center w-full">
-              <Link to="#" className="text-xr-blue hover:underline">
-                Forgot your password?
-              </Link>
-            </animated.div>
-            <animated.div style={slideUp} className="w-full border-t pt-3">
-              <div className="text-center mb-3">
-                <span className="text-sm text-gray-600">If no existing account</span>
-              </div>
-              <Link to="/account-creation">
-                <Button 
-                  variant="outline" 
-                  className="w-full border-xr-blue text-xr-blue hover:bg-xr-blue hover:text-white transition-colors"
-                >
-                  <UserPlus className="h-4 w-4 mr-2" />
-                  Create an Account
-                </Button>
+              Already have an account?{" "}
+              <Link to="/login" className="text-xr-blue font-medium hover:underline">
+                Sign in
               </Link>
             </animated.div>
           </CardFooter>
@@ -242,8 +290,8 @@ const Login = () => {
             <div className="w-16 h-16 bg-green-500 rounded-full mx-auto flex items-center justify-center text-white text-2xl mb-4">
               ✓
             </div>
-            <h2 className="text-2xl font-bold mb-2">Login Successful!</h2>
-            <p>Redirecting to dashboard...</p>
+            <h2 className="text-2xl font-bold mb-2">Account Created!</h2>
+            <p>Redirecting to login...</p>
           </div>
         </animated.div>
       )}
@@ -251,4 +299,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AccountCreation;
