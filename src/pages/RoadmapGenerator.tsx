@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -182,7 +181,7 @@ const RoadmapGenerator = () => {
                           <CardTitle className="flex items-center gap-2">
                             {roadmap.title}
                             {roadmap.aiGenerated && (
-                              <Brain className="h-4 w-4 text-accent" title="AI Generated" />
+                              <Brain className="h-4 w-4 text-accent" />
                             )}
                           </CardTitle>
                           <CardDescription className="mt-1">{roadmap.description}</CardDescription>
