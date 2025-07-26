@@ -41,6 +41,14 @@ const MobileNav: React.FC<MobileNavProps> = ({
             Home
           </Link>
           
+          <Link 
+            to="/about" 
+            className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+            onClick={closeMobileMenu}
+          >
+            About
+          </Link>
+          
           <MobileDropdown
             title="For Students"
             items={studentItems}
