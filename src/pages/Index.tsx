@@ -6,6 +6,7 @@ import Features from '../components/home/Features';
 import CallToAction from '../components/home/CallToAction';
 import ContactForm from '../components/home/ContactForm';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Index = () => {
   useEffect(() => {
@@ -70,6 +71,12 @@ const Index = () => {
                 <Button size="lg" variant="outline" className="border-2 border-gray-300 text-gray-700 hover:bg-gray-50 px-10 py-6 text-lg font-semibold rounded-2xl">
                   Watch Demo
                 </Button>
+                <Link to="/internship-application">
+                  <Button size="lg" className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white px-10 py-6 text-lg font-semibold rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 group">
+                    Apply for Internship
+                    <Briefcase size={20} className="ml-3 group-hover:scale-110 transition-transform" />
+                  </Button>
+                </Link>
               </div>
               
               {/* Target Audience Pills */}
