@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Send, Users, BookOpen, Smartphone, Mail, MessageCircle, Code, Palette, Database, Layers, School, Moon, Sun } from 'lucide-react';
+import { Send, Users, BookOpen, Smartphone, Mail, MessageCircle, Code, Palette, Database, Layers, School, Moon, Sun, Home, Phone, Info, Github, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -30,6 +31,8 @@ const formSchema = z.object({
   customDepartment: z.string().optional(),
   mobileNumber: z.string().regex(/^\d{10}$/, { message: 'Mobile number must be exactly 10 digits' }),
   gmailId: z.string().regex(/^[a-zA-Z0-9._%+-]+@gmail\.com$/, { message: 'Please enter a valid Gmail address' }),
+  linkedinProfile: z.string().url({ message: 'Please enter a valid LinkedIn URL' }).optional().or(z.literal('')),
+  githubId: z.string().url({ message: 'Please enter a valid GitHub URL' }).optional().or(z.literal('')),
   whyInternship: z.string().min(10, { message: 'Please provide at least 10 characters explaining why you want this internship' }),
   frontend: z.array(z.string()).default([]),
   frontendOther: z.string().optional(),
@@ -61,6 +64,8 @@ const InternshipApplication = () => {
       customDepartment: '',
       mobileNumber: '',
       gmailId: '',
+      linkedinProfile: '',
+      githubId: '',
       whyInternship: '',
       frontend: [],
       frontendOther: '',
@@ -92,7 +97,7 @@ const InternshipApplication = () => {
       if (response.ok) {
         toast({
           title: "🎉 Thank you for applying!",
-          description: "We'll get back to you soon.",
+          description: "Our team will contact you soon.",
         });
         form.reset();
         setShowCustomDepartment(false);
@@ -145,13 +150,32 @@ const InternshipApplication = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
-      <div className="container mx-auto px-4 py-16">
-        {/* Header Section */}
-        <div className="text-center mb-12">
-          <div className="flex justify-center items-center gap-4 mb-6">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700">
-              <Users className="w-5 h-5 text-blue-600 dark:text-blue-400 mr-2" />
-              <span className="text-blue-700 dark:text-blue-300 font-medium">Join Our Team</span>
+      {/* Top Navigation Bar */}
+      <header className="fixed top-0 w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-700 shadow-sm">
+        <div className="container mx-auto px-4 py-3">
+          <nav className="flex items-center justify-between">
+            <div className="flex items-center space-x-6">
+              <Link to="/" className="flex items-center space-x-2 text-blue-600 dark:text-blue-400 font-bold text-lg">
+                <span>X-Recruit</span>
+              </Link>
+              <div className="hidden md:flex items-center space-x-6">
+                <Link to="/" className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  <Home className="w-4 h-4" />
+                  <span>Home</span>
+                </Link>
+                <Link to="/internship-application" className="flex items-center space-x-1 text-blue-600 dark:text-blue-400 font-medium">
+                  <Users className="w-4 h-4" />
+                  <span>Apply for Internship</span>
+                </Link>
+                <Link to="/about" className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  <Info className="w-4 h-4" />
+                  <span>About</span>
+                </Link>
+                <Link to="/contact" className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  <Phone className="w-4 h-4" />
+                  <span>Contact</span>
+                </Link>
+              </div>
             </div>
             <Button
               onClick={toggleTheme}
@@ -165,6 +189,18 @@ const InternshipApplication = () => {
                 <Sun className="h-5 w-5 text-gray-600 dark:text-gray-300" />
               )}
             </Button>
+          </nav>
+        </div>
+      </header>
+
+      <div className="container mx-auto px-4 py-16 pt-32">
+        {/* Header Section */}
+        <div className="text-center mb-12">
+          <div className="flex justify-center items-center gap-4 mb-6">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700">
+              <Users className="w-5 h-5 text-blue-600 dark:text-blue-400 mr-2" />
+              <span className="text-blue-700 dark:text-blue-300 font-medium">Join Our Team</span>
+            </div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Apply for <span className="text-gradient bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Internship</span>
@@ -244,6 +280,8 @@ const InternshipApplication = () => {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600">
+                            <SelectItem value="10th Std" className="text-gray-900 dark:text-gray-100">10th Std</SelectItem>
+                            <SelectItem value="12th Std" className="text-gray-900 dark:text-gray-100">12th Std</SelectItem>
                             <SelectItem value="1st Year" className="text-gray-900 dark:text-gray-100">1st Year</SelectItem>
                             <SelectItem value="2nd Year" className="text-gray-900 dark:text-gray-100">2nd Year</SelectItem>
                             <SelectItem value="3rd Year" className="text-gray-900 dark:text-gray-100">3rd Year</SelectItem>
@@ -341,6 +379,50 @@ const InternshipApplication = () => {
                           <Input 
                             placeholder="yourname@gmail.com" 
                             type="email"
+                            className="h-12 border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" 
+                            {...field} 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="linkedinProfile"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-gray-800 dark:text-gray-200 font-semibold flex items-center">
+                          <Linkedin className="mr-2 h-4 w-4 text-blue-600 dark:text-blue-400" />
+                          LinkedIn Profile (Optional)
+                        </FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="https://linkedin.com/in/yourprofile" 
+                            type="url"
+                            className="h-12 border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" 
+                            {...field} 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="githubId"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-gray-800 dark:text-gray-200 font-semibold flex items-center">
+                          <Github className="mr-2 h-4 w-4 text-blue-600 dark:text-blue-400" />
+                          GitHub ID (Optional)
+                        </FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="https://github.com/yourusername" 
+                            type="url"
                             className="h-12 border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" 
                             {...field} 
                           />
@@ -458,8 +540,8 @@ const InternshipApplication = () => {
                       <Database className="mr-2 h-4 w-4 text-green-600 dark:text-green-400" />
                       Backend
                     </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                      {['MongoDB', 'PostgreSQL', 'Others'].map((skill) => (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {['MongoDB', 'Others'].map((skill) => (
                         <div key={skill} className="flex items-center space-x-2">
                           <Checkbox 
                             checked={(form.watch('backend') || []).includes(skill)}
@@ -492,7 +574,7 @@ const InternshipApplication = () => {
                   <Card className="p-4 bg-orange-50/50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800">
                     <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-3 flex items-center">
                       <Layers className="mr-2 h-4 w-4 text-orange-600 dark:text-orange-400" />
-                      Full Stack Track (Optional)
+                      Full Stack Track
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {['MERN', 'MEAN'].map((skill) => (
@@ -512,7 +594,7 @@ const InternshipApplication = () => {
                 <div className="pt-6">
                   <Button 
                     type="submit" 
-                    className="w-full h-14 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold text-lg rounded-xl transition-all duration-300 shadow-xl hover:shadow-2xl"
+                    className="w-full h-14 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold text-lg rounded-xl transition-all duration-300 shadow-xl hover:shadow-2xl"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
