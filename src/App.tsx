@@ -12,6 +12,7 @@ import MentorRequest from "./pages/MentorRequest";
 import AptitudeTraining from "./pages/AptitudeTraining";
 import Login from "./pages/Login";
 import AccountCreation from "./pages/AccountCreation";
+import InternshipApplication from "./pages/InternshipApplication";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/colleges/aptitude-training" element={<AptitudeTraining />} />
           <Route path="/login" element={<Login />} />
           <Route path="/account-creation" element={<AccountCreation />} />
+          <Route path="/internship-application" element={<InternshipApplication />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
