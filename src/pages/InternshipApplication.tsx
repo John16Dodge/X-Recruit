@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Send, Users, BookOpen, Smartphone, Mail, MessageCircle, Code, Palette, Database, Layers, School, Moon, Sun } from 'lucide-react';
+import { Send, Users, BookOpen, Smartphone, Mail, MessageCircle, Code, Palette, Database, Layers } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -19,12 +19,10 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { toast } from '@/hooks/use-toast';
-import useTheme from '@/hooks/useTheme';
 
 // Define form schema using Zod
 const formSchema = z.object({
   fullName: z.string().min(2, { message: 'Full name must be at least 2 characters' }),
-  collegeName: z.string().min(2, { message: 'College/School name must be at least 2 characters' }),
   yearOfStudy: z.string().min(1, { message: 'Please select your year of study' }),
   department: z.string().min(1, { message: 'Please select your department' }),
   customDepartment: z.string().optional(),
@@ -48,14 +46,12 @@ const InternshipApplication = () => {
   const [showFrontendOther, setShowFrontendOther] = useState(false);
   const [showUiuxOther, setShowUiuxOther] = useState(false);
   const [showBackendOther, setShowBackendOther] = useState(false);
-  const { theme, toggleTheme } = useTheme();
 
   // Initialize form
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       fullName: '',
-      collegeName: '',
       yearOfStudy: '',
       department: '',
       customDepartment: '',
@@ -78,6 +74,7 @@ const InternshipApplication = () => {
     
     try {
       // Here you would integrate with your Excel API endpoint
+      // Example: Microsoft Power Automate Flow URL or other Excel integration
       const response = await fetch('/api/internship-application', {
         method: 'POST',
         headers: {
@@ -144,42 +141,28 @@ const InternshipApplication = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="container mx-auto px-4 py-16">
         {/* Header Section */}
         <div className="text-center mb-12">
-          <div className="flex justify-center items-center gap-4 mb-6">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700">
-              <Users className="w-5 h-5 text-blue-600 dark:text-blue-400 mr-2" />
-              <span className="text-blue-700 dark:text-blue-300 font-medium">Join Our Team</span>
-            </div>
-            <Button
-              onClick={toggleTheme}
-              variant="outline"
-              size="icon"
-              className="rounded-full border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800"
-            >
-              {theme === 'light' ? (
-                <Moon className="h-5 w-5 text-gray-600 dark:text-gray-300" />
-              ) : (
-                <Sun className="h-5 w-5 text-gray-600 dark:text-gray-300" />
-              )}
-            </Button>
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 border border-blue-200 mb-6">
+            <Users className="w-5 h-5 text-blue-600 mr-2" />
+            <span className="text-blue-700 font-medium">Join Our Team</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Apply for <span className="text-gradient bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Internship</span>
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Ready to kickstart your career with X-Recruit? We're looking for passionate students 
             who want to make an impact in the future of campus recruitment technology.
           </p>
         </div>
 
         {/* Application Form */}
-        <Card className="max-w-4xl mx-auto bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg border border-white/20 dark:border-gray-700/20 shadow-2xl">
+        <Card className="max-w-4xl mx-auto bg-white/80 backdrop-blur-lg border border-white/20 shadow-2xl">
           <CardHeader className="text-center pb-6">
-            <CardTitle className="text-2xl text-gray-800 dark:text-white">Internship Application Form</CardTitle>
-            <p className="text-gray-600 dark:text-gray-300">Fill in your details and showcase your skills</p>
+            <CardTitle className="text-2xl text-gray-800">Internship Application Form</CardTitle>
+            <p className="text-gray-600">Fill in your details and showcase your skills</p>
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -191,35 +174,14 @@ const InternshipApplication = () => {
                     name="fullName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-800 dark:text-gray-200 font-semibold flex items-center">
-                          <Users className="mr-2 h-4 w-4 text-blue-600 dark:text-blue-400" />
+                        <FormLabel className="text-gray-800 font-semibold flex items-center">
+                          <Users className="mr-2 h-4 w-4 text-blue-600" />
                           Full Name
                         </FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="Enter your full name" 
-                            className="h-12 border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" 
-                            {...field} 
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="collegeName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-gray-800 dark:text-gray-200 font-semibold flex items-center">
-                          <School className="mr-2 h-4 w-4 text-blue-600 dark:text-blue-400" />
-                          College/School Name
-                        </FormLabel>
-                        <FormControl>
-                          <Input 
-                            placeholder="Enter your college or school name" 
-                            className="h-12 border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" 
+                            className="h-12 border-2 border-gray-200 focus:border-blue-500 rounded-lg" 
                             {...field} 
                           />
                         </FormControl>
@@ -233,22 +195,22 @@ const InternshipApplication = () => {
                     name="yearOfStudy"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-800 dark:text-gray-200 font-semibold flex items-center">
-                          <BookOpen className="mr-2 h-4 w-4 text-blue-600 dark:text-blue-400" />
+                        <FormLabel className="text-gray-800 font-semibold flex items-center">
+                          <BookOpen className="mr-2 h-4 w-4 text-blue-600" />
                           Year of Study
                         </FormLabel>
                         <Select onValueChange={field.onChange} value={field.value}>
                           <FormControl>
-                            <SelectTrigger className="h-12 border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                            <SelectTrigger className="h-12 border-2 border-gray-200 focus:border-blue-500 rounded-lg">
                               <SelectValue placeholder="Select your year" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600">
-                            <SelectItem value="1st Year" className="text-gray-900 dark:text-gray-100">1st Year</SelectItem>
-                            <SelectItem value="2nd Year" className="text-gray-900 dark:text-gray-100">2nd Year</SelectItem>
-                            <SelectItem value="3rd Year" className="text-gray-900 dark:text-gray-100">3rd Year</SelectItem>
-                            <SelectItem value="Final Year" className="text-gray-900 dark:text-gray-100">Final Year</SelectItem>
-                            <SelectItem value="Others" className="text-gray-900 dark:text-gray-100">Others</SelectItem>
+                          <SelectContent>
+                            <SelectItem value="1st Year">1st Year</SelectItem>
+                            <SelectItem value="2nd Year">2nd Year</SelectItem>
+                            <SelectItem value="3rd Year">3rd Year</SelectItem>
+                            <SelectItem value="Final Year">Final Year</SelectItem>
+                            <SelectItem value="Others">Others</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
@@ -261,24 +223,24 @@ const InternshipApplication = () => {
                     name="department"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-800 dark:text-gray-200 font-semibold">Department</FormLabel>
+                        <FormLabel className="text-gray-800 font-semibold">Department</FormLabel>
                         <Select onValueChange={(value) => {
                           field.onChange(value);
                           setShowCustomDepartment(value === 'Others');
                         }} value={field.value}>
                           <FormControl>
-                            <SelectTrigger className="h-12 border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                            <SelectTrigger className="h-12 border-2 border-gray-200 focus:border-blue-500 rounded-lg">
                               <SelectValue placeholder="Select your department" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600">
-                            <SelectItem value="CSE" className="text-gray-900 dark:text-gray-100">CSE</SelectItem>
-                            <SelectItem value="IT" className="text-gray-900 dark:text-gray-100">IT</SelectItem>
-                            <SelectItem value="ECE" className="text-gray-900 dark:text-gray-100">ECE</SelectItem>
-                            <SelectItem value="EEE" className="text-gray-900 dark:text-gray-100">EEE</SelectItem>
-                            <SelectItem value="MECH" className="text-gray-900 dark:text-gray-100">MECH</SelectItem>
-                            <SelectItem value="CIVIL" className="text-gray-900 dark:text-gray-100">CIVIL</SelectItem>
-                            <SelectItem value="Others" className="text-gray-900 dark:text-gray-100">Others</SelectItem>
+                          <SelectContent>
+                            <SelectItem value="CSE">CSE</SelectItem>
+                            <SelectItem value="IT">IT</SelectItem>
+                            <SelectItem value="ECE">ECE</SelectItem>
+                            <SelectItem value="EEE">EEE</SelectItem>
+                            <SelectItem value="MECH">MECH</SelectItem>
+                            <SelectItem value="CIVIL">CIVIL</SelectItem>
+                            <SelectItem value="Others">Others</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
@@ -292,11 +254,11 @@ const InternshipApplication = () => {
                       name="customDepartment"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-800 dark:text-gray-200 font-semibold">Custom Department</FormLabel>
+                          <FormLabel className="text-gray-800 font-semibold">Custom Department</FormLabel>
                           <FormControl>
                             <Input 
                               placeholder="Enter your department" 
-                              className="h-12 border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" 
+                              className="h-12 border-2 border-gray-200 focus:border-blue-500 rounded-lg" 
                               {...field} 
                             />
                           </FormControl>
@@ -311,15 +273,15 @@ const InternshipApplication = () => {
                     name="mobileNumber"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-800 dark:text-gray-200 font-semibold flex items-center">
-                          <Smartphone className="mr-2 h-4 w-4 text-blue-600 dark:text-blue-400" />
+                        <FormLabel className="text-gray-800 font-semibold flex items-center">
+                          <Smartphone className="mr-2 h-4 w-4 text-blue-600" />
                           Mobile Number
                         </FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="Enter 10-digit mobile number" 
                             type="tel"
-                            className="h-12 border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" 
+                            className="h-12 border-2 border-gray-200 focus:border-blue-500 rounded-lg" 
                             {...field} 
                           />
                         </FormControl>
@@ -333,15 +295,15 @@ const InternshipApplication = () => {
                     name="gmailId"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-800 dark:text-gray-200 font-semibold flex items-center">
-                          <Mail className="mr-2 h-4 w-4 text-blue-600 dark:text-blue-400" />
+                        <FormLabel className="text-gray-800 font-semibold flex items-center">
+                          <Mail className="mr-2 h-4 w-4 text-blue-600" />
                           Gmail ID
                         </FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="yourname@gmail.com" 
                             type="email"
-                            className="h-12 border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" 
+                            className="h-12 border-2 border-gray-200 focus:border-blue-500 rounded-lg" 
                             {...field} 
                           />
                         </FormControl>
@@ -357,14 +319,14 @@ const InternshipApplication = () => {
                   name="whyInternship"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-gray-800 dark:text-gray-200 font-semibold flex items-center">
-                        <MessageCircle className="mr-2 h-4 w-4 text-blue-600 dark:text-blue-400" />
+                      <FormLabel className="text-gray-800 font-semibold flex items-center">
+                        <MessageCircle className="mr-2 h-4 w-4 text-blue-600" />
                         Why do you want this internship?
                       </FormLabel>
                       <FormControl>
                         <Textarea 
                           placeholder="Tell us about your motivation, goals, and what you hope to achieve..." 
-                          className="resize-none min-h-[120px] border-2 border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" 
+                          className="resize-none min-h-[120px] border-2 border-gray-200 focus:border-blue-500 rounded-lg" 
                           {...field} 
                         />
                       </FormControl>
@@ -375,15 +337,15 @@ const InternshipApplication = () => {
 
                 {/* Skills Section */}
                 <div className="space-y-6">
-                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white flex items-center">
-                    <Code className="mr-2 h-5 w-5 text-blue-600 dark:text-blue-400" />
+                  <h3 className="text-xl font-semibold text-gray-800 flex items-center">
+                    <Code className="mr-2 h-5 w-5 text-blue-600" />
                     Technical Skills
                   </h3>
 
                   {/* Frontend Skills */}
-                  <Card className="p-4 bg-blue-50/50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
-                    <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-3 flex items-center">
-                      <Palette className="mr-2 h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  <Card className="p-4 bg-blue-50/50">
+                    <h4 className="font-semibold text-gray-800 mb-3 flex items-center">
+                      <Palette className="mr-2 h-4 w-4 text-blue-600" />
                       Frontend
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -393,7 +355,7 @@ const InternshipApplication = () => {
                             checked={(form.watch('frontend') || []).includes(skill)}
                             onCheckedChange={(checked) => handleSkillChange(skill, 'frontend', !!checked)}
                           />
-                          <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{skill}</label>
+                          <label className="text-sm font-medium text-gray-700">{skill}</label>
                         </div>
                       ))}
                     </div>
@@ -406,7 +368,7 @@ const InternshipApplication = () => {
                             <FormControl>
                               <Input 
                                 placeholder="Specify other frontend skills" 
-                                className="h-10 border border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" 
+                                className="h-10 border border-gray-200 focus:border-blue-500 rounded-lg" 
                                 {...field} 
                               />
                             </FormControl>
@@ -417,9 +379,9 @@ const InternshipApplication = () => {
                   </Card>
 
                   {/* UI/UX Skills */}
-                  <Card className="p-4 bg-purple-50/50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-800">
-                    <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-3 flex items-center">
-                      <Palette className="mr-2 h-4 w-4 text-purple-600 dark:text-purple-400" />
+                  <Card className="p-4 bg-purple-50/50">
+                    <h4 className="font-semibold text-gray-800 mb-3 flex items-center">
+                      <Palette className="mr-2 h-4 w-4 text-purple-600" />
                       UI/UX Design
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -429,7 +391,7 @@ const InternshipApplication = () => {
                             checked={(form.watch('uiux') || []).includes(skill)}
                             onCheckedChange={(checked) => handleSkillChange(skill, 'uiux', !!checked)}
                           />
-                          <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{skill}</label>
+                          <label className="text-sm font-medium text-gray-700">{skill}</label>
                         </div>
                       ))}
                     </div>
@@ -442,7 +404,7 @@ const InternshipApplication = () => {
                             <FormControl>
                               <Input 
                                 placeholder="Specify other UI/UX tools" 
-                                className="h-10 border border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" 
+                                className="h-10 border border-gray-200 focus:border-blue-500 rounded-lg" 
                                 {...field} 
                               />
                             </FormControl>
@@ -453,9 +415,9 @@ const InternshipApplication = () => {
                   </Card>
 
                   {/* Backend Skills */}
-                  <Card className="p-4 bg-green-50/50 dark:bg-green-900/20 border-green-200 dark:border-green-800">
-                    <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-3 flex items-center">
-                      <Database className="mr-2 h-4 w-4 text-green-600 dark:text-green-400" />
+                  <Card className="p-4 bg-green-50/50">
+                    <h4 className="font-semibold text-gray-800 mb-3 flex items-center">
+                      <Database className="mr-2 h-4 w-4 text-green-600" />
                       Backend
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -465,7 +427,7 @@ const InternshipApplication = () => {
                             checked={(form.watch('backend') || []).includes(skill)}
                             onCheckedChange={(checked) => handleSkillChange(skill, 'backend', !!checked)}
                           />
-                          <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{skill}</label>
+                          <label className="text-sm font-medium text-gray-700">{skill}</label>
                         </div>
                       ))}
                     </div>
@@ -478,7 +440,7 @@ const InternshipApplication = () => {
                             <FormControl>
                               <Input 
                                 placeholder="Specify other backend technologies" 
-                                className="h-10 border border-gray-200 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" 
+                                className="h-10 border border-gray-200 focus:border-blue-500 rounded-lg" 
                                 {...field} 
                               />
                             </FormControl>
@@ -489,9 +451,9 @@ const InternshipApplication = () => {
                   </Card>
 
                   {/* Full Stack Skills */}
-                  <Card className="p-4 bg-orange-50/50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-800">
-                    <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-3 flex items-center">
-                      <Layers className="mr-2 h-4 w-4 text-orange-600 dark:text-orange-400" />
+                  <Card className="p-4 bg-orange-50/50">
+                    <h4 className="font-semibold text-gray-800 mb-3 flex items-center">
+                      <Layers className="mr-2 h-4 w-4 text-orange-600" />
                       Full Stack Track (Optional)
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -501,7 +463,7 @@ const InternshipApplication = () => {
                             checked={(form.watch('fullStack') || []).includes(skill)}
                             onCheckedChange={(checked) => handleSkillChange(skill, 'fullStack', !!checked)}
                           />
-                          <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{skill}</label>
+                          <label className="text-sm font-medium text-gray-700">{skill}</label>
                         </div>
                       ))}
                     </div>
