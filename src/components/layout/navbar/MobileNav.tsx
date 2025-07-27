@@ -27,7 +27,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
 }) => {
   return (
     <div 
-      className={`md:hidden absolute top-full left-0 w-full bg-white shadow-lg transition-all duration-300 ease-in-out ${
+      className={`md:hidden absolute top-full left-0 w-full bg-white dark:bg-gray-900 shadow-lg border-t border-gray-200 dark:border-gray-700 transition-all duration-300 ease-in-out ${
         isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
       }`}
     >
@@ -35,7 +35,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
         <nav className="flex flex-col space-y-4">
           <Link 
             to="/" 
-            className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+            className="text-xr-gray-dark dark:text-gray-300 hover:text-xr-blue dark:hover:text-blue-400 font-medium transition-colors"
             onClick={closeMobileMenu}
           >
             Home
@@ -43,7 +43,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
           
           <Link 
             to="/about" 
-            className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+            className="text-xr-gray-dark dark:text-gray-300 hover:text-xr-blue dark:hover:text-blue-400 font-medium transition-colors"
             onClick={closeMobileMenu}
           >
             About
@@ -67,7 +67,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
           
           <Link 
             to="/features" 
-            className="text-xr-gray-dark hover:text-xr-blue font-medium transition-colors"
+            className="text-xr-gray-dark dark:text-gray-300 hover:text-xr-blue dark:hover:text-blue-400 font-medium transition-colors"
             onClick={closeMobileMenu}
           >
             Features

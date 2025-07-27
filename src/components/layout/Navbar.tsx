@@ -1,16 +1,18 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Moon, Sun } from 'lucide-react';
 import Logo from './navbar/Logo';
 import DesktopNav from './navbar/DesktopNav';
 import MobileNav from './navbar/MobileNav';
 import CTAButtons from './navbar/CTAButtons';
+import useTheme from '@/hooks/useTheme';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [studentDropdownOpen, setStudentDropdownOpen] = useState(false);
   const [collegeDropdownOpen, setCollegeDropdownOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   // Navigation items
   const studentItems = [
@@ -77,17 +79,37 @@ const Navbar = () => {
           collegeItems={collegeItems}
         />
 
-        {/* CTA Buttons */}
-        <CTAButtons />
+        {/* Right side buttons */}
+        <div className="flex items-center space-x-4">
+          {/* Dark Mode Toggle */}
+          <button
+            onClick={toggleTheme}
+            className={`p-2 rounded-lg transition-all duration-300 hover:scale-110 ${
+              theme === 'dark' 
+                ? 'bg-gray-800 text-yellow-400 hover:bg-gray-700' 
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+            aria-label="Toggle dark mode"
+          >
+            {theme === 'dark' ? (
+              <Sun size={20} />
+            ) : (
+              <Moon size={20} />
+            )}
+          </button>
 
-        {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden text-xr-gray-dark" 
-          onClick={toggleMobileMenu}
-          aria-label="Toggle menu"
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          {/* CTA Buttons */}
+          <CTAButtons />
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden text-xr-gray-dark dark:text-gray-300" 
+            onClick={toggleMobileMenu}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
