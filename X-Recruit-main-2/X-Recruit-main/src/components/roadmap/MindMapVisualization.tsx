@@ -177,11 +177,13 @@ const MindMapVisualization: React.FC<MindMapVisualizationProps> = ({ roadmapData
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
     setIsDragging(true);
     setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y });
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    e.preventDefault();
     if (isDragging) {
       setPan({
         x: e.clientX - dragStart.x,
@@ -190,21 +192,27 @@ const MindMapVisualization: React.FC<MindMapVisualizationProps> = ({ roadmapData
     }
   };
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
     setIsDragging(false);
   };
 
   const downloadSVG = () => {
-    if (svgRef.current) {
-      const svgData = new XMLSerializer().serializeToString(svgRef.current);
-      const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
-      const svgUrl = URL.createObjectURL(svgBlob);
-      const downloadLink = document.createElement('a');
-      downloadLink.href = svgUrl;
-      downloadLink.download = `${roadmapData.title}-mindmap.svg`;
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
+    try {
+      if (svgRef.current) {
+        const svgData = new XMLSerializer().serializeToString(svgRef.current);
+        const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+        const svgUrl = URL.createObjectURL(svgBlob);
+        const downloadLink = document.createElement('a');
+        downloadLink.href = svgUrl;
+        downloadLink.download = `${roadmapData.title.replace(/[^a-z0-9]/gi, '_')}-mindmap.svg`;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        URL.revokeObjectURL(svgUrl);
+      }
+    } catch (error) {
+      console.error('Error downloading SVG:', error);
     }
   };
 
@@ -311,12 +319,22 @@ const MindMapVisualization: React.FC<MindMapVisualizationProps> = ({ roadmapData
             height="100%"
             viewBox="0 0 800 600"
             style={{
-              transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`
+              transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+              transformOrigin: 'center center'
             }}
+            preserveAspectRatio="xMidYMid meet"
           >
             <defs>
-              <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-                <feDropShadow dx="2" dy="2" stdDeviation="3" floodColor="#000000" floodOpacity="0.2"/>
+              <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                <feOffset dx="2" dy="2" result="offset"/>
+                <feComponentTransfer>
+                  <feFuncA type="linear" slope="0.2"/>
+                </feComponentTransfer>
+                <feMerge> 
+                  <feMergeNode/>
+                  <feMergeNode in="SourceGraphic"/> 
+                </feMerge>
               </filter>
             </defs>
             
