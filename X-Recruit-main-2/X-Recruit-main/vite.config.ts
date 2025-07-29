@@ -5,8 +5,8 @@ import { componentTagger } from "lovable-tagger";
 import fs from 'fs';
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  base: '/X-Recruit/',
+export default defineConfig(({ mode, command }) => ({
+  base: command === 'build' ? '/X-Recruit/' : '/',
   server: {
     host: "::",
     port: 8080,
