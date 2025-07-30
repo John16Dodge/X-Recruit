@@ -65,11 +65,11 @@ const Navbar = () => {
     <header 
       className={`fixed w-full z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-700/50 py-3' 
-          : 'bg-transparent py-5'
+          ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-700/50 py-1' 
+          : 'bg-transparent py-2'
       }`}
     >
-      <div className="container-custom flex items-center justify-between">
+      <div className="container-custom flex items-center justify-between h-16">
         {/* Logo */}
         <Logo />
 
@@ -80,11 +80,11 @@ const Navbar = () => {
         />
 
         {/* Right side buttons */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-3">
           {/* Dark Mode Toggle */}
           <button
             onClick={toggleTheme}
-            className={`p-2 rounded-lg transition-all duration-300 hover:scale-110 ${
+            className={`p-1.5 rounded-lg transition-all duration-300 hover:scale-110 ${
               theme === 'dark' 
                 ? 'bg-gray-800 text-yellow-400 hover:bg-gray-700' 
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -92,9 +92,9 @@ const Navbar = () => {
             aria-label="Toggle dark mode"
           >
             {theme === 'dark' ? (
-              <Sun size={20} />
+              <Sun size={18} />
             ) : (
-              <Moon size={20} />
+              <Moon size={18} />
             )}
           </button>
 
@@ -107,7 +107,7 @@ const Navbar = () => {
             onClick={toggleMobileMenu}
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>

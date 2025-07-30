@@ -68,9 +68,10 @@ const CTAButtons: React.FC<CTAButtonsProps> = ({ isMobile = false, onLoginClick 
   }
 
   return (
-    <div className="hidden md:flex items-center space-x-4">
+    <div className="hidden md:flex items-center space-x-3">
       <animated.div style={loginButtonProps}>
         <Button 
+          size="sm"
           variant="outline" 
           className="border-xr-blue text-xr-blue hover:bg-xr-blue/5 shine-effect"
           onClick={handleLoginClick}
@@ -81,6 +82,7 @@ const CTAButtons: React.FC<CTAButtonsProps> = ({ isMobile = false, onLoginClick 
       
       <animated.div style={getStartedButtonProps}>
         <Button 
+          size="sm"
           className="bg-xr-blue hover:bg-xr-blue-dark shine-effect"
           onClick={handleGetStartedClick}
         >

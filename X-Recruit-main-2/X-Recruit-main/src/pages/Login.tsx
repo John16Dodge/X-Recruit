@@ -14,6 +14,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { toast } from '@/hooks/use-toast';
 import Logo from '@/components/layout/navbar/Logo';
+import authService, { LoginData } from '@/services/AuthService';
 
 // Form validation schema
 const formSchema = z.object({
@@ -74,7 +75,7 @@ const Login = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
     
     // Button animation on click
@@ -83,23 +84,48 @@ const Login = () => {
       to: { scale: 1 },
     });
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const loginData: LoginData = {
+        email: values.email,
+        password: values.password,
+      };
+
+      const response = await authService.login(loginData);
+      
       setIsLoading(false);
-      setIsSubmitted(true);
+      
+      if (response.success) {
+        setIsSubmitted(true);
+        
+        toast({
+          title: "Login successful!",
+          description: "Welcome back to X-Recruit.",
+        });
+        
+        console.log("Login successful:", response.data?.user);
+        
+        // Redirect after successful animation display
+        setTimeout(() => {
+          navigate('/job-list');
+        }, 1000);
+      } else {
+        // Show error message
+        toast({
+          title: "Login failed",
+          description: response.message || "Please check your credentials and try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.error('Login error:', error);
       
       toast({
-        title: "Login successful!",
-        description: "Welcome back to X-Recruit.",
+        title: "Network Error",
+        description: "Please check your internet connection and try again.",
+        variant: "destructive",
       });
-      
-      console.log("Login submitted:", values);
-      
-      // Redirect after successful animation display
-      setTimeout(() => {
-        navigate('/');
-      }, 1000);
-    }, 1500);
+    }
   };
 
   return (
@@ -243,7 +269,7 @@ const Login = () => {
               ✓
             </div>
             <h2 className="text-2xl font-bold mb-2">Login Successful!</h2>
-            <p>Redirecting to dashboard...</p>
+            <p>Redirecting to job listings...</p>
           </div>
         </animated.div>
       )}

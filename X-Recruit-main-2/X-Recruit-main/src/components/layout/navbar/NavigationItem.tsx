@@ -12,7 +12,7 @@ interface NavigationItemProps {
 
 const NavigationItem: React.FC<NavigationItemProps> = ({ 
   href, 
-  className = "text-xr-gray-dark hover:text-xr-blue font-medium transition-colors", 
+  className = "text-xr-gray-dark hover:text-xr-blue font-medium transition-colors",
   onClick,
   children 
 }) => {

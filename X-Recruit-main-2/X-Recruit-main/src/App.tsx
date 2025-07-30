@@ -15,6 +15,11 @@ import AptitudeTraining from "./pages/AptitudeTraining";
 import Login from "./pages/Login";
 import AccountCreation from "./pages/AccountCreation";
 import InternshipApplication from "./pages/InternshipApplication";
+import Students from "./pages/Students";
+import Colleges from "./pages/Colleges";
+import Recruiters from "./pages/Recruiters";
+import BusinessMentorship from "./pages/BusinessMentorship";
+import JobList from "./pages/JobList";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +45,11 @@ const AppContent = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/account-creation" element={<AccountCreation />} />
           <Route path="/internship-application" element={<InternshipApplication />} />
+          <Route path="/students" element={<Students />} />
+          <Route path="/colleges" element={<Colleges />} />
+          <Route path="/recruiters" element={<Recruiters />} />
+          <Route path="/business-mentorship" element={<BusinessMentorship />} />
+          <Route path="/job-list" element={<JobList />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
@@ -53,7 +63,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename="/X-Recruit">
+      <BrowserRouter>
         <AppContent />
       </BrowserRouter>
     </TooltipProvider>

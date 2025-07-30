@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -7,11 +7,19 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import MindMapVisualization from '@/components/roadmap/MindMapVisualization';
 import { BookOpen, Code, Lightbulb, LineChart, ArrowDown, ArrowUp, Globe, LaptopIcon, Youtube, Database, Server, PencilRuler, BookMarked, FileText as FileTextIcon, Users as UsersIcon, Terminal, ShieldCheck, Smartphone, Gamepad, Brush, Cog, Brain, Aperture, Headphones, CloudSun, LineChart as Analytics, Network, GitBranch, Blocks, Map } from 'lucide-react';
+import { useProgress } from '@/hooks/useProgress';
+import { aiService, CustomRoadmapRequest, GeneratedRoadmap } from '@/services/AIService';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Progress } from '@/components/ui/progress';
+import jsPDF from 'jspdf';
+import CustomRoadmapGenerator from '@/components/roadmap/CustomRoadmapGenerator';
 
 interface Resource {
   title: string;
   url: string;
-  type: 'book' | 'video' | 'course' | 'article' | 'tool' | 'community';
+  type: 'book' | 'video' | 'course' | 'article' | 'tool' | 'community' | 'github';
   platform?: string;
 }
 
@@ -28,6 +36,8 @@ interface Roadmap {
   platforms: string[];
   certifications: string[];
 }
+
+// ... (predefinedRoadmaps remains the same)
 
 const predefinedRoadmaps: Roadmap[] = [
   {
@@ -185,6 +195,110 @@ const predefinedRoadmaps: Roadmap[] = [
     tools: ["Wireshark", "Nmap", "Metasploit", "Burp Suite", "Splunk", "Nessus"],
     platforms: ["Kali Linux", "Security Onion", "SANS", "Cybrary"],
     certifications: ["CompTIA Security+", "CISSP", "CEH", "CISM"]
+  },
+  {
+    id: 7,
+    title: "Game Developer",
+    description: "Create engaging games and interactive experiences",
+    steps: [
+      "Learn programming fundamentals (C# or C++)",
+      "Master a game engine (Unity or Unreal)",
+      "Understand game design principles",
+      "Learn 3D graphics and animation",
+      "Study physics and mathematics for games",
+      "Practice game optimization techniques",
+      "Build complete game projects",
+      "Learn multiplayer and networking concepts"
+    ],
+    icon: <Gamepad />,
+    difficulty: "intermediate",
+    timeEstimate: "10-15 months",
+    resources: [
+      { title: "Unity Learn Platform", url: "https://learn.unity.com", type: "course", platform: "Unity" },
+      { title: "Game Programming Patterns", url: "https://gameprogrammingpatterns.com", type: "book", platform: "Online" },
+      { title: "Brackeys Game Dev Tutorials", url: "https://youtube.com/brackeys", type: "video", platform: "YouTube" }
+    ],
+    tools: ["Unity", "Unreal Engine", "Blender", "Visual Studio", "Git", "Photoshop"],
+    platforms: ["Steam", "itch.io", "Google Play", "App Store"],
+    certifications: ["Unity Certified Developer", "Unreal Engine Certification", "C# Programming Certificate"]
+  },
+  {
+    id: 8,
+    title: "AI/ML Engineer",
+    description: "Build intelligent systems and machine learning models",
+    steps: [
+      "Master Python programming and libraries",
+      "Learn statistics and linear algebra",
+      "Understand machine learning algorithms",
+      "Practice with TensorFlow and PyTorch",
+      "Study deep learning and neural networks",
+      "Learn natural language processing",
+      "Work with big data and cloud platforms",
+      "Deploy ML models to production"
+    ],
+    icon: <Brain />,
+    difficulty: "advanced",
+    timeEstimate: "12-18 months",
+    resources: [
+      { title: "Machine Learning Coursera Course", url: "https://coursera.org/learn/machine-learning", type: "course", platform: "Coursera" },
+      { title: "Hands-On ML with Scikit-Learn", url: "https://oreilly.com", type: "book", platform: "O'Reilly" },
+      { title: "Fast.ai Practical Deep Learning", url: "https://fast.ai", type: "course", platform: "Fast.ai" }
+    ],
+    tools: ["Python", "TensorFlow", "PyTorch", "Jupyter", "Pandas", "NumPy"],
+    platforms: ["Google Colab", "AWS SageMaker", "Azure ML", "Kaggle"],
+    certifications: ["Google ML Engineer", "AWS ML Specialty", "TensorFlow Developer"]
+  },
+  {
+    id: 9,
+    title: "Cloud Architect",
+    description: "Design and implement scalable cloud infrastructure",
+    steps: [
+      "Learn cloud computing fundamentals",
+      "Master a cloud platform (AWS/Azure/GCP)",
+      "Understand infrastructure as code",
+      "Learn containerization and orchestration",
+      "Study microservices architecture",
+      "Practice security and compliance",
+      "Learn cost optimization strategies",
+      "Design disaster recovery solutions"
+    ],
+    icon: <CloudSun />,
+    difficulty: "advanced",
+    timeEstimate: "10-14 months",
+    resources: [
+      { title: "AWS Well-Architected Framework", url: "https://aws.amazon.com/architecture/well-architected", type: "article", platform: "AWS" },
+      { title: "Cloud Architecture Patterns", url: "https://docs.microsoft.com/azure/architecture", type: "article", platform: "Microsoft" },
+      { title: "A Cloud Guru Training", url: "https://acloudguru.com", type: "course", platform: "A Cloud Guru" }
+    ],
+    tools: ["Terraform", "Kubernetes", "Docker", "Jenkins", "Ansible", "Monitoring Tools"],
+    platforms: ["AWS", "Microsoft Azure", "Google Cloud", "Digital Ocean"],
+    certifications: ["AWS Solutions Architect", "Azure Solutions Architect", "Google Cloud Architect"]
+  },
+  {
+    id: 10,
+    title: "Product Manager",
+    description: "Guide product strategy and development lifecycle",
+    steps: [
+      "Learn product management fundamentals",
+      "Understand user research and analytics",
+      "Master agile and scrum methodologies",
+      "Learn market analysis and competitive research",
+      "Practice roadmap planning and prioritization",
+      "Develop stakeholder communication skills",
+      "Study product metrics and KPIs",
+      "Learn go-to-market strategies"
+    ],
+    icon: <Cog />,
+    difficulty: "intermediate",
+    timeEstimate: "6-10 months",
+    resources: [
+      { title: "Inspired: How to Create Products Customers Love", url: "https://amazon.com", type: "book", platform: "Amazon" },
+      { title: "Google Product Management Course", url: "https://coursera.org", type: "course", platform: "Coursera" },
+      { title: "Product School Resources", url: "https://productschool.com", type: "community", platform: "Product School" }
+    ],
+    tools: ["Jira", "Figma", "Google Analytics", "Mixpanel", "Slack", "Miro"],
+    platforms: ["ProductHunt", "Medium", "LinkedIn", "Product School"],
+    certifications: ["Google Product Manager", "Scrum Product Owner", "Product Management Certificate"]
   }
 ];
 
@@ -196,19 +310,25 @@ const RoadmapGenerator = () => {
   const categories = [
     { id: 'all', label: 'All Roadmaps' },
     { id: 'development', label: 'Development' },
-    { id: 'data', label: 'Data & Analytics' },
+    { id: 'data', label: 'Data & AI' },
     { id: 'design', label: 'Design' },
-    { id: 'security', label: 'Security' }
+    { id: 'security', label: 'Security' },
+    { id: 'cloud', label: 'Cloud & DevOps' },
+    { id: 'gaming', label: 'Gaming' },
+    { id: 'management', label: 'Management' }
   ];
 
   const getFilteredRoadmaps = () => {
     if (selectedCategory === 'all') return predefinedRoadmaps;
     
     const categoryMap: { [key: string]: string[] } = {
-      'development': ['Full Stack Developer', 'Mobile App Developer', 'DevOps Engineer'],
-      'data': ['Data Scientist'],
+      'development': ['Full Stack Developer', 'Mobile App Developer'],
+      'data': ['Data Scientist', 'AI/ML Engineer'],
       'design': ['UI/UX Designer'],
-      'security': ['Cybersecurity Analyst']
+      'security': ['Cybersecurity Analyst'],
+      'cloud': ['DevOps Engineer', 'Cloud Architect'],
+      'gaming': ['Game Developer'],
+      'management': ['Product Manager']
     };
     
     return predefinedRoadmaps.filter(roadmap => 
@@ -225,14 +345,15 @@ const RoadmapGenerator = () => {
     return classes[difficulty];
   };
 
-  const getResourceTagClass = (type: 'book' | 'video' | 'course' | 'article' | 'tool' | 'community') => {
+  const getResourceTagClass = (type: 'book' | 'video' | 'course' | 'article' | 'tool' | 'community' | 'github') => {
     const classes = {
       book: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
       video: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
       course: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
       article: 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200',
       tool: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
-      community: 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200'
+      community: 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200',
+      github: 'bg-gray-800 text-gray-100 dark:bg-gray-200 dark:text-gray-800'
     };
     return classes[type];
   };
@@ -260,8 +381,13 @@ const RoadmapGenerator = () => {
           <div className="mb-12 text-center">
             <h1 className="text-4xl font-bold tracking-tight mb-4">Tech Career Roadmaps</h1>
             <p className="text-lg text-muted-foreground">
-              Discover structured learning paths for popular tech careers. Select roadmaps that match your goals.
+              Discover structured learning paths for popular tech careers. Select roadmaps that match your goals or create a custom one.
             </p>
+          </div>
+
+          {/* Custom Roadmap Generator */}
+          <div className="mb-12">
+            <CustomRoadmapGenerator />
           </div>
 
           {/* Category Filter */}

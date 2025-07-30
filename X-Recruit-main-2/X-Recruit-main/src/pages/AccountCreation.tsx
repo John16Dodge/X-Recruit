@@ -13,6 +13,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { toast } from '@/hooks/use-toast';
 import Logo from '@/components/layout/navbar/Logo';
+import authService, { RegisterData } from '@/services/AuthService';
 
 // Form validation schema
 const formSchema = z.object({
@@ -82,7 +83,7 @@ const AccountCreation = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
     
     // Button animation on click
@@ -91,23 +92,52 @@ const AccountCreation = () => {
       to: { scale: 1 },
     });
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      // Call backend API
+      const registerData: RegisterData = {
+        email: values.email,
+        password: values.password,
+        confirmPassword: values.confirmPassword,
+        firstName: values.firstName,
+        lastName: values.lastName,
+      };
+
+      const response = await authService.register(registerData);
+      
       setIsLoading(false);
-      setIsSubmitted(true);
+      
+      if (response.success) {
+        setIsSubmitted(true);
+        
+        toast({
+          title: "Account created successfully!",
+          description: "Welcome to X-Recruit. You can now sign in with your credentials.",
+        });
+        
+        console.log("Account created:", response.data?.user);
+        
+        // Redirect after successful animation display
+        setTimeout(() => {
+          navigate('/job-list');
+        }, 1000);
+      } else {
+        // Show error message
+        toast({
+          title: "Account creation failed",
+          description: response.message || "Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      setIsLoading(false);
+      console.error('Account creation error:', error);
       
       toast({
-        title: "Account created successfully!",
-        description: "Welcome to X-Recruit. You can now sign in with your credentials.",
+        title: "Network Error",
+        description: "Please check your internet connection and try again.",
+        variant: "destructive",
       });
-      
-      console.log("Account creation submitted:", values);
-      
-      // Redirect after successful animation display
-      setTimeout(() => {
-        navigate('/login');
-      }, 1000);
-    }, 1500);
+    }
   };
 
   return (
@@ -291,7 +321,7 @@ const AccountCreation = () => {
               ✓
             </div>
             <h2 className="text-2xl font-bold mb-2">Account Created!</h2>
-            <p>Redirecting to login...</p>
+            <p>Redirecting to job listings...</p>
           </div>
         </animated.div>
       )}

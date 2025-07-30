@@ -123,7 +123,7 @@
   }
   
   .navbar-spacing {
-    @apply pt-32 md:pt-40;
+    @apply pt-20 md:pt-24;
   }
   
   /* New attractive color grade classes */
