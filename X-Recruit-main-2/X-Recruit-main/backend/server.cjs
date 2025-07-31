@@ -12,7 +12,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-jwt-secret-key';
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:8083', 'http://localhost:3000', 'http://localhost:5173', 'http://localhost:8084'],
+  origin: ['http://localhost:8080', 'http://localhost:8083', 'http://localhost:3000', 'http://localhost:5173', 'http://localhost:8084'],
   credentials: true
 }));
 app.use(express.json());
@@ -31,8 +31,55 @@ db.serialize(() => {
       password TEXT NOT NULL,
       firstName TEXT NOT NULL,
       lastName TEXT NOT NULL,
+      userType TEXT DEFAULT 'student' CHECK(userType IN ('student', 'recruiter', 'admin')),
+      company TEXT,
+      phone TEXT,
+      bio TEXT,
+      skills TEXT,
+      experience TEXT,
+      portfolio TEXT,
+      resume TEXT,
       createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
       updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+
+  // Jobs table
+  db.run(`
+    CREATE TABLE IF NOT EXISTS jobs (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      recruiterId INTEGER NOT NULL,
+      title TEXT NOT NULL,
+      company TEXT NOT NULL,
+      location TEXT NOT NULL,
+      type TEXT DEFAULT 'full-time' CHECK(type IN ('full-time', 'part-time', 'internship', 'contract', 'remote')),
+      description TEXT NOT NULL,
+      requirements TEXT,
+      skills TEXT,
+      salary TEXT,
+      experience TEXT DEFAULT 'entry-level' CHECK(experience IN ('entry-level', 'mid-level', 'senior-level')),
+      applicationDeadline DATETIME,
+      status TEXT DEFAULT 'active' CHECK(status IN ('active', 'paused', 'closed')),
+      createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (recruiterId) REFERENCES users (id) ON DELETE CASCADE
+    )
+  `);
+
+  // Applications table
+  db.run(`
+    CREATE TABLE IF NOT EXISTS applications (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      jobId INTEGER NOT NULL,
+      studentId INTEGER NOT NULL,
+      coverLetter TEXT,
+      status TEXT DEFAULT 'pending' CHECK(status IN ('pending', 'reviewed', 'shortlisted', 'rejected', 'hired')),
+      notes TEXT,
+      appliedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (jobId) REFERENCES jobs (id) ON DELETE CASCADE,
+      FOREIGN KEY (studentId) REFERENCES users (id) ON DELETE CASCADE,
+      UNIQUE(jobId, studentId)
     )
   `);
 });
@@ -51,7 +98,7 @@ const isValidPassword = (password) => {
 // User registration endpoint
 app.post('/api/auth/register', async (req, res) => {
   try {
-    const { email, password, confirmPassword, firstName, lastName } = req.body;
+    const { email, password, confirmPassword, firstName, lastName, userType } = req.body;
 
     // Validation
     if (!email || !password || !confirmPassword || !firstName || !lastName) {
@@ -113,8 +160,8 @@ app.post('/api/auth/register', async (req, res) => {
 
         // Insert new user
         db.run(
-          `INSERT INTO users (email, password, firstName, lastName) VALUES (?, ?, ?, ?)`,
-          [email, hashedPassword, firstName, lastName],
+          `INSERT INTO users (email, password, firstName, lastName, userType) VALUES (?, ?, ?, ?, ?)`,
+          [email, hashedPassword, firstName, lastName, userType || 'student'],
           function(err) {
             if (err) {
               console.error('Database insert error:', err);
@@ -130,7 +177,8 @@ app.post('/api/auth/register', async (req, res) => {
                 userId: this.lastID, 
                 email: email,
                 firstName: firstName,
-                lastName: lastName
+                lastName: lastName,
+                userType: userType || 'student'
               },
               JWT_SECRET,
               { expiresIn: '24h' }
@@ -214,7 +262,8 @@ app.post('/api/auth/login', (req, res) => {
             userId: user.id, 
             email: user.email,
             firstName: user.firstName,
-            lastName: user.lastName
+            lastName: user.lastName,
+            userType: user.userType
           },
           JWT_SECRET,
           { expiresIn: '24h' }
@@ -301,7 +350,99 @@ app.get('/api/user/profile', (req, res) => {
   }
 });
 
-// Health check endpoint
+// Middleware to verify JWT and user roles
+const authenticate = (requiredRole) => (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) {
+    return res.status(401).json({ success: false, message: 'No token provided' });
+  }
+
+  jwt.verify(token, JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ success: false, message: 'Invalid token' });
+    }
+
+    req.user = decoded;
+    if (requiredRole && req.user.userType !== requiredRole) {
+      return res.status(403).json({ success: false, message: `Access denied. Requires ${requiredRole} role.` });
+    }
+    next();
+  });
+};
+
+// Job Endpoints
+// Create a new job (recruiter only)
+app.post('/api/jobs', authenticate('recruiter'), (req, res) => {
+  const { title, company, location, type, description, requirements, skills, salary, experience, applicationDeadline } = req.body;
+  const recruiterId = req.user.userId;
+
+  db.run(
+    'INSERT INTO jobs (recruiterId, title, company, location, type, description, requirements, skills, salary, experience, applicationDeadline) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+    [recruiterId, title, company, location, type, description, requirements, skills, salary, experience, applicationDeadline],
+    function(err) {
+      if (err) {
+        return res.status(500).json({ success: false, message: 'Failed to create job' });
+      }
+      res.status(201).json({ success: true, message: 'Job created successfully', jobId: this.lastID });
+    }
+  );
+});
+
+// Get all jobs (public)
+app.get('/api/jobs', (req, res) => {
+  db.all('SELECT * FROM jobs WHERE status = ?', ['active'], (err, rows) => {
+    if (err) {
+      return res.status(500).json({ success: false, message: 'Failed to fetch jobs' });
+    }
+    res.json({ success: true, data: { jobs: rows } });
+  });
+});
+
+// Get a single job (public)
+app.get('/api/jobs/:id', (req, res) => {
+  db.get('SELECT * FROM jobs WHERE id = ?', [req.params.id], (err, row) => {
+    if (err) {
+      return res.status(500).json({ success: false, message: 'Failed to fetch job' });
+    }
+    if (!row) {
+      return res.status(404).json({ success: false, message: 'Job not found' });
+    }
+    res.json({ success: true, data: { job: row } });
+  });
+});
+
+// Apply for a job (student only)
+app.post('/api/jobs/:id/apply', authenticate('student'), (req, res) => {
+  const jobId = req.params.id;
+  const studentId = req.user.userId;
+  const { coverLetter } = req.body;
+
+  db.run('INSERT INTO applications (jobId, studentId, coverLetter) VALUES (?, ?, ?)', [jobId, studentId, coverLetter], function(err) {
+    if (err) {
+      return res.status(500).json({ success: false, message: 'Failed to apply for job' });
+    }
+    res.status(201).json({ success: true, message: 'Applied for job successfully', applicationId: this.lastID });
+  });
+});
+
+// Get applicants for a job (recruiter only)
+app.get('/api/jobs/:id/applicants', authenticate('recruiter'), (req, res) => {
+  const jobId = req.params.id;
+
+  db.all(
+    `SELECT u.id, u.firstName, u.lastName, u.email, a.status, a.appliedAt 
+     FROM applications a 
+     JOIN users u ON a.studentId = u.id 
+     WHERE a.jobId = ?`,
+    [jobId],
+    (err, rows) => {
+      if (err) {
+        return res.status(500).json({ success: false, message: 'Failed to fetch applicants' });
+      }
+      res.json({ success: true, data: { applicants: rows } });
+    }
+  );
+});
 app.get('/api/health', (req, res) => {
   res.json({
     success: true,
