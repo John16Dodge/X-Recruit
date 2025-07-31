@@ -32,15 +32,139 @@ db.serialize(() => {
       firstName TEXT NOT NULL,
       lastName TEXT NOT NULL,
       userType TEXT DEFAULT 'student' CHECK(userType IN ('student', 'recruiter', 'admin')),
-      company TEXT,
+      headline TEXT,
+      summary TEXT,
+      location TEXT,
       phone TEXT,
-      bio TEXT,
-      skills TEXT,
-      experience TEXT,
+      website TEXT,
+      linkedin TEXT,
+      github TEXT,
       portfolio TEXT,
-      resume TEXT,
+      profilePicture TEXT,
+      coverPhoto TEXT,
+      isOpenToWork BOOLEAN DEFAULT false,
+      preferredJobTypes TEXT,
+      salaryExpectation TEXT,
+      availableFrom DATE,
       createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
       updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `);  
+
+  // Experience table
+  db.run(`
+    CREATE TABLE IF NOT EXISTS experiences (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      userId INTEGER NOT NULL,
+      title TEXT NOT NULL,
+      company TEXT NOT NULL,
+      location TEXT,
+      employmentType TEXT CHECK(employmentType IN ('full-time', 'part-time', 'contract', 'internship', 'freelance', 'volunteer')),
+      startDate DATE NOT NULL,
+      endDate DATE,
+      isCurrentPosition BOOLEAN DEFAULT false,
+      description TEXT,
+      skills TEXT,
+      mediaUrl TEXT,
+      createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE
+    )
+  `);
+
+  // Education table
+  db.run(`
+    CREATE TABLE IF NOT EXISTS education (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      userId INTEGER NOT NULL,
+      institution TEXT NOT NULL,
+      degree TEXT NOT NULL,
+      fieldOfStudy TEXT,
+      startDate DATE,
+      endDate DATE,
+      grade TEXT,
+      activities TEXT,
+      description TEXT,
+      isCurrentlyStudying BOOLEAN DEFAULT false,
+      createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE
+    )
+  `);
+
+  // Skills table
+  db.run(`
+    CREATE TABLE IF NOT EXISTS skills (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      userId INTEGER NOT NULL,
+      skillName TEXT NOT NULL,
+      proficiencyLevel TEXT CHECK(proficiencyLevel IN ('beginner', 'intermediate', 'advanced', 'expert')),
+      endorsements INTEGER DEFAULT 0,
+      yearsOfExperience INTEGER,
+      createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE
+    )
+  `);
+
+  // Certifications table
+  db.run(`
+    CREATE TABLE IF NOT EXISTS certifications (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      userId INTEGER NOT NULL,
+      name TEXT NOT NULL,
+      issuingOrganization TEXT NOT NULL,
+      issueDate DATE,
+      expirationDate DATE,
+      credentialId TEXT,
+      credentialUrl TEXT,
+      skills TEXT,
+      createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE
+    )
+  `);
+
+  // Projects table
+  db.run(`
+    CREATE TABLE IF NOT EXISTS projects (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      userId INTEGER NOT NULL,
+      name TEXT NOT NULL,
+      description TEXT,
+      startDate DATE,
+      endDate DATE,
+      isOngoing BOOLEAN DEFAULT false,
+      projectUrl TEXT,
+      skills TEXT,
+      collaborators TEXT,
+      createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE
+    )
+  `);
+
+  // Languages table
+  db.run(`
+    CREATE TABLE IF NOT EXISTS languages (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      userId INTEGER NOT NULL,
+      language TEXT NOT NULL,
+      proficiency TEXT CHECK(proficiency IN ('elementary', 'limited-working', 'professional-working', 'full-professional', 'native')),
+      createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE
+    )
+  `);
+
+  // Volunteer Experience table
+  db.run(`
+    CREATE TABLE IF NOT EXISTS volunteer_experiences (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      userId INTEGER NOT NULL,
+      role TEXT NOT NULL,
+      organization TEXT NOT NULL,
+      cause TEXT,
+      startDate DATE,
+      endDate DATE,
+      isCurrentRole BOOLEAN DEFAULT false,
+      description TEXT,
+      createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE
     )
   `);
 
@@ -319,7 +443,9 @@ app.get('/api/user/profile', (req, res) => {
         });
       }
 
-      db.get('SELECT id, email, firstName, lastName, createdAt FROM users WHERE id = ?', [decoded.userId], (err, user) => {
+      const query = `SELECT * FROM users WHERE id = ?`;
+
+      db.get(query, [decoded.userId], (err, user) => {
         if (err) {
           console.error('Database error:', err);
           return res.status(500).json({
@@ -335,6 +461,9 @@ app.get('/api/user/profile', (req, res) => {
           });
         }
 
+        // Remove password from response
+        delete user.password;
+        
         res.json({
           success: true,
           data: { user }
@@ -369,6 +498,72 @@ const authenticate = (requiredRole) => (req, res, next) => {
     next();
   });
 };
+
+// Update user profile endpoint (protected)
+app.put('/api/user/profile', authenticate(), (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const profileData = req.body;
+
+    const query = `UPDATE users SET
+      headline = ?,
+      summary = ?,
+      location = ?,
+      phone = ?,
+      website = ?,
+      linkedin = ?,
+      github = ?,
+      portfolio = ?,
+      profilePicture = ?,
+      coverPhoto = ?,
+      isOpenToWork = ?,
+      preferredJobTypes = ?,
+      salaryExpectation = ?,
+      availableFrom = ?,
+      updatedAt = CURRENT_TIMESTAMP
+      WHERE id = ?`;
+
+    const params = [
+      profileData.headline,
+      profileData.summary,
+      profileData.location,
+      profileData.phone,
+      profileData.website,
+      profileData.linkedin,
+      profileData.github,
+      profileData.portfolio,
+      profileData.profilePicture,
+      profileData.coverPhoto,
+      profileData.isOpenToWork,
+      profileData.preferredJobTypes,
+      profileData.salaryExpectation,
+      profileData.availableFrom,
+      userId
+    ];
+
+    db.run(query, params, function(err) {
+      if (err) {
+        console.error('Database update error:', err);
+        return res.status(500).json({
+          success: false,
+          message: 'Failed to update profile'
+        });
+      }
+
+      res.json({
+        success: true,
+        message: 'Profile updated successfully'
+      });
+    });
+  } catch (error) {
+    console.error('Profile update error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Internal server error'
+    });
+  }
+});
+
 
 // Job Endpoints
 // Create a new job (recruiter only)
