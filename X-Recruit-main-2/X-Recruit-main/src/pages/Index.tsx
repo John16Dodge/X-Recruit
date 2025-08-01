@@ -8,6 +8,7 @@ import CallToAction from '../components/home/CallToAction';
 import ContactForm from '../components/home/ContactForm';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import SignupButtons from '../components/home/SignupButtons';
 
 const Index = () => {
   useEffect(() => {
@@ -99,7 +100,7 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Impact Statistics */}
+{/* Impact Statistics */}
         <section className="py-24 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 dark:from-gray-950 dark:via-blue-950 dark:to-purple-950 relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.1),transparent_50%)] dark:bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.05),transparent_50%)]"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.1),transparent_50%)] dark:bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.05),transparent_50%)]"></div>
@@ -143,6 +144,8 @@ const Index = () => {
                 </div>
               </div>
             </div>
+            
+            <SignupButtons />
           </div>
         </section>
         

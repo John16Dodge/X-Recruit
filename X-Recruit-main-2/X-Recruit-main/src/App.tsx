@@ -23,6 +23,7 @@ import JobList from "./pages/JobList";
 import JobListings from "./pages/JobListings";
 import JobDetail from "./pages/JobDetail";
 import CreateJob from "./pages/CreateJob";
+import PostJob from "./pages/PostJob";
 import RecruiterDashboard from "./pages/RecruiterDashboard";
 
 const queryClient = new QueryClient();
@@ -56,7 +57,8 @@ const AppContent = () => {
           <Route path="/job-list" element={<JobList />} />
           <Route path="/jobs" element={<JobListings />} />
           <Route path="/jobs/:id" element={<JobDetail />} />
-          <Route path="/post-job" element={<CreateJob />} />
+          <Route path="/post-job" element={<PostJob />} />
+          <Route path="/create-job" element={<CreateJob />} />
           <Route path="/recruiter-dashboard" element={<RecruiterDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
