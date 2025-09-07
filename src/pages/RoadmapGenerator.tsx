@@ -3,9 +3,12 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import { BookOpen, Code, Lightbulb, LineChart, ArrowDown, ArrowUp, Globe, LaptopIcon, Youtube, Database, Server, PencilRuler, BookMarked, FileText as FileTextIcon, Users as UsersIcon, Terminal, ShieldCheck, Smartphone, Gamepad, Brush, Cog, Brain, Aperture, Headphones, CloudSun, LineChart as Analytics, Network, GitBranch, Blocks } from 'lucide-react';
+import { BookOpen, Code, Lightbulb, LineChart, ArrowDown, ArrowUp, Globe, LaptopIcon, Youtube, Database, Server, PencilRuler, BookMarked, FileText as FileTextIcon, Users as UsersIcon, Terminal, ShieldCheck, Smartphone, Gamepad, Brush, Cog, Brain, Aperture, Headphones, CloudSun, LineChart as Analytics, Network, GitBranch, Blocks, Map, Sparkles } from 'lucide-react';
+import AIRoadmapGenerator from '@/components/roadmap/AIRoadmapGenerator';
+import RoadmapVisualizer from '@/components/roadmap/RoadmapVisualizer';
 
 interface Resource {
   title: string;
@@ -257,25 +260,226 @@ const RoadmapGenerator = () => {
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12 text-center">
-            <h1 className="text-4xl font-bold tracking-tight mb-4">Tech Career Roadmaps</h1>
+            <h1 className="text-4xl font-bold tracking-tight mb-4">
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                AI-Powered Career Roadmaps
+              </span>
+            </h1>
             <p className="text-lg text-muted-foreground">
-              Discover structured learning paths for popular tech careers. Select roadmaps that match your goals.
+              Generate personalized learning paths with AI or explore our curated roadmaps. Visualize your journey with interactive MindMaps and timeline graphs.
             </p>
           </div>
 
-          {/* Category Filter */}
-          <div className="mb-8">
-            <div className="flex flex-wrap gap-2 justify-center">
-              {categories.map(category => (
-                <Button
-                  key={category.id}
-                  variant={selectedCategory === category.id ? "default" : "outline"}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className="mb-2"
-                >
-                  {category.label}
-                </Button>
-              ))}
+          <Tabs defaultValue="ai-generator" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 mb-8">
+              <TabsTrigger value="ai-generator" className="flex items-center gap-2">
+                <Brain className="h-4 w-4" />
+                AI Generator
+              </TabsTrigger>
+              <TabsTrigger value="predefined" className="flex items-center gap-2">
+                <Map className="h-4 w-4" />
+                Curated Roadmaps
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="ai-generator">
+              <AIRoadmapGenerator />
+            </TabsContent>
+
+            <TabsContent value="predefined">
+              {/* Category Filter */}
+              <div className="mb-8">
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {categories.map(category => (
+                    <Button
+                      key={category.id}
+                      variant={selectedCategory === category.id ? "default" : "outline"}
+                      onClick={() => setSelectedCategory(category.id)}
+                      className="mb-2"
+                    >
+                      {category.label}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Available Roadmaps */}
+              <div className="mb-12">
+                <h2 className="text-2xl font-semibold mb-6">Curated Career Roadmaps</h2>
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {getFilteredRoadmaps().map((roadmap) => (
+                    <Card key={roadmap.id} className="cursor-pointer hover:shadow-lg transition-shadow">
+                      <CardHeader className="pb-4">
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="p-2 rounded-md bg-primary/10 text-primary">
+                            {roadmap.icon}
+                          </div>
+                          <div>
+                            <CardTitle className="text-lg">{roadmap.title}</CardTitle>
+                            <div className="flex items-center gap-2 mt-1">
+                              <Badge className={getDifficultyTagClass(roadmap.difficulty)}>
+                                {roadmap.difficulty}
+                              </Badge>
+                              <span className="text-sm text-muted-foreground">{roadmap.timeEstimate}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <CardDescription>{roadmap.description}</CardDescription>
+                      </CardHeader>
+                      <CardFooter>
+                        <Button 
+                          onClick={() => selectRoadmap(roadmap)}
+                          className="w-full"
+                          disabled={selectedRoadmaps.some(r => r.id === roadmap.id)}
+                        >
+                          {selectedRoadmaps.some(r => r.id === roadmap.id) ? 'Added' : 'Add to My Roadmaps'}
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+
+              {/* Selected Roadmaps */}
+              {selectedRoadmaps.length > 0 && (
+                <div className="space-y-8">
+                  <h2 className="text-2xl font-semibold">My Selected Roadmaps</h2>
+                  
+                  {selectedRoadmaps.map((roadmap) => (
+                    <div key={roadmap.id} className="space-y-4">
+                      <RoadmapVisualizer roadmap={roadmap} />
+                      
+                      <Card className="border-t-4 border-t-primary">
+                        <CardHeader className="pb-4">
+                          <div className="flex justify-between items-start">
+                            <div className="flex items-center gap-3">
+                              <div className="p-2 rounded-md bg-primary/10 text-primary">
+                                {roadmap.icon}
+                              </div>
+                              <div>
+                                <CardTitle>{roadmap.title}</CardTitle>
+                                <CardDescription className="mt-1">{roadmap.description}</CardDescription>
+                              </div>
+                            </div>
+                            
+                            <div className="flex items-center gap-2">
+                              <Badge className={getDifficultyTagClass(roadmap.difficulty)}>
+                                {roadmap.difficulty}
+                              </Badge>
+                              <Button 
+                                variant="outline" 
+                                size="sm"
+                                onClick={() => removeRoadmap(roadmap.id)}
+                              >
+                                Remove
+                              </Button>
+                            </div>
+                          </div>
+                        </CardHeader>
+                        
+                        <CardContent className="pb-4">
+                          <div className="mb-4">
+                            <div className="text-sm font-medium mb-2">Learning Path:</div>
+                            <ol className="space-y-2 list-decimal pl-5 text-sm">
+                              {roadmap.steps.map((step, index) => (
+                                <li key={index}>{step}</li>
+                              ))}
+                            </ol>
+                          </div>
+                          
+                          {showDetails === roadmap.id && (
+                            <div className="space-y-4 mt-6 pt-4 border-t">
+                              <div>
+                                <div className="text-sm font-medium mb-1">Estimated Time:</div>
+                                <div className="text-sm">{roadmap.timeEstimate}</div>
+                              </div>
+                              
+                              <div>
+                                <div className="text-sm font-medium mb-2">Recommended Resources:</div>
+                                <div className="grid gap-2">
+                                  {roadmap.resources.map((resource, index) => (
+                                    <div key={index} className="flex items-start gap-2">
+                                      <Badge className={getResourceTagClass(resource.type)}>
+                                        {resource.type}
+                                      </Badge>
+                                      <div className="text-sm flex-grow">
+                                        <a href={resource.url} target="_blank" rel="noopener noreferrer" className="hover:underline font-medium">
+                                          {resource.title}
+                                        </a>
+                                        {resource.platform && (
+                                          <span className="text-muted-foreground"> • {resource.platform}</span>
+                                        )}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                              
+                              <div>
+                                <div className="text-sm font-medium mb-1">Tools & Technologies:</div>
+                                <div className="flex flex-wrap gap-2">
+                                  {roadmap.tools.map((tool, index) => (
+                                    <Badge key={index} variant="secondary">
+                                      {tool}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+                              
+                              <div>
+                                <div className="text-sm font-medium mb-1">Learning Platforms:</div>
+                                <div className="flex flex-wrap gap-2">
+                                  {roadmap.platforms.map((platform, index) => (
+                                    <Badge key={index} variant="secondary">
+                                      {platform}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+                              
+                              <div>
+                                <div className="text-sm font-medium mb-1">Recommended Certifications:</div>
+                                <div className="space-y-1">
+                                  {roadmap.certifications.map((certification, index) => (
+                                    <div key={index} className="text-sm">
+                                      • {certification}
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </CardContent>
+                        
+                        <CardFooter>
+                          <Button 
+                            variant="outline" 
+                            onClick={() => toggleRoadmapDetails(roadmap.id)}
+                            className="w-full gap-1"
+                          >
+                            {showDetails === roadmap.id ? (
+                              <>Hide Details <ArrowUp className="h-4 w-4" /></>
+                            ) : (
+                              <>Show Details <ArrowDown className="h-4 w-4" /></>
+                            )}
+                          </Button>
+                        </CardFooter>
+                      </Card>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </TabsContent>
+          </Tabs>
+        </div>
+      </main>
+      
+      <Footer />
+    </div>
+  );
+};
+
+export default RoadmapGenerator;
             </div>
           </div>
 

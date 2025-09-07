@@ -51,7 +51,7 @@ export class AIService {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'gpt-4.1-2025-04-14',
+          model: 'gpt-4o-mini',
           messages: [
             {
               role: 'system',
@@ -94,21 +94,21 @@ Additional context:
 - Desired timeframe: ${request.timeframe || 'Not specified'}
 - Learning style: ${request.learningStyle || 'Not specified'}
 
-Please provide a detailed roadmap in the following JSON format:
+Please provide a detailed roadmap in the following JSON format (respond with ONLY valid JSON, no additional text):
 {
   "title": "Career title (e.g., 'Full Stack Developer')",
   "description": "Brief description of the career path",
   "difficulty": "beginner|intermediate|advanced",
   "timeEstimate": "Realistic timeframe (e.g., '6-12 months')",
   "steps": [
-    "Step 1: Specific actionable step",
-    "Step 2: Another specific step",
+    "Learn HTML, CSS, and JavaScript fundamentals (2 weeks)",
+    "Master React.js for frontend development (3 weeks)",
     "... continue with 8-12 steps"
   ],
   "resources": [
     {
       "title": "Resource name",
-      "url": "https://example.com",
+      "url": "https://developer.mozilla.org",
       "type": "book|video|course|article|tool|community",
       "platform": "Platform name (optional)"
     }
@@ -125,6 +125,8 @@ Make sure to:
 4. Be specific about tools and technologies
 5. Suggest relevant certifications for the field
 6. Provide a realistic timeline
+7. Include duration estimates for each step (e.g., "Learn Python basics (2 weeks)")
+8. Respond with ONLY the JSON object, no markdown formatting or additional text
 `;
   }
 }
