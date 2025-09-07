@@ -103,21 +103,21 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center px-4 bg-gradient-to-br from-xr-blue-light/10 to-xr-purple-light/10">
+    <div className="min-h-screen flex flex-col justify-center items-center px-4 bg-background">
       {/* Background Elements */}
-      <div className="absolute top-20 right-20 w-64 h-64 bg-xr-blue/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 left-20 w-72 h-72 bg-xr-purple/5 rounded-full blur-3xl"></div>
+      <div className="absolute top-20 right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-20 w-72 h-72 bg-secondary/5 rounded-full blur-3xl"></div>
       
       {/* Logo */}
       <animated.div style={fadeIn} className="w-full max-w-md text-center mb-8">
         <div className="flex justify-center mb-4">
           <Logo />
         </div>
-        <p className="text-xr-gray mt-2">Sign in to access your account</p>
+        <p className="text-muted-foreground mt-2">Sign in to access your account</p>
       </animated.div>
       
       <animated.div style={formAnimation} className="w-full max-w-md">
-        <Card className="border-none shadow-card">
+        <Card className="shadow-lg">
           <CardHeader>
             <CardTitle className="text-2xl text-center">Welcome Back</CardTitle>
             <CardDescription className="text-center">Enter your credentials to continue</CardDescription>
@@ -135,7 +135,6 @@ const Login = () => {
                         <Input
                           type="email"
                           placeholder="you@example.com"
-                          className="input-animated"
                           {...field}
                         />
                       </FormControl>
@@ -153,7 +152,6 @@ const Login = () => {
                         <Input
                           type="password"
                           placeholder="••••••••"
-                          className="input-animated"
                           {...field}
                         />
                       </FormControl>
@@ -183,7 +181,7 @@ const Login = () => {
                 <animated.div style={buttonProps}>
                   <Button 
                     type="submit" 
-                    className="w-full shine-effect" 
+                    className="w-full" 
                     disabled={isLoading}
                     onClick={() => {
                       buttonApi.start({
@@ -200,7 +198,7 @@ const Login = () => {
                     ) : (
                       <div className="flex items-center gap-2">
                         <Key className="h-4 w-4" />
-                        Login
+                        Sign In
                       </div>
                     )}
                   </Button>
@@ -210,18 +208,18 @@ const Login = () => {
           </CardContent>
           <CardFooter className="flex flex-col space-y-3">
             <animated.div style={slideUp} className="text-sm text-center w-full">
-              <Link to="#" className="text-xr-blue hover:underline">
+              <Link to="#" className="text-primary hover:underline">
                 Forgot your password?
               </Link>
             </animated.div>
             <animated.div style={slideUp} className="w-full border-t pt-3">
               <div className="text-center mb-3">
-                <span className="text-sm text-gray-600">If no existing account</span>
+                <span className="text-sm text-muted-foreground">Don't have an account?</span>
               </div>
               <Link to="/account-creation">
                 <Button 
                   variant="outline" 
-                  className="w-full border-xr-blue text-xr-blue hover:bg-xr-blue hover:text-white transition-colors"
+                  className="w-full"
                 >
                   <UserPlus className="h-4 w-4 mr-2" />
                   Create an Account
@@ -238,12 +236,12 @@ const Login = () => {
           style={successAnimation}
           className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
         >
-          <div className="bg-white p-8 rounded-lg text-center">
+          <div className="bg-card p-8 rounded-lg text-center border shadow-lg">
             <div className="w-16 h-16 bg-green-500 rounded-full mx-auto flex items-center justify-center text-white text-2xl mb-4">
               ✓
             </div>
             <h2 className="text-2xl font-bold mb-2">Login Successful!</h2>
-            <p>Redirecting to dashboard...</p>
+            <p className="text-muted-foreground">Redirecting to dashboard...</p>
           </div>
         </animated.div>
       )}
