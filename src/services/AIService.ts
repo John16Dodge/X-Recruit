@@ -1,4 +1,37 @@
 
+export interface CustomRoadmapRequest {
+  title: string;
+  description?: string;
+  targetRole: string;
+  currentSkills: string[];
+  experience: string;
+  duration?: string;
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  goals: string[];
+}
+
+export interface RoadmapStep {
+  title: string;
+  duration: number;
+  category: string;
+  description: string;
+}
+
+export interface GeneratedRoadmap {
+  title: string;
+  description: string;
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  timeEstimate: string;
+  roadmapType: string;
+  steps: RoadmapStep[];
+  tools: string[];
+  platforms: string[];
+  certifications: string[];
+  currentSkills?: string[];
+  targetGoals?: string[];
+  experienceLevel?: string;
+}
+
 interface AIRoadmapRequest {
   careerGoal: string;
   currentSkills?: string[];
@@ -129,4 +162,93 @@ Make sure to:
 8. Respond with ONLY the JSON object, no markdown formatting or additional text
 `;
   }
+
+  async generateCustomRoadmap(request: CustomRoadmapRequest): Promise<GeneratedRoadmap> {
+    // Simulate AI generation - in a real implementation, this would call an AI service
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    const roadmap: GeneratedRoadmap = {
+      title: request.title,
+      description: request.description || `Comprehensive learning path to become a ${request.targetRole}`,
+      difficulty: request.difficulty,
+      timeEstimate: request.duration || 'Custom timeline',
+      roadmapType: 'custom',
+      steps: this.generateSteps(request),
+      tools: this.generateTools(request.targetRole),
+      platforms: ['GitHub', 'Stack Overflow', 'Online Learning Platforms'],
+      certifications: this.generateCertifications(request.targetRole),
+      currentSkills: request.currentSkills,
+      targetGoals: request.goals,
+      experienceLevel: request.experience
+    };
+
+    return roadmap;
+  }
+
+  private generateSteps(request: CustomRoadmapRequest): RoadmapStep[] {
+    const baseSteps = [
+      {
+        title: 'Foundation Building',
+        duration: 2,
+        category: 'foundation',
+        description: `Build strong fundamentals based on your current skills: ${request.currentSkills.join(', ')}`
+      },
+      {
+        title: 'Core Skill Development',
+        duration: 4,
+        category: 'core',
+        description: `Develop core competencies for ${request.targetRole}`
+      },
+      {
+        title: 'Practical Projects',
+        duration: 3,
+        category: 'project',
+        description: 'Apply knowledge through hands-on projects and portfolio building'
+      },
+      {
+        title: 'Advanced Topics',
+        duration: 3,
+        category: 'advanced',
+        description: 'Master advanced concepts and specialization areas'
+      },
+      {
+        title: 'Professional Development',
+        duration: 2,
+        category: 'specialization',
+        description: 'Prepare for job market and continuous learning'
+      }
+    ];
+
+    return baseSteps;
+  }
+
+  private generateTools(targetRole: string): string[] {
+    const toolMap: { [key: string]: string[] } = {
+      'frontend developer': ['React', 'Vue.js', 'JavaScript', 'HTML/CSS', 'Webpack', 'Git'],
+      'backend developer': ['Node.js', 'Python', 'Java', 'Docker', 'PostgreSQL', 'Git'],
+      'full stack developer': ['React', 'Node.js', 'JavaScript', 'MongoDB', 'Docker', 'Git'],
+      'data scientist': ['Python', 'R', 'Jupyter', 'TensorFlow', 'Pandas', 'SQL'],
+      'devops engineer': ['Docker', 'Kubernetes', 'AWS', 'Terraform', 'Jenkins', 'Git'],
+      'mobile developer': ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Xcode', 'Android Studio']
+    };
+
+    const roleKey = targetRole.toLowerCase();
+    return toolMap[roleKey] || ['Git', 'VS Code', 'Documentation Tools', 'Project Management Tools'];
+  }
+
+  private generateCertifications(targetRole: string): string[] {
+    const certMap: { [key: string]: string[] } = {
+      'frontend developer': ['React Developer Certification', 'JavaScript Fundamentals', 'Web Accessibility'],
+      'backend developer': ['AWS Developer Associate', 'Database Management', 'API Development'],
+      'full stack developer': ['Full Stack Web Development', 'Cloud Practitioner', 'Database Design'],
+      'data scientist': ['Google Data Analytics', 'AWS Machine Learning', 'Python for Data Science'],
+      'devops engineer': ['AWS DevOps Engineer', 'Kubernetes Administrator', 'Docker Certified Associate'],
+      'mobile developer': ['Google Associate Android Developer', 'Apple iOS Developer', 'React Native']
+    };
+
+    const roleKey = targetRole.toLowerCase();
+    return certMap[roleKey] || [`${targetRole} Certification`, 'Industry Standard Certifications'];
+  }
 }
+
+export const aiService = new AIService();
