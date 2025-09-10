@@ -97,7 +97,11 @@ const Login = () => {
       
       // Redirect after successful animation display
       setTimeout(() => {
+<<<<<<< HEAD
         navigate('/jobs');
+=======
+        navigate('/');
+>>>>>>> e537ea31e6b108399fb8f79ea1c7cdebfca58d37
       }, 1000);
     }, 1500);
   };

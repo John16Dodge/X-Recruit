@@ -11,8 +11,11 @@ import {
   BracketsIcon
 } from 'lucide-react';
 import FeatureCard from '../ui/FeatureCard';
+<<<<<<< HEAD
 import FloatingElement from '@/components/ui/FloatingElements';
 import ParallaxScroll from '@/components/ui/ParallaxScroll';
+=======
+>>>>>>> e537ea31e6b108399fb8f79ea1c7cdebfca58d37
 
 const Features = () => {
   const features = [
@@ -94,6 +97,7 @@ const Features = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
+<<<<<<< HEAD
             <FloatingElement 
               key={index}
               direction="up" 
@@ -109,6 +113,15 @@ const Features = () => {
                 />
               </ParallaxScroll>
             </FloatingElement>
+=======
+            <FeatureCard
+              key={index}
+              title={feature.title}
+              description={feature.description}
+              icon={feature.icon}
+              delay={feature.delay}
+            />
+>>>>>>> e537ea31e6b108399fb8f79ea1c7cdebfca58d37
           ))}
         </div>
       </div>

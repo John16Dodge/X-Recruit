@@ -81,6 +81,7 @@
   body {
     @apply bg-background text-foreground font-sans;
     font-family: 'Inter', sans-serif;
+<<<<<<< HEAD
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
@@ -91,6 +92,8 @@
 
   .light {
     color-scheme: light;
+=======
+>>>>>>> e537ea31e6b108399fb8f79ea1c7cdebfca58d37
   }
 }
 
@@ -233,6 +236,7 @@
     animation: pulse 1.5s ease-in-out;
   }
 
+<<<<<<< HEAD
   /* Button hover animations */
   .button-hover-animate {
     @apply transition-all duration-300 ease-out;
@@ -415,6 +419,8 @@
   .animate-delay-900 { animation-delay: 900ms; }
   .animate-delay-1000 { animation-delay: 1000ms; }
 
+=======
+>>>>>>> e537ea31e6b108399fb8f79ea1c7cdebfca58d37
   @keyframes pulse {
     0% {
       opacity: 0.5;

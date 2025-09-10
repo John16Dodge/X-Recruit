@@ -1,10 +1,15 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
 import { Moon, Sun } from 'lucide-react';
 import MobileDropdown from './MobileDropdown';
 import CTAButtons from './CTAButtons';
 import useTheme from '@/hooks/useTheme';
+=======
+import MobileDropdown from './MobileDropdown';
+import CTAButtons from './CTAButtons';
+>>>>>>> e537ea31e6b108399fb8f79ea1c7cdebfca58d37
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -27,7 +32,10 @@ const MobileNav: React.FC<MobileNavProps> = ({
   studentItems,
   collegeItems,
 }) => {
+<<<<<<< HEAD
   const { theme, toggleTheme } = useTheme();
+=======
+>>>>>>> e537ea31e6b108399fb8f79ea1c7cdebfca58d37
   return (
     <div 
       className={`md:hidden absolute top-full left-0 w-full bg-white dark:bg-gray-900 shadow-lg border-t border-gray-200 dark:border-gray-700 transition-all duration-300 ease-in-out ${
@@ -77,6 +85,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
           </Link>
         </nav>
         
+<<<<<<< HEAD
         {/* Theme Toggle for Mobile */}
         <div className="flex items-center justify-center py-4">
           <button
@@ -97,6 +106,8 @@ const MobileNav: React.FC<MobileNavProps> = ({
           </button>
         </div>
         
+=======
+>>>>>>> e537ea31e6b108399fb8f79ea1c7cdebfca58d37
         <CTAButtons isMobile={true} onLoginClick={closeMobileMenu} />
       </div>
     </div>

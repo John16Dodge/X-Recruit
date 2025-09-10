@@ -15,11 +15,14 @@ import AptitudeTraining from "./pages/AptitudeTraining";
 import Login from "./pages/Login";
 import AccountCreation from "./pages/AccountCreation";
 import InternshipApplication from "./pages/InternshipApplication";
+<<<<<<< HEAD
 import JobListings from "./pages/JobListings";
 import JobDetails from "./pages/JobDetails";
 import UserProfile from "./pages/UserProfile";
 import ProfileCreation from "./pages/ProfileCreation";
 import EditProfile from "./pages/EditProfile";
+=======
+>>>>>>> e537ea31e6b108399fb8f79ea1c7cdebfca58d37
 
 const queryClient = new QueryClient();
 
@@ -30,10 +33,13 @@ const AppContent = () => {
     // Apply theme class to document element
     document.documentElement.classList.remove('light', 'dark');
     document.documentElement.classList.add(theme);
+<<<<<<< HEAD
     
     // Also apply to body for better theme support
     document.body.className = document.body.className.replace(/theme-\w+/g, '');
     document.body.classList.add(`theme-${theme}`);
+=======
+>>>>>>> e537ea31e6b108399fb8f79ea1c7cdebfca58d37
   }, [theme]);
 
   return (
@@ -49,11 +55,14 @@ const AppContent = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/account-creation" element={<AccountCreation />} />
           <Route path="/internship-application" element={<InternshipApplication />} />
+<<<<<<< HEAD
           <Route path="/jobs" element={<JobListings />} />
           <Route path="/jobs/:id" element={<JobDetails />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/profile/create" element={<ProfileCreation />} />
           <Route path="/profile/edit" element={<EditProfile />} />
+=======
+>>>>>>> e537ea31e6b108399fb8f79ea1c7cdebfca58d37
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

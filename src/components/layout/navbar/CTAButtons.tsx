@@ -45,9 +45,12 @@ const CTAButtons: React.FC<CTAButtonsProps> = ({ isMobile = false, onLoginClick 
       from: { scale: 0.9 },
       to: { scale: 1 },
     });
+<<<<<<< HEAD
     
     // Navigate to profile creation
     navigate('/profile/create');
+=======
+>>>>>>> e537ea31e6b108399fb8f79ea1c7cdebfca58d37
   };
 
   if (isMobile) {
@@ -55,13 +58,21 @@ const CTAButtons: React.FC<CTAButtonsProps> = ({ isMobile = false, onLoginClick 
       <div className="flex flex-col space-y-3">
         <Button 
           variant="outline" 
+<<<<<<< HEAD
           className="w-full border-xr-blue text-xr-blue hover:bg-xr-blue/5 button-hover-animate button-hover-glow hover-wiggle"
+=======
+          className="w-full border-xr-blue text-xr-blue hover:bg-xr-blue/5"
+>>>>>>> e537ea31e6b108399fb8f79ea1c7cdebfca58d37
           onClick={handleLoginClick}
         >
           Log in
         </Button>
         <Button 
+<<<<<<< HEAD
           className="w-full bg-xr-blue hover:bg-xr-blue-dark button-hover-animate button-hover-bounce hover-heartbeat"
+=======
+          className="w-full bg-xr-blue hover:bg-xr-blue-dark"
+>>>>>>> e537ea31e6b108399fb8f79ea1c7cdebfca58d37
           onClick={handleGetStartedClick}
         >
           Get Started
@@ -75,7 +86,11 @@ const CTAButtons: React.FC<CTAButtonsProps> = ({ isMobile = false, onLoginClick 
       <animated.div style={loginButtonProps}>
         <Button 
           variant="outline" 
+<<<<<<< HEAD
           className="border-xr-blue text-xr-blue hover:bg-xr-blue/5 shine-effect button-hover-animate button-hover-glow hover-wiggle"
+=======
+          className="border-xr-blue text-xr-blue hover:bg-xr-blue/5 shine-effect"
+>>>>>>> e537ea31e6b108399fb8f79ea1c7cdebfca58d37
           onClick={handleLoginClick}
         >
           Log in
@@ -84,7 +99,11 @@ const CTAButtons: React.FC<CTAButtonsProps> = ({ isMobile = false, onLoginClick 
       
       <animated.div style={getStartedButtonProps}>
         <Button 
+<<<<<<< HEAD
           className="bg-xr-blue hover:bg-xr-blue-dark shine-effect button-hover-animate button-hover-bounce hover-heartbeat"
+=======
+          className="bg-xr-blue hover:bg-xr-blue-dark shine-effect"
+>>>>>>> e537ea31e6b108399fb8f79ea1c7cdebfca58d37
           onClick={handleGetStartedClick}
         >
           Get Started
