@@ -310,8 +310,8 @@ const JobListings: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Job Cards */}
           <div className="lg:col-span-2 space-y-4">
-            {filteredJobs.map((job) => (
-              <Card key={job.id} className={`hover:shadow-lg transition-all duration-300 ${job.isFeatured ? 'ring-2 ring-blue-500' : ''}`}>
+            {filteredJobs.map((job, index) => (
+              <Card key={job.id} className={`hover:shadow-lg transition-all duration-300 animate-fade-in-up hover:scale-105 hover:rotate-1 ${job.isFeatured ? 'ring-2 ring-blue-500' : ''}`} style={{ animationDelay: `${index * 100}ms` }}>
                 <CardContent className="p-6">
                   <div className="flex justify-between items-start mb-4">
                     <div className="flex-1">
@@ -378,15 +378,15 @@ const JobListings: React.FC = () => {
                       </div>
                     </div>
                     <div className="flex gap-2">
-                      <Button variant="outline" asChild className="button-hover-animate button-hover-glow">
-                        <Link to={`/jobs/${job.id}`}>
-                          <Eye className="h-4 w-4 mr-2" />
-                          View Details
-                        </Link>
-                      </Button>
-                      <Button asChild className="button-hover-animate button-hover-bounce">
-                        <Link to={`/jobs/${job.id}/apply`}>Apply Now</Link>
-                      </Button>
+        <Button variant="outline" asChild className="button-hover-animate button-hover-glow hover-wiggle">
+            <Link to={`/jobs/${job.id}`}>
+                <Eye className="h-4 w-4 mr-2" />
+                View Details
+            </Link>
+        </Button>
+        <Button asChild className="button-hover-animate button-hover-bounce hover-heartbeat">
+            <Link to={`/jobs/${job.id}/apply`}>Apply Now</Link>
+        </Button>
                     </div>
                   </div>
                 </CardContent>

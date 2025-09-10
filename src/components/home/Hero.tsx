@@ -2,6 +2,10 @@
 import React from 'react';
 import { ArrowRight, Search, CheckCircle, BriefcaseBusiness } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import AnimatedButton from '@/components/ui/AnimatedButton';
+import FloatingElement from '@/components/ui/FloatingElements';
+import TypewriterEffect from '@/components/ui/TypewriterEffect';
+import AnimatedCounter from '@/components/ui/AnimatedCounter';
 
 const Hero = () => {
   return (
@@ -9,6 +13,19 @@ const Hero = () => {
       {/* Background with subtle patterns */}
       <div className="absolute inset-0 bg-gradient-to-b from-white to-blue-50 z-0">
         <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#0052CC_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        
+        {/* Animated background elements */}
+        <FloatingElement direction="diagonal" intensity="subtle" delay={0}>
+          <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-gradient-to-r from-blue-400/20 to-purple-400/20 blur-xl animate-pulse-slow"></div>
+        </FloatingElement>
+        
+        <FloatingElement direction="up" intensity="medium" delay={1}>
+          <div className="absolute top-40 right-20 w-24 h-24 rounded-full bg-gradient-to-r from-pink-400/20 to-red-400/20 blur-lg animate-spin-slow"></div>
+        </FloatingElement>
+        
+        <FloatingElement direction="diagonal" intensity="strong" delay={2}>
+          <div className="absolute bottom-20 left-1/4 w-40 h-40 rounded-full bg-gradient-to-r from-green-400/20 to-blue-400/20 blur-2xl animate-ping-slow"></div>
+        </FloatingElement>
       </div>
 
       <div className="container-custom relative z-10">
@@ -29,36 +46,60 @@ const Hero = () => {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight animate-fade-in animate-delay-100">
-              <span className="text-gradient">X-Recruit</span> Career Guidance for Placement
+              <TypewriterEffect 
+                text={["X-Recruit Career Guidance for Placement", "Your Path to Success Starts Here", "Transform Your Career Journey"]}
+                speed={100}
+                loop={true}
+                className="text-gradient"
+              />
             </h1>
             
             <p className="text-lg text-xr-gray mb-8 max-w-xl mx-auto lg:mx-0 animate-fade-in animate-delay-200">
-            "X-Recruit: Transforming Campus Placements and Beyond"
+              <TypewriterEffect 
+                text="X-Recruit: Transforming Campus Placements and Beyond"
+                speed={50}
+                delay={2000}
+              />
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 animate-fade-in animate-delay-300">
-              <Button size="lg" className="bg-xr-blue hover:bg-xr-blue-dark group">
+              <AnimatedButton 
+                size="lg" 
+                animationType="bounce"
+                className="bg-xr-blue hover:bg-xr-blue-dark group"
+              >
                 Get Started
                 <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button size="lg" variant="outline" className="border-xr-blue text-xr-blue hover:bg-xr-blue/5">
+              </AnimatedButton>
+              <AnimatedButton 
+                size="lg" 
+                variant="outline" 
+                animationType="glow"
+                className="border-xr-blue text-xr-blue hover:bg-xr-blue/5"
+              >
                 Learn More
-              </Button>
+              </AnimatedButton>
             </div>
             
             <div className="mt-12 flex items-center justify-center lg:justify-start space-x-8 animate-fade-in animate-delay-400">
-              <div className="flex items-center space-x-2">
-                <CheckCircle size={20} className="text-xr-blue" />
-                <span className="text-xr-gray-dark">For Students</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle size={20} className="text-xr-blue" />
-                <span className="text-xr-gray-dark">For Colleges</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <CheckCircle size={20} className="text-xr-blue" />
-                <span className="text-xr-gray-dark">For Companies</span>
-              </div>
+              <FloatingElement direction="up" intensity="subtle" delay={0}>
+                <div className="flex items-center space-x-2 hover-float">
+                  <CheckCircle size={20} className="text-xr-blue animate-heartbeat" />
+                  <span className="text-xr-gray-dark">For Students</span>
+                </div>
+              </FloatingElement>
+              <FloatingElement direction="up" intensity="subtle" delay={0.5}>
+                <div className="flex items-center space-x-2 hover-float">
+                  <CheckCircle size={20} className="text-xr-blue animate-heartbeat" />
+                  <span className="text-xr-gray-dark">For Colleges</span>
+                </div>
+              </FloatingElement>
+              <FloatingElement direction="up" intensity="subtle" delay={1}>
+                <div className="flex items-center space-x-2 hover-float">
+                  <CheckCircle size={20} className="text-xr-blue animate-heartbeat" />
+                  <span className="text-xr-gray-dark">For Companies</span>
+                </div>
+              </FloatingElement>
             </div>
           </div>
           
@@ -88,12 +129,16 @@ const Hero = () => {
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="p-4 rounded-lg bg-xr-blue-light/10 border border-xr-blue-light/30">
-                    <div className="text-xr-blue text-2xl font-bold">100+</div>
+                  <div className="p-4 rounded-lg bg-xr-blue-light/10 border border-xr-blue-light/30 hover:scale-105 transition-transform duration-300">
+                    <div className="text-xr-blue text-2xl font-bold">
+                      <AnimatedCounter end={100} suffix="+" duration={2000} />
+                    </div>
                     <div className="text-xr-gray-dark text-sm">New Job Matches</div>
                   </div>
-                  <div className="p-4 rounded-lg bg-xr-purple-light/10 border border-xr-purple-light/30">
-                    <div className="text-xr-purple text-2xl font-bold">1000+</div>
+                  <div className="p-4 rounded-lg bg-xr-purple-light/10 border border-xr-purple-light/30 hover:scale-105 transition-transform duration-300">
+                    <div className="text-xr-purple text-2xl font-bold">
+                      <AnimatedCounter end={1000} suffix="+" duration={2500} />
+                    </div>
                     <div className="text-xr-gray-dark text-sm">Interview Requests</div>
                   </div>
                 </div>
@@ -139,8 +184,15 @@ const Hero = () => {
             </div>
             
             {/* Floating Bubble Elements */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-xr-teal-light/30 backdrop-blur-sm animate-float opacity-80"></div>
-            <div className="absolute -bottom-6 -left-6 w-16 h-16 rounded-full bg-xr-purple-light/30 backdrop-blur-sm animate-float opacity-80" style={{ animationDelay: '1s' }}></div>
+            <FloatingElement direction="diagonal" intensity="medium" delay={0}>
+              <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-xr-teal-light/30 backdrop-blur-sm opacity-80 hover-glow"></div>
+            </FloatingElement>
+            <FloatingElement direction="diagonal" intensity="strong" delay={1}>
+              <div className="absolute -bottom-6 -left-6 w-16 h-16 rounded-full bg-xr-purple-light/30 backdrop-blur-sm opacity-80 hover-glow"></div>
+            </FloatingElement>
+            <FloatingElement direction="up" intensity="subtle" delay={2}>
+              <div className="absolute top-1/2 -right-8 w-12 h-12 rounded-full bg-xr-blue-light/20 backdrop-blur-sm opacity-60 hover-pulse-slow"></div>
+            </FloatingElement>
           </div>
         </div>
       </div>

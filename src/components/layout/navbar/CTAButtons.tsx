@@ -55,13 +55,13 @@ const CTAButtons: React.FC<CTAButtonsProps> = ({ isMobile = false, onLoginClick 
       <div className="flex flex-col space-y-3">
         <Button 
           variant="outline" 
-          className="w-full border-xr-blue text-xr-blue hover:bg-xr-blue/5 button-hover-animate button-hover-glow"
+          className="w-full border-xr-blue text-xr-blue hover:bg-xr-blue/5 button-hover-animate button-hover-glow hover-wiggle"
           onClick={handleLoginClick}
         >
           Log in
         </Button>
         <Button 
-          className="w-full bg-xr-blue hover:bg-xr-blue-dark button-hover-animate button-hover-bounce"
+          className="w-full bg-xr-blue hover:bg-xr-blue-dark button-hover-animate button-hover-bounce hover-heartbeat"
           onClick={handleGetStartedClick}
         >
           Get Started
@@ -75,7 +75,7 @@ const CTAButtons: React.FC<CTAButtonsProps> = ({ isMobile = false, onLoginClick 
       <animated.div style={loginButtonProps}>
         <Button 
           variant="outline" 
-          className="border-xr-blue text-xr-blue hover:bg-xr-blue/5 shine-effect button-hover-animate button-hover-glow"
+          className="border-xr-blue text-xr-blue hover:bg-xr-blue/5 shine-effect button-hover-animate button-hover-glow hover-wiggle"
           onClick={handleLoginClick}
         >
           Log in
@@ -84,7 +84,7 @@ const CTAButtons: React.FC<CTAButtonsProps> = ({ isMobile = false, onLoginClick 
       
       <animated.div style={getStartedButtonProps}>
         <Button 
-          className="bg-xr-blue hover:bg-xr-blue-dark shine-effect button-hover-animate button-hover-bounce"
+          className="bg-xr-blue hover:bg-xr-blue-dark shine-effect button-hover-animate button-hover-bounce hover-heartbeat"
           onClick={handleGetStartedClick}
         >
           Get Started
